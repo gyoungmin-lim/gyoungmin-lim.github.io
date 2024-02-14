@@ -1,0 +1,517 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>HYCOM 수온, 염도 데이터 분석 및 비교 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : 전 지구 해양수치모델과 실제 관측자료(Temperature)의 수온과 염도(Salinity) 비교  수행기간  : 2021. 01 ~ 2021. 04  수행내용  전 지구 해양수치모델 중 하나인 HYCOM을 통해 국내 적용가능성 확인 모델 관측 값과 국내 기상청에서 수집하는 관측자료 중 대해구좌표에 따른 수온(Tempera">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HYCOM 수온, 염도 데이터 분석 및 비교">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/14/Project-HYCOM/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : 전 지구 해양수치모델과 실제 관측자료(Temperature)의 수온과 염도(Salinity) 비교  수행기간  : 2021. 01 ~ 2021. 04  수행내용  전 지구 해양수치모델 중 하나인 HYCOM을 통해 국내 적용가능성 확인 모델 관측 값과 국내 기상청에서 수집하는 관측자료 중 대해구좌표에 따른 수온(Tempera">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_HYCOM_cover.jpg">
+<meta property="article:published_time" content="2024-02-14T07:50:03.000Z">
+<meta property="article:modified_time" content="2024-02-14T08:27:32.880Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Project">
+<meta property="article:tag" content="HYCOM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_HYCOM_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/14/Project-HYCOM/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HYCOM 수온, 염도 데이터 분석 및 비교',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-14 17:27:32'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_HYCOM_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HYCOM 수온, 염도 데이터 분석 및 비교</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-14T07:50:03.000Z" title="Created 2024-02-14 16:50:03">2024-02-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-14T08:27:32.880Z" title="Updated 2024-02-14 17:27:32">2024-02-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Project/">Project</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HYCOM 수온, 염도 데이터 분석 및 비교"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>전 지구 해양수치모델과 실제 관측자료(Temperature)의 수온과 염도(Salinity) 비교</strong></li>
+<li><span style="color:blue"> <strong>수행기간</strong> </span> : <strong>2021. 01 ~ 2021. 04</strong></li>
+<li><span style="color:violet"> <strong>수행내용</strong> </span><ul>
+<li>전 지구 해양수치모델 중 하나인 HYCOM을 통해 <strong>국내 적용가능성 확인</strong></li>
+<li>모델 관측 값과 국내 기상청에서 수집하는 관측자료 중 <strong>대해구좌표에 따른 수온(Temperature)과 염도(Salinity)를 비교</strong></li>
+<li><strong>깊이에 따라 수온과 염도의 차이가 다르게 형성</strong>됨. 10m에서는 0.2℃의 온도차와 0.2psu의 염도차가 났으며, 주로 1~4월에서 차이를 보임. 50m의 경우 0.4℃로 큰 차이를 보임. 반대로 염도의 경우 0.1psu의 차이를 보임.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="HYCOM"><a href="#HYCOM" class="headerlink" title="HYCOM"></a>HYCOM</h2><img src="/2024/02/14/Project-HYCOM/HYCOM_1.png" class="">
+<ul>
+<li>미국에서 사용하는 해양수치모델</li>
+<li>위성으로부터 제공되는 해수면의 시공간적 변화를 포함하여 여러가지 관측자료를 모델에 동화시키기 때문에 다양한 해양 연구에 활용할 수 있음</li>
+<li><strong>전 지구 규모의 수치모델</strong>이기 때문에 우리나라 근해의 연구에 활용되기 위해서는 모델결과의 정확성에 대한 검증이 필요함</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_2.png" class="">
+<p><br></p>
+<h2 id="Data-Configuration"><a href="#Data-Configuration" class="headerlink" title="Data Configuration"></a>Data Configuration</h2><ul>
+<li><p><strong>HYCOM Data</strong></p>
+<ul>
+<li>파일형태 : 200001010131.nc4</li>
+<li>2000년 01월 ~ 2010년 12월 데이터</li>
+<li>데이터 구성 : 월별(1개월) 데이터로 이루어져 있음</li>
+<li>Variable<br><code>Lon, lat, depth, time, salinity, water_temp, water_u, water_v</code></li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_3.png" class="">
+<ul>
+<li><strong>대해구격자 rho_point</strong><ul>
+<li><a target="_blank" rel="noopener" href="http://www.nifs.go.kr/sois/subs/search_4.jsp">위상해양정보시스템 (Satellite ocean information system)</a></li>
+<li>csv 파일</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_4.jpg" class="">
+<p><br></p>
+<h2 id="Interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h2><ul>
+<li><strong>대해구격자 좌표의 Temperature, Salinity를 구하기 위한 Data Interpolation</strong></li>
+</ul>
+<blockquote>
+<p><strong>How to?</strong></p>
+<ol>
+<li>대해구 좌표에 따른 Boundary를 설정</li>
+<li>Boundary 내 Data를 <strong>Interpolation</strong>하여 대해구 좌표의 Temperature, Salinity 값을 구함</li>
+</ol>
+</blockquote>
+<ul>
+<li>Grid 설정<ul>
+<li>대해구격자 <code>rho_point</code> 좌표를 기준으로 $\pm 0.25^\circ$의 격자 생성  </li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Generate Grid with rho_point</th>
+<th>Set the Grid on observed data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_8.jpg" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/Grid_set.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<blockquote>
+<p><strong>Interpolation Method - Inverse Distance Weighting(IDW)</strong></p>
+</blockquote>
+<ul>
+<li>인접한 점들의 값 $(x_i, y_i, z_i)$들을 사용하여 찾아내고자 하는 위치의 값 $(x_p, y_p, z_p)$를 거리의 역함수로 찾아내는 기법</li>
+<li>$(x_i, y_i, z_i)$ 값을 알 때, $(x_p, y_p)$ 위치의 $z_p$ 값을 계산할 수 있음</li>
+</ul>
+<script type="math/tex; mode=display">
+  z_p = \frac{
+    \sum_{i=1}^{n}{\frac{z_i}{d_i}}
+    }{
+      \sum_{i=1}^{n}{\frac{1}{d_i}}
+      }</script><ul>
+<li>$d$ : Distance</li>
+<li>두 점 사이 $(x_1, y_1)$, $(x_2, y_2)$의 거리</li>
+</ul>
+<script type="math/tex; mode=display">
+  d = \sqrt{(x_1 - y_1) ^2 + (x_2 - y_2)^2}</script><img src="/2024/02/14/Project-HYCOM/HYCOM_9.png" class="">
+<p><br></p>
+<h3 id="Case-One-Data-Set-Test"><a href="#Case-One-Data-Set-Test" class="headerlink" title="Case : One Data Set Test"></a>Case : One Data Set Test</h3><ul>
+<li>2006년 01월 01일 ~ 2006년 01월 31일 데이터 이용<ul>
+<li>HYCOM data information: lon, lat, depth, temperature</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_5.png" class="">
+<ul>
+<li>01월 01일의 데이터 정제를 목표</li>
+<li>위도, 경도에 따른 깊이 10m의 수온 데이터를 정제</li>
+<li>2006년 01월 01일 Depth 10m의 수온을 Figure out</li>
+</ul>
+
+<h3 id="Try-near-16-points"><a href="#Try-near-16-points" class="headerlink" title="Try : near 16 points"></a>Try : near 16 points</h3><ul>
+<li>IDW 알고리즘을 사용하는데 있어 구하고자 하는 Point와 <strong>인접한 16개의 점을 이용</strong>하여 수온 값을 Interpolation</li>
+<li>rho_point 좌표 lon = 119.75, lat = 42.75 지점에서 <strong>Error 발생</strong><ul>
+<li><strong>Data의 개수가 16개 미만(6개)</strong> 인 좌표가 있어 <strong>IDW 알고리즘 적용 불가.</strong></li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_11.png" class="">
+<p><br></p>
+<h3 id="Use-all-data-in-boundary"><a href="#Use-all-data-in-boundary" class="headerlink" title="Use all data in boundary"></a>Use all data in boundary</h3><ul>
+<li><p>Boundary <strong>내부에 있는 모든 점을 이용</strong>하여 Interpolation 진행<br>  ※ <u><strong>단, 수온 값이 NaN인 point는 제외하고 IDW Algorithm 진행</strong></u></p>
+</li>
+<li><p>green dots represent using data and purple dots represent vanishing data</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>near 16 points</th>
+<th>Use all data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_10.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_12.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p><strong>Checking</strong></p>
+<ul>
+<li>Interpolation 결과를 확인하기 위해, 임의의 대해구좌표 한 점에서 Interpolation 된 Temperature 값 확인</li>
+</ul>
+</li>
+<li><p>Check the Interpolation at <u><strong>lon=130.25, lat=36.75</strong></u></p>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_13.png" class="">
+<p><br></p>
+<h2 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h2><blockquote>
+<p><strong>HYCOM 데이터와 대해구 좌표에 원 Data와 interpolation한 값의 연 평균 값을 비교</strong></p>
+</blockquote>
+<ul>
+<li>Temperature<ul>
+<li>X축 : years, Y축 : Temperature(℃)</li>
+</ul>
+</li>
+<li>Salinity<ul>
+<li>X축 : years, Y축 : Salinity</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="Time-Series-in-depth-10m"><a href="#Time-Series-in-depth-10m" class="headerlink" title="Time Series in depth 10m"></a>Time Series in depth 10m</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Year</th>
+<th>Temperature</th>
+<th>Salinity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2000</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_00.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_00.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2001</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_01.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_01.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2002</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_02.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_02.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2003</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_03.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_03.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2004</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_04.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_04.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2005</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_05.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_05.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2006</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_06.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_06.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2007</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_07.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_07.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2008</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_08.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_08.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2009</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_09.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_09.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2010</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_10m_10.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_10m_10.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="Time-Series-in-depth-50m"><a href="#Time-Series-in-depth-50m" class="headerlink" title="Time Series in depth 50m"></a>Time Series in depth 50m</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Year</th>
+<th>Temperature</th>
+<th>Salinity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2000</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_00.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_00.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2001</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_01.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_01.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2002</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_02.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_02.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2003</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_03.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_03.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2004</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_04.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_04.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2005</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_05.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_05.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2006</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_06.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_06.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2007</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_07.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_07.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2008</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_08.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_08.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2009</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_09.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_09.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center">2010</td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Depth_50m_10.png" class=""></td>
+<td><img src="/2024/02/14/Project-HYCOM/HYCOM_Salinity_50m_10.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><ul>
+<li><p><strong>Depth = 10m</strong></p>
+<ul>
+<li><strong>Temperature</strong><br>기존 값과 약 0.2℃의 차이를 보이며, 대체적으로 1~4월 Data에서 차이가 발생</li>
+<li><p><strong>Salinity</strong><br>약 0.25psu의 차이를 보이며, Interpolation결과가 전체적으로 낮게 형성</p>
+</li>
+<li><p>The temperature(left) and salinity(right) difference between Origin and HYCOM observations in depth 10m</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_dep10_mean.png" class="">
+<ul>
+<li><p><strong>Depth = 50m</strong></p>
+<ul>
+<li><strong>Temperature</strong><br>기존 값과 약 0.4℃의 차이를 보이며, 전반적으로 Interpolation 결과가 낮게 나왔으나, 7~9월은 비슷하거나 높게 형성됨</li>
+<li><p><strong>Salinity</strong><br>약 0.1psu의 차이를 보임</p>
+</li>
+<li><p>The temperature(left) and salinity(right) difference between Origin and HYCOM observations in depth 50m</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/14/Project-HYCOM/HYCOM_dep50_mean.png" class="">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/14/Project-HYCOM/">https://gyoungmin-lim.github.io/2024/02/14/Project-HYCOM/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Project/">Project</a><a class="post-meta__tags" href="/tags/HYCOM/">HYCOM</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/14/OA-Hwp-Intro/" title="(Hwp) Introduction"><img class="cover" src="/../cover_img/OA_Hwp_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Hwp) Introduction</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/14/ETC-CMC-Difference/" title="(Textile) CMC 색차식"><img class="cover" src="/../cover_img/ETC_Textile_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Textile) CMC 색차식</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">21</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">14</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HYCOM"><span class="toc-number">1.</span> <span class="toc-text">HYCOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Configuration"><span class="toc-number">2.</span> <span class="toc-text">Data Configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Interpolation"><span class="toc-number">3.</span> <span class="toc-text">Interpolation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Case-One-Data-Set-Test"><span class="toc-number">3.1.</span> <span class="toc-text">Case : One Data Set Test</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Try-near-16-points"><span class="toc-number">3.2.</span> <span class="toc-text">Try : near 16 points</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Use-all-data-in-boundary"><span class="toc-number">3.3.</span> <span class="toc-text">Use all data in boundary</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison"><span class="toc-number">4.</span> <span class="toc-text">Comparison</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-Series-in-depth-10m"><span class="toc-number">4.1.</span> <span class="toc-text">Time Series in depth 10m</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-Series-in-depth-50m"><span class="toc-number">4.2.</span> <span class="toc-text">Time Series in depth 50m</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/Mysql-User/" title="(MySQL) User"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(MySQL) User"/></a><div class="content"><a class="title" href="/2024/02/14/Mysql-User/" title="(MySQL) User">(MySQL) User</a><time datetime="2024-02-14T09:28:17.000Z" title="Created 2024-02-14 18:28:17">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/Mysql-Database/" title="(MySQL) Database"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(MySQL) Database"/></a><div class="content"><a class="title" href="/2024/02/14/Mysql-Database/" title="(MySQL) Database">(MySQL) Database</a><time datetime="2024-02-14T09:23:56.000Z" title="Created 2024-02-14 18:23:56">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/Mysql-Install/" title="Install MySQL (MAC)"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Install MySQL (MAC)"/></a><div class="content"><a class="title" href="/2024/02/14/Mysql-Install/" title="Install MySQL (MAC)">Install MySQL (MAC)</a><time datetime="2024-02-14T09:09:28.000Z" title="Created 2024-02-14 18:09:28">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/OA-Hwp-CtrlKE/" title="(Hwp) 누름 틀 설정"><img src="/../cover_img/OA_Hwp_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Hwp) 누름 틀 설정"/></a><div class="content"><a class="title" href="/2024/02/14/OA-Hwp-CtrlKE/" title="(Hwp) 누름 틀 설정">(Hwp) 누름 틀 설정</a><time datetime="2024-02-14T09:06:51.000Z" title="Created 2024-02-14 18:06:51">2024-02-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/14/OA-Hwp-AltWB/" title="(Hwp) 쪽 테두리 설정"><img src="/../cover_img/OA_Hwp_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Hwp) 쪽 테두리 설정"/></a><div class="content"><a class="title" href="/2024/02/14/OA-Hwp-AltWB/" title="(Hwp) 쪽 테두리 설정">(Hwp) 쪽 테두리 설정</a><time datetime="2024-02-14T09:00:06.000Z" title="Created 2024-02-14 18:00:06">2024-02-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
