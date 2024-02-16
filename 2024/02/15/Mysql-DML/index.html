@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(MySQL) 데이터 조작어(Data Manipulation Language) | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="실습환경 만들기   person table 생성  1234567CREATE TABLE person(	id int,	name varchar(16),	age int,	sex CHAR);   INSERT Data 추가   입력한 Column 이름의 순서와 값의 순서가 일치하도록 주의  12INSERT INTO &lt;tablename&gt; (column1,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(MySQL) 데이터 조작어(Data Manipulation Language)">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/15/Mysql-DML/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="실습환경 만들기   person table 생성  1234567CREATE TABLE person(	id int,	name varchar(16),	age int,	sex CHAR);   INSERT Data 추가   입력한 Column 이름의 순서와 값의 순서가 일치하도록 주의  12INSERT INTO &lt;tablename&gt; (column1,">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Mysql_cover.jpg">
+<meta property="article:published_time" content="2024-02-15T03:10:05.000Z">
+<meta property="article:modified_time" content="2024-02-15T03:16:07.268Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Mysql_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/15/Mysql-DML/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(MySQL) 데이터 조작어(Data Manipulation Language)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-15 12:16:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Mysql_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(MySQL) 데이터 조작어(Data Manipulation Language)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-15T03:10:05.000Z" title="Created 2024-02-15 12:10:05">2024-02-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-15T03:16:07.268Z" title="Updated 2024-02-15 12:16:07">2024-02-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/MySQL/">MySQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(MySQL) 데이터 조작어(Data Manipulation Language)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>실습환경 만들기</strong></p>
+</blockquote>
+<ul>
+<li><code>person</code> table 생성</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> person</span><br><span class="line">(</span><br><span class="line">	id <span class="type">int</span>,</span><br><span class="line">	name <span class="type">varchar</span>(<span class="number">16</span>),</span><br><span class="line">	age <span class="type">int</span>,</span><br><span class="line">	sex <span class="type">CHAR</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_0.png" class="">
+<p><br></p>
+<h2 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h2><blockquote>
+<p><strong>Data 추가</strong></p>
+</blockquote>
+<ul>
+<li>입력한 Column 이름의 순서와 값의 순서가 일치하도록 주의</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span> (column1, column2, ...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1, value2, ...)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_1.png" class="">
+<p><br></p>
+<h3 id="모든-Column-값을-추가하는-경우"><a href="#모든-Column-값을-추가하는-경우" class="headerlink" title="모든 Column 값을 추가하는 경우"></a>모든 Column 값을 추가하는 경우</h3><ul>
+<li>Column 이름을 지정하지 않아도 가능</li>
+<li><strong>입력하는 값의 순서가 테이블 Column 순서와 일치</strong>하도록 주의할 것</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">VALUES</span> (value1, value2, ...)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_2.png" class="">
+<p><br></p>
+<h2 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h2><blockquote>
+<p><strong>데이터를 조회하는 명령어</strong></p>
+</blockquote>
+<ul>
+<li>테이블 내의 특정 칼럼에 대한 데이터를 조회</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> person 테이블 내의 이름, 나이, 성별 데이터를 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, age, sex <span class="keyword">FROM</span> person;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_3.png" class="">
+<ul>
+<li>테이블 내의 모든 컬럼에 대한 데이터를 조회</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_4.png" class="">
+<p><br></p>
+<h2 id="WHERE"><a href="#WHERE" class="headerlink" title="WHERE"></a>WHERE</h2><blockquote>
+<p><strong>SQL문에 조건을 추가하여 SELECT 뿐만 아니라 UPDATE, DELETE에도 사용</strong></p>
+</blockquote>
+<ul>
+<li>테이블 내에서 조건을 만족하는 데이터 조회</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> person 테이블에서 성별이 여자인 데이터 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> person <span class="keyword">WHERE</span> sex <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_5.png" class="">
+<p><br></p>
+<h2 id="UPDATE"><a href="#UPDATE" class="headerlink" title="UPDATE"></a>UPDATE</h2><blockquote>
+<p><strong>데이터 수정</strong></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">SET</span> column1 <span class="operator">=</span> value1, column2 <span class="operator">=</span> value2, ...</span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span></span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> ‘이효리’ 나이를 23세로 수정</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> person <span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">23</span> <span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;이효리&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_6.png" class="">
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_7.png" class="">
+<p><br></p>
+<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><blockquote>
+<p><strong>데이터 삭제</strong></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="operator">&lt;</span>tablename<span class="operator">&gt;</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">condition</span>;</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 이상순 데이터 삭제</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> person <span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;이상순&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_8.png" class="">
+<p><br><br><br></p>
+<blockquote>
+<p><strong>실습환경 만들기</strong></p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> celeb</span><br><span class="line">(</span><br><span class="line">	ID <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">	NAME <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">	BRITHDAY <span class="type">date</span>,</span><br><span class="line">	AGE <span class="type">INT</span>,</span><br><span class="line">	SEX <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line">	JOB_TITLE <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">	AGENCY <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_9.png" class="">
+<ul>
+<li>데이터 추가</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">1</span>, <span class="string">&#x27;아이유&#x27;</span>, <span class="string">&#x27;1993-05-16&#x27;</span>, <span class="number">29</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;가수, 텔런트&#x27;</span>, <span class="string">&#x27;EDAM엔터테이먼트&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">2</span>, <span class="string">&#x27;이미주&#x27;</span>, <span class="string">&#x27;1994-09-23&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;가수&#x27;</span>, <span class="string">&#x27;울림엔터테이먼트&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">3</span>, <span class="string">&#x27;송강&#x27;</span>, <span class="string">&#x27;1994-04-23&#x27;</span>, <span class="number">28</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;텔런트&#x27;</span>, <span class="string">&#x27;나무엑터스&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">4</span>, <span class="string">&#x27;강동원&#x27;</span>, <span class="string">&#x27;1981-01-18&#x27;</span>, <span class="number">41</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;영화배우, 텔런트&#x27;</span>, <span class="string">&#x27;YG엔터테이먼트&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">5</span>, <span class="string">&#x27;유재석&#x27;</span>, <span class="string">&#x27;1972-08-14&#x27;</span>, <span class="number">50</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;MC, 개그맨&#x27;</span>, <span class="string">&#x27;안테나&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">6</span>, <span class="string">&#x27;차승원&#x27;</span>, <span class="string">&#x27;1970-06-07&#x27;</span>, <span class="number">48</span>, <span class="string">&#x27;M&#x27;</span>, <span class="string">&#x27;영화배우, 모델&#x27;</span>, <span class="string">&#x27;YG엔터테이먼트&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> celeb <span class="keyword">VALUES</span>(<span class="number">7</span>, <span class="string">&#x27;이수현&#x27;</span>, <span class="string">&#x27;1999-05-04&#x27;</span>, <span class="number">23</span>, <span class="string">&#x27;F&#x27;</span>, <span class="string">&#x27;가수&#x27;</span>, <span class="string">&#x27;YG엔터테이먼트&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_10.png" class="">
+<p><br></p>
+<h2 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h2><ul>
+<li>SELECT 문에서  데이터를 <strong>특정 컬럼을 기준으로</strong> <strong>오름차순</strong> 혹은 <strong>내림차순</strong> 정렬<ul>
+<li>ASC(Ascending) : 오름차순 정렬</li>
+<li>DESC(Descending) : 내림차순 정렬</li>
+<li>기본 Option : 오름차순 정렬</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column1, column2, ...</span><br><span class="line"><span class="keyword">FROM</span> tablename</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> column1, column2, ... <span class="keyword">ASC</span><span class="operator">|</span><span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름과 나이를 나이순으로 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age, name</span><br><span class="line"><span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_11.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름과 나이를 나이 역순(내림차순)으로 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age, name</span><br><span class="line"><span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_12.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름과 나이를 나이와 이름순으로 정렬하여 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age, name</span><br><span class="line"><span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age, name;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_13.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름과 나이를 나이의 역순으로 정렬한 뒤, 이름순으로 정렬하여 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> age, name</span><br><span class="line"><span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age <span class="keyword">DESC</span>, name <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_14.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름, 생년월일, 성별, 소속자 데이터를 소속사 순으로 정렬하여 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, birthday, sex, agency</span><br><span class="line"><span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> agency <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_15.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 전체 컬럼을 전체 소속사, 이름 순으로 정렬하여 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> agency, name <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_16.png" class="">
+<p><span style="color:blue"> [Ex] </span> celeb 테이블에서 이름, 나이, 직업, 소속사 데이터를 소속사 순, 나이 역순으로 정렬하여 조회</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, age, job_title, agency <span class="keyword">FROM</span> celeb</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> agency <span class="keyword">ASC</span>, age <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Mysql-DML/Mysql_DML_17.png" class="">
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/15/Mysql-DML/">https://gyoungmin-lim.github.io/2024/02/15/Mysql-DML/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MySQL/">MySQL</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/15/Mysql-ComparisonOperator/" title="(MySQL) 비교 연산자"><img class="cover" src="/../cover_img/Mysql_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(MySQL) 비교 연산자</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/15/Mysql-Table/" title="(MySQL) Table"><img class="cover" src="/../cover_img/Mysql_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(MySQL) Table</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/15/Mysql-ComparisonOperator/" title="(MySQL) 비교 연산자"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-15</div><div class="title">(MySQL) 비교 연산자</div></div></a></div><div><a href="/2024/02/15/Mysql-Concat/" title="(MySQL) Concat"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-15</div><div class="title">(MySQL) Concat</div></div></a></div><div><a href="/2024/02/14/Mysql-Install/" title="Install MySQL (MAC)"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">Install MySQL (MAC)</div></div></a></div><div><a href="/2024/02/15/Mysql-Join/" title="(MySQL) Join"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-15</div><div class="title">(MySQL) Join</div></div></a></div><div><a href="/2024/02/15/Mysql-Table/" title="(MySQL) Table"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-15</div><div class="title">(MySQL) Table</div></div></a></div><div><a href="/2024/02/14/Mysql-Database/" title="(MySQL) Database"><img class="cover" src="/../cover_img/Mysql_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">(MySQL) Database</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#INSERT"><span class="toc-number">1.</span> <span class="toc-text">INSERT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%AA%A8%EB%93%A0-Column-%EA%B0%92%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0"><span class="toc-number">1.1.</span> <span class="toc-text">모든 Column 값을 추가하는 경우</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELECT"><span class="toc-number">2.</span> <span class="toc-text">SELECT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WHERE"><span class="toc-number">3.</span> <span class="toc-text">WHERE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPDATE"><span class="toc-number">4.</span> <span class="toc-text">UPDATE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DELETE"><span class="toc-number">5.</span> <span class="toc-text">DELETE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ORDER-BY"><span class="toc-number">6.</span> <span class="toc-text">ORDER BY</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) 시각화 라이브러리 Package - matplotlib"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib">(Python) 시각화 라이브러리 Package - matplotlib</a><time datetime="2024-02-16T10:15:16.000Z" title="Created 2024-02-16 19:15:16">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Module-Install/" title="(Python) 모듈(Module) 설치방법"><img src="/../cover_img/python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) 모듈(Module) 설치방법"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Module-Install/" title="(Python) 모듈(Module) 설치방법">(Python) 모듈(Module) 설치방법</a><time datetime="2024-02-16T10:09:31.000Z" title="Created 2024-02-16 19:09:31">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)"><img src="/../cover_img/python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 중급) 알고리즘(Algorithm)"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)">(Python 중급) 알고리즘(Algorithm)</a><time datetime="2024-02-16T09:53:06.000Z" title="Created 2024-02-16 18:53:06">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Problem-003/" title="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제"><img src="/../cover_img/Python_Problem_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Problem-003/" title="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제">(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제</a><time datetime="2024-02-16T09:40:06.000Z" title="Created 2024-02-16 18:40:06">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Problem-002/" title="(Python 기초) 기초수학 문제"><img src="/../cover_img/Python_Problem_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 기초) 기초수학 문제"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Problem-002/" title="(Python 기초) 기초수학 문제">(Python 기초) 기초수학 문제</a><time datetime="2024-02-16T09:32:01.000Z" title="Created 2024-02-16 18:32:01">2024-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Python 중급) 함수(Function), 변수(Variable), 모듈(Module), 패키지(Package) | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="함수란? 파이썬의 함수는 수학의 함수와 동일 함수 사용 이유 : 특정 기능을 재사용하기 위해 기능을 함수로 정의하여 사용   내장함수, 사용자함수 함수는 파이썬에서 기본으로 제공하는 내장함수와 사용자가 직접 선언하는 사용자 함수가 존재   함수 선언 함수는 def 키워드, 함수명, : 들여쓰기를 이용하여 선언함   첫 글자는 소문자가 관례 &#x2F; 숫자나 특수문">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Python 중급) 함수(Function), 변수(Variable), 모듈(Module), 패키지(Package)">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/15/Python-Mid-001/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="함수란? 파이썬의 함수는 수학의 함수와 동일 함수 사용 이유 : 특정 기능을 재사용하기 위해 기능을 함수로 정의하여 사용   내장함수, 사용자함수 함수는 파이썬에서 기본으로 제공하는 내장함수와 사용자가 직접 선언하는 사용자 함수가 존재   함수 선언 함수는 def 키워드, 함수명, : 들여쓰기를 이용하여 선언함   첫 글자는 소문자가 관례 &#x2F; 숫자나 특수문">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/python_cover.jpg">
+<meta property="article:published_time" content="2024-02-15T05:50:39.000Z">
+<meta property="article:modified_time" content="2024-02-15T08:51:55.878Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/python_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/15/Python-Mid-001/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Python 중급) 함수(Function), 변수(Variable), 모듈(Module), 패키지(Package)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-15 17:51:55'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/python_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Python 중급) 함수(Function), 변수(Variable), 모듈(Module), 패키지(Package)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-15T05:50:39.000Z" title="Created 2024-02-15 14:50:39">2024-02-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-15T08:51:55.878Z" title="Updated 2024-02-15 17:51:55">2024-02-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Python 중급) 함수(Function), 변수(Variable), 모듈(Module), 패키지(Package)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="함수란"><a href="#함수란" class="headerlink" title="함수란?"></a>함수란?</h1><ul>
+<li><strong>파이썬의 함수</strong>는 <strong>수학의 함수</strong>와 <strong>동일</strong></li>
+<li>함수 사용 이유 : 특정 기능을 재사용하기 위해 <strong>기능을 함수로 정의</strong>하여 사용</li>
+</ul>
+<p><br></p>
+<h2 id="내장함수-사용자함수"><a href="#내장함수-사용자함수" class="headerlink" title="내장함수, 사용자함수"></a>내장함수, 사용자함수</h2><ul>
+<li>함수는 <strong>파이썬에서 기본으로 제공</strong>하는 <strong>내장함수</strong>와 <strong>사용자가 직접 선언</strong>하는 <strong>사용자 함수</strong>가 존재</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="함수-선언"><a href="#함수-선언" class="headerlink" title="함수 선언"></a>함수 선언</h1><blockquote>
+<p><strong>함수</strong>는 <strong>def 키워드, 함수명, : 들여쓰기를 이용하여 선언</strong>함</p>
+</blockquote>
+<ul>
+<li>첫 글자는 <strong>소문자</strong>가 관례 / <strong>숫자</strong>나 <strong>특수문자</strong>는  쓸 수 없음</li>
+<li><strong>변수</strong>는 보통 <strong>명사</strong>, <strong>함수</strong>는 <strong>동사</strong>로 작성<ul>
+<li>함수의 의미를 알아볼 수 있게 작성</li>
+</ul>
+</li>
+<li><strong>실행</strong> 부분은 <strong>들여쓰기 반드시</strong>!<ul>
+<li>들여쓰기가 없을 경우, <strong>에러가 발생</strong>할 수 있음</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">addFun</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(addFun(<span class="number">100</span>, <span class="number">50</span>))</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 두 수의 덧셈</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">addCal</span>():</span><br><span class="line">    n1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;n1 입력: &#x27;</span>))</span><br><span class="line">    n2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;n2 입력: &#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;n1 * n2 = <span class="subst">&#123;n1 + n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">addCal()</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 곱셈, 나눗셈 출력하기</p>
+<ul>
+<li>정수 두개를 입력하면 곱셈과 나눗셈 연산 결과를 출력하는 함수를 만들고 호출해보자.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calCulatorFunction</span>():</span><br><span class="line">    n1 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;n1 입력: &#x27;</span>))</span><br><span class="line">    n2 = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;n2 입력: &#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;n1 * n2 = <span class="subst">&#123;n1 * n2&#125;</span>&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;n1 / n2 = <span class="subst">&#123;<span class="built_in">round</span>(n1 / n2, <span class="number">2</span>)&#125;</span>&#x27;</span>) <span class="comment"># 소수 아래 두번째 자리까지 나타냄</span></span><br><span class="line"></span><br><span class="line">calCulatorFunction()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="함수-내-다른-함수-호출"><a href="#함수-내-다른-함수-호출" class="headerlink" title="함수 내 다른 함수 호출"></a>함수 내 다른 함수 호출</h2><blockquote>
+<p>함수 내에서 또 다른 함수를 호출할 수 있다.</p>
+</blockquote>
+<ul>
+<li>pass를 이용해 실행물을 생략할 수 있음<ul>
+<li>실행문이 정해지지 않았을 때 유용</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fun1</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fun1 호출&#x27;</span>)</span><br><span class="line">    fun2()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun2</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fun2 호출&#x27;</span>)</span><br><span class="line">    fun3()</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fun3</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;fun3 호출&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fun1()</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 구구단 출력 함수가 연쇄적으로 호출되도록 함수를 선언해보자.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">guguDan2</span>():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;2 * &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(i, <span class="number">2</span> * i))</span><br><span class="line">    guguDan3()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">guguDan3</span>():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;3 * &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(i, <span class="number">3</span> * i))</span><br><span class="line">    guguDan4()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">guguDan4</span>():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;4 * &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(i, <span class="number">4</span> * i))</span><br><span class="line">    guguDan5()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">guguDan5</span>():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;5 * &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(i, <span class="number">5</span> * i))</span><br><span class="line"></span><br><span class="line">guguDan2()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="인수와-매개변수"><a href="#인수와-매개변수" class="headerlink" title="인수와 매개변수"></a>인수와 매개변수</h2><blockquote>
+<p>함수 호출 시 함수에 데이터를 전달할 수 있다</p>
+</blockquote>
+<ul>
+<li>함수 작성 시, 데이터를 넣었을 때, 함수 내 ‘매개변수’에 할당되는 것을 이용<ul>
+<li>이 때, 함수에 주는 데이터를 ‘<strong>인수</strong>’ 또는 ‘<strong>파라미터</strong>’라고 함</li>
+<li>즉, 호출부와 선언부의 관계를 맺어주는 것</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">customer</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;님, 안녕하세요&#x27;</span> .<span class="built_in">format</span>(customer))</span><br><span class="line"></span><br><span class="line">greet(<span class="string">&#x27;김경배&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>인수</strong>와 <strong>매개변수</strong> <strong>개수는 일치</strong>해야 한다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">greet</span>(<span class="params">customer1, customer2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;님, &#123;&#125;님, 안녕하세요&#x27;</span> .<span class="built_in">format</span>(customer1, customer2))</span><br><span class="line"></span><br><span class="line">greet(<span class="string">&#x27;김경배&#x27;</span>, <span class="string">&#x27;홍길동&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>매개변수 개수가 정해지지 않은 경우 *를 이용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">printNumber</span>(<span class="params">*numbers</span>):</span><br><span class="line">    <span class="keyword">for</span> number <span class="keyword">in</span> numbers:</span><br><span class="line">        <span class="built_in">print</span>(number, end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br><span class="line">    </span><br><span class="line">printNumber()</span><br><span class="line">printNumber(<span class="number">10</span>)</span><br><span class="line">printNumber(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">printNumber(<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="함수-실행결과-반환"><a href="#함수-실행결과-반환" class="headerlink" title="함수 실행결과 반환"></a>함수 실행결과 반환</h2><ul>
+<li><strong>return</strong> 키워드 이용, 함수 실행결과를 호출부로 반환함</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculator</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    result = n1 + n2</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">returnValue = calculator(<span class="number">20</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;returnValue: <span class="subst">&#123;returnValue&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>함수가 return을 만나면 <strong>실행을 종료</strong><ul>
+<li>return 이후 코드내용은 실행하지 않는다.</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:blue"> [Ex] </span> 홀, 짝 구분하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">devideNumber</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        result = <span class="string">&#x27;짝수&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        result = <span class="string">&#x27;홀수&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">returnValue = devideNumber(<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(returnValue)</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> cm을 mm으로 환산하기</p>
+<ul>
+<li>사용자가 길이(cm)를 입력하면 mm로 환산한 값을 반환하는 함수를 만들어보자</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cmToMm</span>(<span class="params">cm</span>):</span><br><span class="line">    result = cm * <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">cmLen = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&#x27;길이(cm) 입력: &#x27;</span>))</span><br><span class="line">returnValue = cmToMm(cmLen)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;Return Value : &#123;&#125;mm&#x27;</span> .<span class="built_in">format</span>(returnValue))</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 1부터 100까지의 정수 중에서 홀수인 난수를 반환하는 함수를 선언하자.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getOddRandomNumber</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        rNum = random.randint(<span class="number">1</span>, <span class="number">100</span>)</span><br><span class="line">        <span class="keyword">if</span> rNum % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> rNum</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;returnValue : <span class="subst">&#123;getOddRandomNumber()&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="지역변수와-전역변수"><a href="#지역변수와-전역변수" class="headerlink" title="지역변수와 전역변수"></a>지역변수와 전역변수</h2><h3 id="전역변수"><a href="#전역변수" class="headerlink" title="전역변수"></a>전역변수</h3><ul>
+<li>함수 밖에 선언된 변수</li>
+<li>어디에서나 사용 가능하나, 함수 안에서 수정할 수 없음</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_out = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">printNumbers</span>():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(num_out))</span><br><span class="line"></span><br><span class="line">printNumbers()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(num_out))</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_0.png" class="">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">num_out = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">printNumbers</span>():</span><br><span class="line">    num_out = <span class="number">20</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(num_out))</span><br><span class="line"></span><br><span class="line">printNumbers()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(num_out))</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_1.png" class="">
+<p><br></p>
+<h3 id="지역변수"><a href="#지역변수" class="headerlink" title="지역변수"></a>지역변수</h3><ul>
+<li>함수 안에 선언된 변수</li>
+<li>함수 안에서만 사용 가능</li>
+</ul>
+<p><br></p>
+<h3 id="Global-Keyword"><a href="#Global-Keyword" class="headerlink" title="Global Keyword"></a>Global Keyword</h3><ul>
+<li>Global을 사용하면 함수 안에서도 전역변수의 값을 수정할 수 있음</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">num_out = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">printNumbers</span>():</span><br><span class="line">    <span class="keyword">global</span> num_out</span><br><span class="line">    num_out = <span class="number">20</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(num_out))</span><br><span class="line"></span><br><span class="line">printNumbers()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;num_out : &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(num_out))</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_2.png" class="">
+<p><span style="color:blue"> [Ex] </span> 삼각형, 사각형 넓이 구하기</p>
+<ul>
+<li>사용자가 가로, 세로 길이를 입력하면 삼각형과 사각형의 넓이를 구하는 함수를 만들어보자.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 삼각형, 사각형 넓이 구하기</span></span><br><span class="line">width = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;가로의 길이: &#x27;</span>))</span><br><span class="line">height = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;세로의 길이: &#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">areaTriSquare</span>():</span><br><span class="line">    triArea = width * height / <span class="number">2</span></span><br><span class="line">    squareArea = width * height</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;삼각형 넓이: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(triArea))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;사각형 넓이: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(squareArea))</span><br><span class="line"></span><br><span class="line">areaTriSquare()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="중첩함수"><a href="#중첩함수" class="headerlink" title="중첩함수"></a>중첩함수</h2><ul>
+<li>함수 안에 또 다른 형수가 있는 형태<ul>
+<li>함수 안에서 호출해서 사용 가능</li>
+<li>내부 함수를 함수 밖에서 호출할 수 없음 (함수 내에서만 사용 가능)</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:blue"> [Ex] </span> 계산기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculator</span>(<span class="params">n1, n2, operator</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addCal</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;덧셈 연산: &#123;&#125; + &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(n1, n2, n1 + n2))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">subCal</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;뺄셈 연산: &#123;&#125; - &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(n1, n2, n1 - n2))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mulCal</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;곱셈 연산: &#123;&#125; * &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(n1, n2, n1 * n2))</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">divCal</span>():</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;나눗셈 연산: &#123;&#125; / &#123;&#125; = &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(n1, n2, n1 / n2))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> operator == <span class="number">1</span>:</span><br><span class="line">        addCal()</span><br><span class="line">    <span class="keyword">elif</span> operator == <span class="number">2</span>:</span><br><span class="line">        subCal()</span><br><span class="line">    <span class="keyword">elif</span> operator == <span class="number">3</span>:</span><br><span class="line">        mulCal()</span><br><span class="line">    <span class="keyword">elif</span> operator == <span class="number">4</span>:</span><br><span class="line">        divCal()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    num1 = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&#x27;첫 번째 수 입력: &#x27;</span>))</span><br><span class="line">    num2 = <span class="built_in">float</span>(<span class="built_in">input</span>(<span class="string">&#x27;두 번째 수 입력: &#x27;</span>))</span><br><span class="line">    operator = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;1. 덧셈 \t 2. 뺄셈 \t 3. 곱셈 \t 4. 나눗셈 \t 5. 종료 \t&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> operator == <span class="number">5</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Bye!&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    calculator(num1, num2, operator)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="Lambda-함수"><a href="#Lambda-함수" class="headerlink" title="Lambda 함수"></a>Lambda 함수</h2><blockquote>
+<p>함수 선언을 보다 간단하게 하자!</p>
+</blockquote>
+<ul>
+<li><p><strong>lambda 변수1, 변수2, $\cdots$ : 함수식</strong> 형태</p>
+</li>
+<li><p><strong>기존 함수 정의</strong></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculator</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> n1 + n2</span><br><span class="line"></span><br><span class="line">returnValue = calculator(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;return Value : &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(returnValue))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Lambda 함수 정의</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">caculator = <span class="keyword">lambda</span> n1, n2 : n1 + n2</span><br><span class="line">returnValue = caculator(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;return Value : &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(returnValue))</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> lambda 함수 이용 삼각형, 사각형, 원의 넓이 구하기</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">getSquareArea = <span class="keyword">lambda</span> n1, n2 : n1 * n2</span><br><span class="line">getTriArea = <span class="keyword">lambda</span> n1, n2 : n1 * n2 / <span class="number">2</span></span><br><span class="line">getCircleArea = <span class="keyword">lambda</span> r : (r ** <span class="number">2</span>) * <span class="number">3.14</span></span><br><span class="line"></span><br><span class="line">width = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;가로 길이 입력: &#x27;</span>))</span><br><span class="line">height = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;세로 길이 입력: &#x27;</span>))</span><br><span class="line">radius = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;반지름 길이 입력: &#x27;</span>))</span><br><span class="line"></span><br><span class="line">triangleArea = getTriArea(width, height)</span><br><span class="line">squareArea = getSquareArea(width, height)</span><br><span class="line">circleArea = getCircleArea(radius)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;삼각형 넓이: &#123;&#125; \t 사각형 넓이: &#123;&#125; \t 원 넓이: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(triangleArea, squareArea, circleArea))</span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<h1 id="모듈-Module"><a href="#모듈-Module" class="headerlink" title="모듈(Module)"></a>모듈(Module)</h1><blockquote>
+<p><strong>모듈이란?</strong></p>
+</blockquote>
+<ul>
+<li>이미 만들어진 훌륭한 기능</li>
+<li><p>사용자는 쉽게 사용할 수 있다.</p>
+<ul>
+<li>계산 모듈, 난수모듈, 날짜/시간 모듈 등</li>
+</ul>
+</li>
+<li><p>Python Module은 내부, 외부, 사용자 모듈로 구분</p>
+<ul>
+<li>내부 모듈 : 파이썬 설치 시 기본적으로 사용할 수 있는 모듈</li>
+<li>외부 모듈 : 별도 설치 후 사용할 수 있는 모듈(Pandas, Numpy)</li>
+<li>사용자 모듈 : 사용자가 직접 만든 모듈</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="모듈-Module-제작"><a href="#모듈-Module-제작" class="headerlink" title="모듈(Module) 제작"></a>모듈(Module) 제작</h2><blockquote>
+<p>모듈은 파이썬 파일이다!</p>
+</blockquote>
+<ul>
+<li>모듈(Module)은 특정 기능을 가지고 있는 파이썬 파일을 의미</li>
+</ul>
+<p><span style="color:blue"> [Ex] </span> 계산기 모듈 만들어 사용하기</p>
+<ul>
+<li>Module</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;덧셈 결과: <span class="subst">&#123;n1 + n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sub</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;뺼셈 결과: <span class="subst">&#123;n1 - n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;곱셈 결과: <span class="subst">&#123;n1 * n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;나눗셈 결과: <span class="subst">&#123;n1 / n2&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Excute</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calculator</span><br><span class="line"></span><br><span class="line">calculator.add(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">calculator.sub(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">calculator.mul(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">calculator.div(<span class="number">10</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><span style="color:blue"> [Ex] </span> 로또 번호 난수</p>
+<ul>
+<li>Module</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getLottoNumbers</span>():</span><br><span class="line">    result = random.sample(<span class="built_in">range</span>(<span class="number">1</span>, <span class="number">45</span>), <span class="number">6</span>)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Excute</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lottoMachine</span><br><span class="line"></span><br><span class="line">result = lottoMachine.getLottoNumbers()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;lotto numbers : <span class="subst">&#123;result&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="모듈-Module-사용"><a href="#모듈-Module-사용" class="headerlink" title="모듈(Module) 사용"></a>모듈(Module) 사용</h2><ul>
+<li>import 키워드를 이용하여 module을 가져온다.</li>
+<li>as 키워드를 이용하여 모듈 이름을 단축시킬 수 있다.</li>
+<li>from ~ as 키워드를 통해 모듈에서 특정 부분만 가져올 수 있다.<ul>
+<li>모듈명으로 접근하지 않고, 기능(함수)명을 이용해서 접근할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:blue"> [Ex] </span> 계산기</p>
+<ul>
+<li>Module</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;덧셈 결과: <span class="subst">&#123;n1 + n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sub</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;뺼셈 결과: <span class="subst">&#123;n1 - n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;곱셈 결과: <span class="subst">&#123;n1 * n2&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;나눗셈 결과: <span class="subst">&#123;n1 / n2&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Excute(as)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calculator <span class="keyword">as</span> cal</span><br><span class="line"></span><br><span class="line">cal.add(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">cal.sub(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">cal.mul(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">cal.div(<span class="number">10</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Excute(from ~ as)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> calculator <span class="keyword">import</span> add, sub</span><br><span class="line"></span><br><span class="line">add(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">sub(<span class="number">10</span>, <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>.append()</code> : 리스트에 추가</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="전역변수-1"><a href="#전역변수-1" class="headerlink" title="전역변수"></a>전역변수</h1><h2 id="전역변수-name"><a href="#전역변수-name" class="headerlink" title="전역변수 name"></a>전역변수 <strong>name</strong></h2><ul>
+<li><strong><strong>name</strong></strong>에는 모듈 이름이 저장된다.</li>
+<li>실행파일인 경우,  <strong>main</strong> 이 저장된다.</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">addModule.py</td>
+<td style="text-align:center"><strong>name</strong> = ‘addModule’</td>
+</tr>
+<tr>
+<td style="text-align:center">subModule.py</td>
+<td style="text-align:center"><strong>name</strong> = ‘subModule’</td>
+</tr>
+<tr>
+<td style="text-align:center">mulModule.py</td>
+<td style="text-align:center"><strong>name</strong> = ‘mulModule’</td>
+</tr>
+<tr>
+<td style="text-align:center">divModule.py</td>
+<td style="text-align:center"><strong>name</strong> = ‘divModule’</td>
+</tr>
+<tr>
+<td style="text-align:center">module.py</td>
+<td style="text-align:center"><strong>name</strong> = ‘<strong>main</strong>’</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="color:blue"> [Ex] </span> 계산기 모듈</p>
+<ul>
+<li><strong>Module</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 덧셈</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> n1 + n2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&#x27;__main__&#x27;</span>: <span class="comment"># 다른 실행파일(py)에서 돌릴 시 미작동</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;__name__: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(__name__))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 뺄셈</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sub</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> n1 - n2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;__name__: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(__name__))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 곱셈</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> n1 * n2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;__name__: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(__name__))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 나눗셈</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> n1 / n2</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ ==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;__name__: &#123;&#125;&#x27;</span> .<span class="built_in">format</span>(__name__))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Excute</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> addModule, subModule, divModule, mulModule</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(addModule.add(<span class="number">10</span>,<span class="number">20</span>))</span><br><span class="line"><span class="built_in">print</span>(subModule.sub(<span class="number">10</span>,<span class="number">20</span>))</span><br><span class="line"><span class="built_in">print</span>(mulModule.mul(<span class="number">10</span>,<span class="number">20</span>))</span><br><span class="line"><span class="built_in">print</span>(divModule.div(<span class="number">10</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="실행-파일-지정"><a href="#실행-파일-지정" class="headerlink" title="실행 파일 지정"></a>실행 파일 지정</h2><p><span style="color:blue"> [Ex] </span> cm를 mm, inch, m, ft로 변환해보자.</p>
+<ul>
+<li>직접 실행</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 직접 실행</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmToMm</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">round</span>(n * <span class="number">10</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmToInch</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">round</span>(n * <span class="number">0.393</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmToM</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">round</span>(n * <span class="number">0.01</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cmToFt</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">round</span>(n * <span class="number">0.032</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;10cm : <span class="subst">&#123;cmToMm(<span class="number">10</span>)&#125;</span>mm&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;10cm : <span class="subst">&#123;cmToInch(<span class="number">10</span>)&#125;</span>mm&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;10cm : <span class="subst">&#123;cmToM(<span class="number">10</span>)&#125;</span>mm&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;10cm : <span class="subst">&#123;cmToFt(<span class="number">10</span>)&#125;</span>mm&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>모듈(Module)로써 불러와 실행</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Module 불러와 실행</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> unitConversion <span class="keyword">as</span> uc</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    inputNumber = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;길이(cm) 입력: &#x27;</span>))</span><br><span class="line">    returnValue = uc.cmToMm(inputNumber)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;returnValue: <span class="subst">&#123;returnValue&#125;</span>mm&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    returnValue = uc.cmToInch(inputNumber)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;returnValue: <span class="subst">&#123;returnValue&#125;</span>inch&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    returnValue = uc.cmToM(inputNumber)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;returnValue: <span class="subst">&#123;returnValue&#125;</span>m&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    returnValue = uc.cmToFt(inputNumber)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;returnValue: <span class="subst">&#123;returnValue&#125;</span>ft&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<h1 id="패키지"><a href="#패키지" class="headerlink" title="패키지"></a>패키지</h1><blockquote>
+<p>패키지를 이용하면 관련 있는 모듈을 그룹으로 관리할 수 있다</p>
+</blockquote>
+<p><span style="color:blue"> [Ex] </span> 계산기</p>
+<blockquote>
+<p><strong>모듈</strong></p>
+<ul>
+<li>정수형/실수형 모듈 각각 작성</li>
+</ul>
+</blockquote>
+<ul>
+<li>정수형 모듈</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(n1 + n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(add(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sub</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(n1 - n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(sub(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(n1 * n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(mul(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(n1 / n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(div(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>실수형 모듈</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(n1 + n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(add(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">sub</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(n1 - n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(sub(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mul</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(n1 * n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(mul(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">div</span>(<span class="params">n1, n2</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">float</span>(n1 / n2)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(div(<span class="number">3.14</span>, <span class="number">1.2</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>실행 차이</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 정수형 실행</span></span><br><span class="line"><span class="keyword">from</span> CalculatorForInt <span class="keyword">import</span> addCal, subCal, mulCal, divCal</span><br><span class="line"><span class="built_in">print</span>(addCal.add(<span class="number">10</span>, <span class="number">20</span>), subCal.sub(<span class="number">10</span>, <span class="number">20</span>), mulCal.mul(<span class="number">10</span>, <span class="number">20</span>), divCal.div(<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 실수형 실행</span></span><br><span class="line"><span class="keyword">from</span> CalculatorForFloat <span class="keyword">import</span> addCal, subCal, mulCal, divCal</span><br><span class="line"><span class="built_in">print</span>(addCal.add(<span class="number">10</span>, <span class="number">20</span>), subCal.sub(<span class="number">10</span>, <span class="number">20</span>), mulCal.mul(<span class="number">10</span>, <span class="number">20</span>), divCal.div(<span class="number">10</span>, <span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_3.png" class="">
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_4.png" class="">
+<p><br></p>
+<h2 id="site-packages"><a href="#site-packages" class="headerlink" title="site-packages"></a>site-packages</h2><ul>
+<li>실행파일과 동일한 디렉토리에 있는 경우만 모듈을 사용할 수 있음(다른 디렉토리에 있는 경우 모듈 <strong>사용 불가)</strong></li>
+<li>site-packages에 있는 모듈은 어디서나 사용할 수 있는 범용 모듈화 가능</li>
+</ul>
+<blockquote>
+<p>sys : 시스템에 대한 간략한 정보를 모아놓은 Python 기본 제공 모듈(Module)<br>  sys.path : 모듈이 들어있는 경로 값을 나열</p>
+</blockquote>
+<ul>
+<li>venv : Python을 작업하기 위한 가상 환경. 독립적인 환경 셋팅을 할 수 있는 큰 장점</li>
+<li>독립 환경이 구성되지 않을 경우, 다른 버전 등(ver 3.7, ver 3.9)에 의해 에러(error)가 발생할 수 있음</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 모듈의 경로 확인</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> path <span class="keyword">in</span> sys.path:</span><br><span class="line">    <span class="built_in">print</span>(path)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/15/Python-Mid-001/Python_Mid_001_5.png" class="">
+<p><br><br><br></p>
+<h1 id="자주-사용하는-모듈-Module"><a href="#자주-사용하는-모듈-Module" class="headerlink" title="자주 사용하는 모듈(Module)"></a>자주 사용하는 모듈(Module)</h1><h2 id="수학-math"><a href="#수학-math" class="headerlink" title="수학(math)"></a>수학(math)</h2><ul>
+<li>절댓값 fabs</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.fabs(<span class="number">0.5355</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>올림 ceil</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.ceil(-<span class="number">5.21</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>내림 floor</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.floor(-<span class="number">5.21</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>버림 trunc</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.trunc(-<span class="number">5.21</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>최대공약수 gcd</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">math.gcd(<span class="number">14</span>, <span class="number">21</span>) <span class="comment"># math.gcd(A, B): A와 B의 최대공약수를 구함</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>팩토리얼</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.factorial(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>제곱근 sqrt</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">math.sqrt(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="난수-random"><a href="#난수-random" class="headerlink" title="난수(random)"></a>난수(random)</h2><ul>
+<li>정수난수 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">random.randint(<span class="number">1</span>, <span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="시간-time"><a href="#시간-time" class="headerlink" title="시간(time)"></a>시간(time)</h2><ul>
+<li>localtime : 현재 시스템 시간 반환. 시스템 모든정보 한 번에 출력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">lt = time.localtime() </span><br><span class="line">time.localtime() <span class="comment"># 한번에 모든정보 출력</span></span><br><span class="line">time.location().tm_year <span class="comment"># 연도 출력</span></span><br><span class="line">time.location().tm_mon <span class="comment"># 월 출력</span></span><br><span class="line">time.location().tm_mday <span class="comment"># 요일 출력</span></span><br><span class="line">time.location().tm_hour <span class="comment"># 시간 출력</span></span><br><span class="line">time.location().tm_min <span class="comment"># 분 출력</span></span><br><span class="line">time.location().tm_sec <span class="comment"># 초 출력</span></span><br><span class="line">time.location().tm_wday <span class="comment"># 요일 출력(0-6 숫자로 표현) 0-월,1-화,2-수,3-목,4-금,5-토6-일</span></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/15/Python-Mid-001/">https://gyoungmin-lim.github.io/2024/02/15/Python-Mid-001/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/16/Python-Mid-002/" title="(Python 중급) 객체(Object), 클래스(Class), 복사(Copy), 예외(Exception)"><img class="cover" src="/../cover_img/python_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Python 중급) 객체(Object), 클래스(Class), 복사(Copy), 예외(Exception)</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/15/Python-Basic-004/" title="(Python 기초) 기초수학"><img class="cover" src="/../cover_img/python_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Python 기초) 기초수학</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/14/Python-Basic-001/" title="(Python 기초) 변수(Variable), 자료형(Data Type)"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">(Python 기초) 변수(Variable), 자료형(Data Type)</div></div></a></div><div><a href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-16</div><div class="title">(Python 중급) 알고리즘(Algorithm)</div></div></a></div><div><a href="/2024/02/14/Python-Basic-002/" title="(Python 기초) 데이터 입&#x2F;출력, 산술 연산자(Operator)"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">(Python 기초) 데이터 입&#x2F;출력, 산술 연산자(Operator)</div></div></a></div><div><a href="/2024/02/14/Python-Anaconda-Install/" title="(Python) 아나콘다(anaconda) 설치"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">(Python) 아나콘다(anaconda) 설치</div></div></a></div><div><a href="/2024/02/14/Python-Basic-003/" title="(Python 기초) 조건문, 반복문"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">(Python 기초) 조건문, 반복문</div></div></a></div><div><a href="/2024/02/16/Python-DataStructure-Dictionary/" title="(Python 중급) 자료구조 - 딕셔너리(Dictionary)"><img class="cover" src="/../cover_img/python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-16</div><div class="title">(Python 중급) 자료구조 - 딕셔너리(Dictionary)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">41</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">16</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%95%A8%EC%88%98%EB%9E%80"><span class="toc-number">1.</span> <span class="toc-text">함수란?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%82%B4%EC%9E%A5%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%EC%9E%90%ED%95%A8%EC%88%98"><span class="toc-number">1.1.</span> <span class="toc-text">내장함수, 사용자함수</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%95%A8%EC%88%98-%EC%84%A0%EC%96%B8"><span class="toc-number">2.</span> <span class="toc-text">함수 선언</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%95%A8%EC%88%98-%EB%82%B4-%EB%8B%A4%EB%A5%B8-%ED%95%A8%EC%88%98-%ED%98%B8%EC%B6%9C"><span class="toc-number">2.1.</span> <span class="toc-text">함수 내 다른 함수 호출</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9D%B8%EC%88%98%EC%99%80-%EB%A7%A4%EA%B0%9C%EB%B3%80%EC%88%98"><span class="toc-number">2.2.</span> <span class="toc-text">인수와 매개변수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%95%A8%EC%88%98-%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC-%EB%B0%98%ED%99%98"><span class="toc-number">2.3.</span> <span class="toc-text">함수 실행결과 반환</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A7%80%EC%97%AD%EB%B3%80%EC%88%98%EC%99%80-%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98"><span class="toc-number">2.4.</span> <span class="toc-text">지역변수와 전역변수</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98"><span class="toc-number">2.4.1.</span> <span class="toc-text">전역변수</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A7%80%EC%97%AD%EB%B3%80%EC%88%98"><span class="toc-number">2.4.2.</span> <span class="toc-text">지역변수</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Global-Keyword"><span class="toc-number">2.4.3.</span> <span class="toc-text">Global Keyword</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A4%91%EC%B2%A9%ED%95%A8%EC%88%98"><span class="toc-number">2.5.</span> <span class="toc-text">중첩함수</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda-%ED%95%A8%EC%88%98"><span class="toc-number">2.6.</span> <span class="toc-text">Lambda 함수</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EB%AA%A8%EB%93%88-Module"><span class="toc-number">3.</span> <span class="toc-text">모듈(Module)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%AA%A8%EB%93%88-Module-%EC%A0%9C%EC%9E%91"><span class="toc-number">3.1.</span> <span class="toc-text">모듈(Module) 제작</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%AA%A8%EB%93%88-Module-%EC%82%AC%EC%9A%A9"><span class="toc-number">3.2.</span> <span class="toc-text">모듈(Module) 사용</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98-1"><span class="toc-number">4.</span> <span class="toc-text">전역변수</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98-name"><span class="toc-number">4.1.</span> <span class="toc-text">전역변수 name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%8B%A4%ED%96%89-%ED%8C%8C%EC%9D%BC-%EC%A7%80%EC%A0%95"><span class="toc-number">4.2.</span> <span class="toc-text">실행 파일 지정</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%8C%A8%ED%82%A4%EC%A7%80"><span class="toc-number">5.</span> <span class="toc-text">패키지</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#site-packages"><span class="toc-number">5.1.</span> <span class="toc-text">site-packages</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EC%9E%90%EC%A3%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%AA%A8%EB%93%88-Module"><span class="toc-number">6.</span> <span class="toc-text">자주 사용하는 모듈(Module)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%88%98%ED%95%99-math"><span class="toc-number">6.1.</span> <span class="toc-text">수학(math)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%82%9C%EC%88%98-random"><span class="toc-number">6.2.</span> <span class="toc-text">난수(random)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%8B%9C%EA%B0%84-time"><span class="toc-number">6.3.</span> <span class="toc-text">시간(time)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) 시각화 라이브러리 Package - matplotlib"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib">(Python) 시각화 라이브러리 Package - matplotlib</a><time datetime="2024-02-16T10:15:16.000Z" title="Created 2024-02-16 19:15:16">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Module-Install/" title="(Python) 모듈(Module) 설치방법"><img src="/../cover_img/python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) 모듈(Module) 설치방법"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Module-Install/" title="(Python) 모듈(Module) 설치방법">(Python) 모듈(Module) 설치방법</a><time datetime="2024-02-16T10:09:31.000Z" title="Created 2024-02-16 19:09:31">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)"><img src="/../cover_img/python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 중급) 알고리즘(Algorithm)"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)">(Python 중급) 알고리즘(Algorithm)</a><time datetime="2024-02-16T09:53:06.000Z" title="Created 2024-02-16 18:53:06">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Problem-003/" title="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제"><img src="/../cover_img/Python_Problem_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Problem-003/" title="(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제">(Python 중급) 함수, 모듈, 클래스, 예외처리, 텍스트파일 문제</a><time datetime="2024-02-16T09:40:06.000Z" title="Created 2024-02-16 18:40:06">2024-02-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/16/Python-Problem-002/" title="(Python 기초) 기초수학 문제"><img src="/../cover_img/Python_Problem_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python 기초) 기초수학 문제"/></a><div class="content"><a class="title" href="/2024/02/16/Python-Problem-002/" title="(Python 기초) 기초수학 문제">(Python 기초) 기초수학 문제</a><time datetime="2024-02-16T09:32:01.000Z" title="Created 2024-02-16 18:32:01">2024-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
