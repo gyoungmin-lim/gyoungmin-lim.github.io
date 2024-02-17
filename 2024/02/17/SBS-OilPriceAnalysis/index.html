@@ -1,0 +1,466 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Step by Step) 주유소 데이터 분석 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : 셀프 주유소에서 유가가 정말 저렴한가?  수행기간  : 2023. 10. 16 ~ 2023. 10. 23  수행내용  셀프 주유소의 휘발유&#x2F;경유의 가격이 더 저렴한 것을 확인할 수 있음 브랜드 별로 평균 주유가격을 비교했을 때 휘발유&#x2F;경유 모두 알뜰주유소의 가격이 가장 낮은 것을 확인할 수 있음 서울시 구별 주유 가격 비교">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Step by Step) 주유소 데이터 분석">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/17/SBS-OilPriceAnalysis/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : 셀프 주유소에서 유가가 정말 저렴한가?  수행기간  : 2023. 10. 16 ~ 2023. 10. 23  수행내용  셀프 주유소의 휘발유&#x2F;경유의 가격이 더 저렴한 것을 확인할 수 있음 브랜드 별로 평균 주유가격을 비교했을 때 휘발유&#x2F;경유 모두 알뜰주유소의 가격이 가장 낮은 것을 확인할 수 있음 서울시 구별 주유 가격 비교">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/EDA_OilPriceAnalysis_cover.jpg">
+<meta property="article:published_time" content="2024-02-17T08:09:08.000Z">
+<meta property="article:modified_time" content="2024-02-17T09:00:12.942Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="StepByStep">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/EDA_OilPriceAnalysis_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/17/SBS-OilPriceAnalysis/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Step by Step) 주유소 데이터 분석',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-17 18:00:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/EDA_OilPriceAnalysis_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Step by Step) 주유소 데이터 분석</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-17T08:09:08.000Z" title="Created 2024-02-17 17:09:08">2024-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-17T09:00:12.942Z" title="Updated 2024-02-17 18:00:12">2024-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Step-By-Step/">Step By Step</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Step by Step) 주유소 데이터 분석"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>셀프 주유소에서 유가가 정말 저렴한가?</strong></li>
+<li><span style="color:blue"> <strong>수행기간</strong> </span> : <strong>2023. 10. 16 ~ 2023. 10. 23</strong></li>
+<li><span style="color:violet"> <strong>수행내용</strong> </span><ul>
+<li>셀프 주유소의 휘발유/경유의 가격이 더 저렴한 것을 확인할 수 있음</li>
+<li>브랜드 별로 평균 주유가격을 비교했을 때 휘발유/경유 모두 알뜰주유소의 가격이 가장 낮은 것을 확인할 수 있음</li>
+<li>서울시 구별 주유 가격 비교<ul>
+<li>서울시에서 휘발유/경유 모두 주유 가격이 비싼 상위 10개의 주유소를 확인하였을 때, ‘용산구’, ‘중구’, ‘강남구’ 등의 지역이 휘발유 가격이 높은 비중을 차지</li>
+<li>서울시에서 휘발유/경유 모두 가격이 싼 주유소 상위 10개의 주유소를 확인해보면 ‘강서구’, ‘양천구’, ‘구로구’ 등의 지역이 휘발유 가격이 낮은 비중을 차지</li>
+<li>가격이 가장 비싼 주유소와 싼 주유소는 리터당 약 1,000원의 차이를 보임</li>
+<li>‘중랑구’, ‘은평구’와 같이 셀프주유가능 주유소가 많음에도 가격이 싼 순위권에 많이 들지 못하는 것으로 보아, 셀프주유가능과 주유가격 간의 관계는 Weak correlation으로 생각됨</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h1 id="데이터-수집"><a href="#데이터-수집" class="headerlink" title="데이터 수집"></a>데이터 수집</h1><h2 id="데이터-수집-시-구"><a href="#데이터-수집-시-구" class="headerlink" title="데이터 수집 (시 / 구)"></a>데이터 수집 (시 / 구)</h2><ul>
+<li>Module Load 및 웹 페이지 이동</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome(<span class="string">&#x27;../driver/chromedriver.exe&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main_page_access</span>():</span><br><span class="line">    driver.get(<span class="string">&#x27;https://www.opinet.co.kr&#x27;</span>)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    driver.get(<span class="string">&#x27;https://www.opinet.co.kr/searRgSelect.do&#x27;</span>)</span><br><span class="line">    driver.maximize_window() <span class="comment"># 화면 최대화</span></span><br><span class="line"></span><br><span class="line">main_page_access() <span class="comment"># 페이지 이동</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_0.png" class="">
+<p><br></p>
+<h3 id="시-추출"><a href="#시-추출" class="headerlink" title="시 추출"></a>시 추출</h3><ul>
+<li>주어진 데이터에서 ‘서울’을 기준으로 정렬할 것이기 때문에, 서울 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 지역 시/도</span></span><br><span class="line">sido_list_raw = driver.find_element_by_id(<span class="string">&#x27;SIDO_NM0&#x27;</span>)</span><br><span class="line">sido_list_raw.text</span><br></pre></td></tr></table></figure>
+<p><strong>Output :</strong> </p>
+<p><code>&#39; 시/도\n \n \n \n 서울\n \n \n \n 부산\n \n \n \n \n \n 대구\n \n \n \n \n 인천\n \n \n \n \n 광주\n \n \n \n \n 대전\n \n \n \n \n 울산\n \n \n \n \n 세종\n \n \n \n \n 경기\n \n \n \n \n 충북\n \n \n \n \n 충남\n \n \n \n \n 전북\n \n \n \n \n 전남\n \n \n \n \n 경북\n \n \n \n \n 경남\n \n \n \n \n 제주\n \n \n \n \n 강원\n \n \n ‘</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sido_list = sido_list_raw.find_elements_by_tag_name(<span class="string">&#x27;option&#x27;</span>)</span><br><span class="line">sido_list[<span class="number">0</span>].text, <span class="built_in">len</span>(sido_list)</span><br></pre></td></tr></table></figure>
+<p><strong>Output :</strong> <code>(&#39;시/도&#39;, 18)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sido_names = [sido_list[idx].text <span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(sido_list))]</span><br><span class="line"></span><br><span class="line">sido_element = driver.find_element_by_id(<span class="string">&#x27;SIDO_NM0&#x27;</span>)</span><br><span class="line">sido_element.send_keys(sido_names[<span class="number">1</span>]) <span class="comment"># 서울을 조사할 것이기 때문에 다음과 같이 설정</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="구-추출"><a href="#구-추출" class="headerlink" title="구 추출"></a>구 추출</h3><ul>
+<li>시/도에 해당하는 구 이름 추출하여 리스트에 저장</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 구</span></span><br><span class="line"></span><br><span class="line">gu_list_raw = driver.find_element_by_id(<span class="string">&#x27;SIGUNGU_NM0&#x27;</span>)</span><br><span class="line">gu_list = gu_list_raw.find_elements_by_tag_name(<span class="string">&#x27;option&#x27;</span>) <span class="comment"># Tag 길이 확인</span></span><br><span class="line"><span class="built_in">len</span>(gu_list), gu_list</span><br><span class="line"></span><br><span class="line">gu_names = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> option <span class="keyword">in</span> gu_list:</span><br><span class="line">    gu_names.append(option.get_attribute(<span class="string">&#x27;value&#x27;</span>))</span><br><span class="line"></span><br><span class="line">gu_names[:<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>Output :</strong> <code>[&#39;&#39;, &#39;강남구&#39;, &#39;강동구&#39;, &#39;강북구&#39;, &#39;강서구&#39;]</code></p>
+<ul>
+<li>맨 첫 값 공백(<code>’ ‘</code>) 제거</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gu_names = gu_names[<span class="number">1</span>:] <span class="comment"># 빈 칸 제거</span></span><br><span class="line">gu_names</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_1.png" class="">
+<p><br></p>
+<h2 id="데이터-수집-유가-서비스-유-무"><a href="#데이터-수집-유가-서비스-유-무" class="headerlink" title="데이터 수집 (유가 / 서비스 유, 무)"></a>데이터 수집 (유가 / 서비스 유, 무)</h2><h3 id="1개의-구-이름을-통해-데이터-수집-데스트-진행"><a href="#1개의-구-이름을-통해-데이터-수집-데스트-진행" class="headerlink" title="1개의 구 이름을 통해 데이터 수집 데스트 진행"></a>1개의 구 이름을 통해 데이터 수집 데스트 진행</h3><ul>
+<li>Module Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm_notebook</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br></pre></td></tr></table></figure>
+<ul>
+<li>부가정보 수집을 위해 체크 진행</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">driver.find_element_by_id(<span class="string">&#x27;SIGUNGU_NM0&#x27;</span>).send_keys(<span class="string">&#x27;강남구&#x27;</span>)</span><br><span class="line">addelement1 = driver.find_element_by_css_selector(<span class="string">&#x27;#CWSH_YN&#x27;</span>).click() <span class="comment"># 세차장 체크</span></span><br><span class="line">addelement2 = driver.find_element_by_css_selector(<span class="string">&#x27;#MAINT_YN&#x27;</span>).click() <span class="comment"># 경정비 체크</span></span><br><span class="line">addelement3 = driver.find_element_by_css_selector(<span class="string">&#x27;#CVS_YN&#x27;</span>).click() <span class="comment"># 편의점 체크</span></span><br><span class="line">addelement4 = driver.find_element_by_css_selector(<span class="string">&#x27;#SEL24_YN&#x27;</span>).click() <span class="comment"># 24시간 체크</span></span><br><span class="line"></span><br><span class="line">driver.find_element(By.CSS_SELECTOR,<span class="string">&#x27;#body1 &gt; tr:nth-child(1) &gt; td.rlist &gt; a&#x27;</span>).click() <span class="comment"># 세부정보 보기</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>페이지 저장</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">req = driver.page_source <span class="comment"># 해당 페이지 저장</span></span><br><span class="line">soup = BeautifulSoup(req, <span class="string">&#x27;html.parser&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>구별 주유소 추출 및 저장</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 구별 주유소 추출 및 저장</span></span><br><span class="line">oilStation = soup.select_one(<span class="string">&#x27;#os_price1&#x27;</span>)</span><br><span class="line">oilStation_list = oilStation.select(<span class="string">&#x27;.rlist&#x27;</span>)</span><br><span class="line"><span class="comment"># oilStation_list[0].text.strip()</span></span><br><span class="line"><span class="keyword">for</span> idx, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(oilStation_list):</span><br><span class="line">    <span class="built_in">print</span>(idx)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>해당 구 중 한 개의 주유소 정보 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 해당 구 중 한 개의 주유소 정보 확인</span></span><br><span class="line">req = driver.page_source</span><br><span class="line">soup = BeautifulSoup(req,<span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 주유소 정보 확인</span></span><br><span class="line">name = soup.select_one(<span class="string">&#x27;#os_nm&#x27;</span>).text <span class="comment"># 이름</span></span><br><span class="line">brand = soup.select_one(<span class="string">&#x27;#poll_div_nm&#x27;</span>).text <span class="comment"># 브랜드</span></span><br><span class="line">gasoline = soup.select_one(<span class="string">&#x27;#b027_p&#x27;</span>).text <span class="comment"># 휘발유 가격</span></span><br><span class="line">diesel = soup.select_one(<span class="string">&#x27;#d047_p&#x27;</span>).text <span class="comment"># 경유 가격</span></span><br><span class="line">address = soup.select_one(<span class="string">&#x27;#rd_addr&#x27;</span>).text <span class="comment"># 주소</span></span><br><span class="line"></span><br><span class="line">name, brand, gasoline, diesel, address</span><br></pre></td></tr></table></figure>
+<p><strong>Output :</strong> <code>(&#39;HD현대오일뱅크㈜직영 도곡셀프주유소&#39;,&#39;HD현대오일뱅크&#39;,&#39;1,784&#39;,&#39;1,719&#39;,&#39;서울 강남구  남부순환로 2718 (도곡2동)&#39;)</code></p>
+<ul>
+<li>서비스 정보 확인<ul>
+<li>서비스 항목 : 세차, 정비, LPG, 편의점, 24시간</li>
+<li>체크가 안 되어 있을 경우 <code>N</code>, 되어있을 경우 <code>Y</code>로 표시</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 서비스 정보 확인</span></span><br><span class="line"></span><br><span class="line">service_info = soup.select(<span class="string">&#x27;.service&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#cwsh_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">    carWash = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    carWash = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#maint_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">    charging = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    charging = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#lpg_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">    maintenance = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    maintenance = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#cvs_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">    cvsStore = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    cvsStore = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#sel24_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">    hours24 = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    hours24 = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">carWash, charging, maintenance, cvsStore, hours24</span><br></pre></td></tr></table></figure>
+<p><strong>Output :</strong> <code>(&#39;Y&#39;, &#39;Y&#39;, &#39;N&#39;, &#39;N&#39;, &#39;N&#39;)</code></p>
+<p><br></p>
+<h3 id="구별-주유소-데이터-수집-및-데이터프레임-생성"><a href="#구별-주유소-데이터-수집-및-데이터프레임-생성" class="headerlink" title="구별 주유소 데이터 수집 및 데이터프레임 생성"></a>구별 주유소 데이터 수집 및 데이터프레임 생성</h3><ul>
+<li>데이터 저장공간(리스트) 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 저장공간(리스트) 생성</span></span><br><span class="line">name_list = [] ; brand_list = [] ; gasoline_list = [] ; diesel_list = [] ; address_list = [] ; oilSelf_list = []<span class="comment"># 주유소정보</span></span><br><span class="line">carWash_list = [] ; charging_list = [] ; maintenance_list = [] ; cvsStore_list = [] ; hours24_list = [] <span class="comment"># 서비스정보</span></span><br><span class="line">guName_list = [] <span class="comment"># 구 이름</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>구별 주유소 정보 추출 및 저장</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> gu <span class="keyword">in</span> tqdm_notebook(gu_names):</span><br><span class="line"></span><br><span class="line">    element = driver.find_element_by_id(<span class="string">&#x27;SIGUNGU_NM0&#x27;</span>)</span><br><span class="line">    element.send_keys(gu)</span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 구별 주유소 추출 및 저장</span></span><br><span class="line"></span><br><span class="line">    req = driver.page_source <span class="comment"># 해당 페이지 저장</span></span><br><span class="line">    soup = BeautifulSoup(req, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    oilStation = soup.select_one(<span class="string">&#x27;#os_price1&#x27;</span>)</span><br><span class="line">    oilStation_list = oilStation.select(<span class="string">&#x27;.rlist&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> idx, information <span class="keyword">in</span> <span class="built_in">enumerate</span>(oilStation_list):</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#oilStation_info = driver.find_element(By.CSS_SELECTOR,&#x27;#body1 &gt; tr:nth-child(&#123;&#125;) &gt; td.rlist &gt; a&#x27; .format(idx + 1)).click() # 세부정보 보기</span></span><br><span class="line">        driver.find_element(By.CSS_SELECTOR,<span class="string">&#x27;#body1 &gt; tr:nth-child(&#123;&#125;) &gt; td.rlist &gt; a&#x27;</span> .<span class="built_in">format</span>(idx + <span class="number">1</span>)).click() <span class="comment"># 세부정보 보기</span></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">#rlist=driver.find_element(By.CSS_SELECTOR,f&#x27;#body1 &gt; tr:nth-child(&#123;idx+1&#125;) &gt; td.rlist &gt; a&#x27;)</span></span><br><span class="line"></span><br><span class="line">        req = driver.page_source</span><br><span class="line">        soup = BeautifulSoup(req,<span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 셀프 여부 확인</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;셀프&#x27;</span> <span class="keyword">in</span> information.text.strip():</span><br><span class="line">            oilSelf = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            oilSelf = <span class="string">&#x27;N&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 주유소 정보 확인</span></span><br><span class="line">        name = soup.select_one(<span class="string">&#x27;#os_nm&#x27;</span>).text <span class="comment"># 이름</span></span><br><span class="line">        brand = soup.select_one(<span class="string">&#x27;#poll_div_nm&#x27;</span>).text <span class="comment"># 브랜드</span></span><br><span class="line">        gasoline = soup.select_one(<span class="string">&#x27;#b027_p&#x27;</span>).text <span class="comment"># 휘발유 가격</span></span><br><span class="line">        diesel = soup.select_one(<span class="string">&#x27;#d047_p&#x27;</span>).text <span class="comment"># 경유 가격</span></span><br><span class="line">        address = soup.select_one(<span class="string">&#x27;#rd_addr&#x27;</span>).text <span class="comment"># 주소</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#cwsh_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">            carWash = <span class="string">&#x27;N&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            carWash = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#maint_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">            charging = <span class="string">&#x27;N&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            charging = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#lpg_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">            maintenance = <span class="string">&#x27;N&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            maintenance = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#cvs_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">            cvsStore = <span class="string">&#x27;N&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            cvsStore = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;off&#x27;</span> <span class="keyword">in</span> soup.select_one(<span class="string">&#x27;#sel24_yn&#x27;</span>).get(<span class="string">&#x27;src&#x27;</span>):</span><br><span class="line">            hours24 = <span class="string">&#x27;N&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            hours24 = <span class="string">&#x27;Y&#x27;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 리스트 추가</span></span><br><span class="line">        guName_list.append(gu)</span><br><span class="line"></span><br><span class="line">        name_list.append(name)</span><br><span class="line">        brand_list.append(brand)</span><br><span class="line">        gasoline_list.append(gasoline)</span><br><span class="line">        diesel_list.append(diesel)</span><br><span class="line">        address_list.append(address)</span><br><span class="line">        oilSelf_list.append(oilSelf)</span><br><span class="line">        </span><br><span class="line">        carWash_list.append(carWash)</span><br><span class="line">        charging_list.append(charging)</span><br><span class="line">        maintenance_list.append(maintenance)</span><br><span class="line">        cvsStore_list.append(cvsStore)</span><br><span class="line">        hours24_list.append(hours24)</span><br><span class="line"></span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>저장된 리스트를 가지고 최종 데이터 프레임 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.DataFrame(&#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span> : name_list,</span><br><span class="line">    <span class="string">&#x27;brand&#x27;</span> : brand_list,</span><br><span class="line">    <span class="string">&#x27;gasolinePrice&#x27;</span> : gasoline_list,</span><br><span class="line">    <span class="string">&#x27;dieselPrice&#x27;</span> : diesel_list,</span><br><span class="line">    <span class="string">&#x27;address&#x27;</span> : address_list,</span><br><span class="line">    <span class="string">&#x27;oilSelf&#x27;</span> : oilSelf_list,</span><br><span class="line">    <span class="string">&#x27;carWash&#x27;</span> : carWash_list,</span><br><span class="line">    <span class="string">&#x27;charging&#x27;</span> : charging_list,</span><br><span class="line">    <span class="string">&#x27;maintenance&#x27;</span> : maintenance_list,</span><br><span class="line">    <span class="string">&#x27;cvsStore&#x27;</span> : cvsStore_list,</span><br><span class="line">    <span class="string">&#x27;hours24&#x27;</span> : hours24_list,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_2.png" class="">
+<p><br></p>
+<h2 id="위도-경도-정보-추가"><a href="#위도-경도-정보-추가" class="headerlink" title="위도, 경도 정보 추가"></a>위도, 경도 정보 추가</h2><ul>
+<li>Module Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> googlemaps</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">gmaps_key = <span class="string">&#x27;****************&#x27;</span></span><br><span class="line">gmaps = googlemaps.Client(key = gmaps_key)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>위도, 경도 column 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;lat&#x27;</span>]= np.nan</span><br><span class="line">data[<span class="string">&#x27;lon&#x27;</span>]= np.nan</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_3.png" class="">
+<ul>
+<li>Googlemaps를 이용해 해당 주유소의 위/경도 정보를 저장</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> idx, rows <span class="keyword">in</span> data.iterrows():</span><br><span class="line">    station_address = rows[<span class="string">&#x27;address&#x27;</span>]</span><br><span class="line">    tmp = gmaps.geocode(station_address, language=<span class="string">&#x27;ko&#x27;</span>)</span><br><span class="line">    lat = tmp[<span class="number">0</span>][<span class="string">&#x27;geometry&#x27;</span>][<span class="string">&#x27;location&#x27;</span>][<span class="string">&#x27;lat&#x27;</span>]</span><br><span class="line">    lon = tmp[<span class="number">0</span>][<span class="string">&#x27;geometry&#x27;</span>][<span class="string">&#x27;location&#x27;</span>][<span class="string">&#x27;lng&#x27;</span>]</span><br><span class="line">    address = tmp[<span class="number">0</span>][<span class="string">&#x27;formatted_address&#x27;</span>].split()[<span class="number">2</span>]</span><br><span class="line">    data.loc[idx, <span class="string">&#x27;gu&#x27;</span>] = address</span><br><span class="line">    data.loc[idx, <span class="string">&#x27;lat&#x27;</span>] = lat</span><br><span class="line">    data.loc[idx, <span class="string">&#x27;lon&#x27;</span>] = lon</span><br><span class="line"></span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_4.png" class="">
+<blockquote>
+<p><strong>데이터 저장</strong></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.to_csv(<span class="string">&#x27;Oil Price Analysis.csv&#x27;</span>, sep = <span class="string">&#x27;,&#x27;</span>, encoding = <span class="string">&#x27;utf-8&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<h1 id="EDA"><a href="#EDA" class="headerlink" title="EDA"></a>EDA</h1><h2 id="데이터-Type-변경"><a href="#데이터-Type-변경" class="headerlink" title="데이터 Type 변경"></a>데이터 Type 변경</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;Oil Price Analysis.csv&#x27;</span>, thousands = <span class="string">&#x27;,&#x27;</span>, encoding = <span class="string">&#x27;utf-8&#x27;</span>, index_col = <span class="number">0</span>)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_5.png" class="">
+<ul>
+<li>데이터 정보 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.info()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_6.png" class="">
+<p><br></p>
+<h2 id="주유-가격-별-주유소-확인"><a href="#주유-가격-별-주유소-확인" class="headerlink" title="주유 가격 별 주유소 확인"></a>주유 가격 별 주유소 확인</h2><ul>
+<li>가격이 가장 비싼 가솔린 주유소</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by = <span class="string">&quot;gasolinePrice&quot;</span>, ascending = <span class="literal">False</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_7.png" class="">
+<ul>
+<li>가격이 가장 싼 가솔린 주유소</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by = <span class="string">&quot;gasolinePrice&quot;</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_8.png" class="">
+<ul>
+<li>가격이 가장 비싼 디젤 주유소</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by = <span class="string">&quot;dieselPrice&quot;</span>, ascending = <span class="literal">False</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_9.png" class="">
+<ul>
+<li>가격이 가장 싼 디젤 주유소</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data.sort_values(by = <span class="string">&quot;dieselPrice&quot;</span>).head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_10.png" class="">
+<p><br><br><br></p>
+<h1 id="Visualization"><a href="#Visualization" class="headerlink" title="Visualization"></a>Visualization</h1><ul>
+<li>ModuleLoad<ul>
+<li>한글 설정</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 한글 설정</span></span><br><span class="line"><span class="keyword">import</span> platform</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> rc, font_manager</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">path = <span class="string">&quot;C:/Windows/Fonts/malgun.ttf&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> platform.system() == <span class="string">&quot;Darwin&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;System On : MAC&quot;</span>)</span><br><span class="line">    rc(<span class="string">&quot;font&quot;</span>, family = <span class="string">&quot;Arial Unicode MS&quot;</span>)</span><br><span class="line"><span class="keyword">elif</span> platform.system() == <span class="string">&quot;Windows&quot;</span>:</span><br><span class="line">    font_name = font_manager.FontProperties(fname = path).get_name()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;System On : Windows&quot;</span>)</span><br><span class="line">    rc(<span class="string">&quot;font&quot;</span>, family = font_name)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Unknown System&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="셀프-주유소-가격-비교"><a href="#셀프-주유소-가격-비교" class="headerlink" title="셀프 주유소 가격 비교"></a>셀프 주유소 가격 비교</h2><ul>
+<li>셀프 주유소의 휘발유 가격 비교</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ComparisonGasolinePrice</span>():</span><br><span class="line">    plt.figure(figsize=(<span class="number">6</span>, <span class="number">6</span>))</span><br><span class="line">    sns.boxplot(x = <span class="string">&quot;oilSelf&quot;</span>, y=<span class="string">&quot;gasolinePrice&quot;</span>, data = data, palette = <span class="string">&quot;Reds&quot;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Comparison Gasoline Price by Self&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">ComparisonGasolinePrice()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_11.png" class="">
+<ul>
+<li>셀프 주유소의 경유 가격 비교</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ComparisonGasolinePrice</span>():</span><br><span class="line">    plt.figure(figsize=(<span class="number">6</span>, <span class="number">6</span>))</span><br><span class="line">    sns.boxplot(x = <span class="string">&quot;oilSelf&quot;</span>, y=<span class="string">&quot;dieselPrice&quot;</span>, data = data, palette = <span class="string">&quot;Blues&quot;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Comparison Diesel Price by Self&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">ComparisonGasolinePrice()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_12.png" class="">
+<h2 id="브랜드별-가격-비교"><a href="#브랜드별-가격-비교" class="headerlink" title="브랜드별 가격 비교"></a>브랜드별 가격 비교</h2><ul>
+<li>브랜드별 휘발유 가격 비교<ul>
+<li>셀프 유/무 여부에 따라 boxplot</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ComparisonGasolinePriceWithBrand</span>():</span><br><span class="line">    plt.figure(figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line">    sns.boxplot(x = <span class="string">&quot;brand&quot;</span>, y = <span class="string">&quot;gasolinePrice&quot;</span>, hue = <span class="string">&quot;oilSelf&quot;</span>, data = data, palette = <span class="string">&quot;Reds&quot;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Comparison Gasoline Price by Self&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">ComparisonGasolinePriceWithBrand()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_13.png" class="">
+<ul>
+<li>브랜드별 경유 가격 비교<ul>
+<li>셀프 유/무 여부에 따라 boxplot</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ComparisonDieselPriceWithBrand</span>():</span><br><span class="line">    </span><br><span class="line">    plt.figure(figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line">    sns.boxplot(x = <span class="string">&quot;brand&quot;</span>, y = <span class="string">&quot;dieselPrice&quot;</span>, hue = <span class="string">&quot;oilSelf&quot;</span>, data = data, palette = <span class="string">&quot;Blues&quot;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Comparison Diesel Price by Self&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">ComparisonDieselPriceWithBrand()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_14.png" class="">
+<p><br></p>
+<h2 id="브랜드별-유가-평균-비교"><a href="#브랜드별-유가-평균-비교" class="headerlink" title="브랜드별 유가 평균 비교"></a>브랜드별 유가 평균 비교</h2><ul>
+<li>PivotTable을 통해 브랜드별 유가 평균 가격 표시</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">brand_Pivot = pd.pivot_table(data, </span><br><span class="line">                             index = [<span class="string">&#x27;brand&#x27;</span>, <span class="string">&#x27;oilSelf&#x27;</span>], </span><br><span class="line">                             values = [<span class="string">&#x27;gasolinePrice&#x27;</span>, <span class="string">&#x27;dieselPrice&#x27;</span>,], </span><br><span class="line">                             aggfunc = np.mean)</span><br><span class="line"></span><br><span class="line">brand_Pivot[<span class="string">&#x27;gasolinePrice&#x27;</span>] = <span class="built_in">round</span>(brand_Pivot[<span class="string">&#x27;gasolinePrice&#x27;</span>], <span class="number">2</span>)</span><br><span class="line">brand_Pivot[<span class="string">&#x27;dieselPrice&#x27;</span>] = <span class="built_in">round</span>(brand_Pivot[<span class="string">&#x27;dieselPrice&#x27;</span>], <span class="number">2</span>)</span><br><span class="line">brand_Pivot</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_15.png" class="">
+<ul>
+<li>브랜드별 휘발유 평균 가격<ul>
+<li>셀프 유/무 여부에 따라 boxplot</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">brandGasolineBasedSelf</span>():</span><br><span class="line">    plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">    sns.barplot(x = <span class="string">&#x27;brand&#x27;</span>, y = <span class="string">&#x27;gasolinePrice&#x27;</span>, data = data, hue = <span class="string">&#x27;oilSelf&#x27;</span>, palette = <span class="string">&#x27;Reds&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Each brand gasoline Price based on Self Service&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">brandGasolineBasedSelf()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_16.png" class="">
+<ul>
+<li>브랜드별 경유 평균 가격<ul>
+<li>셀프 유/무 여부에 따라 boxplot</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">brandDieselBasedSelf</span>():</span><br><span class="line">    plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">    sns.barplot(x = <span class="string">&#x27;brand&#x27;</span>, y = <span class="string">&#x27;dieselPrice&#x27;</span>, data = data, hue = <span class="string">&#x27;oilSelf&#x27;</span>, palette = <span class="string">&#x27;Blues&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&#x27;Each brand Diesel Price based on Self Service&#x27;</span>, size = <span class="number">15</span>)</span><br><span class="line">    sns.despine()</span><br><span class="line">    plt.tight_layout()</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">brandDieselBasedSelf()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_17.png" class="">
+<ul>
+<li>구별 셀프주유소 갯수 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pivotCnt = pd.pivot_table(data, </span><br><span class="line">                             index = [<span class="string">&#x27;gu&#x27;</span>, <span class="string">&#x27;oilSelf&#x27;</span>], </span><br><span class="line">                             values = [<span class="string">&#x27;address&#x27;</span>,], </span><br><span class="line">                             aggfunc = <span class="string">&#x27;count&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pivotCnt</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_18.png" class=""></td>
+<td><img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_19.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="위-경도-이용-지도-시각화"><a href="#위-경도-이용-지도-시각화" class="headerlink" title="위/경도 이용 지도 시각화"></a>위/경도 이용 지도 시각화</h2><ul>
+<li>ModuleLoad</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Module &amp; lat, lon in Seoul</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> folium</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">geo_path=<span class="string">&#x27;../data/02. skorea_municipalities_geo_simple.json&#x27;</span></span><br><span class="line">geo_str=json.load(<span class="built_in">open</span>(geo_path,encoding=<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>구별 평균 유가 피벗테이블 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gu_Pivot = pd.pivot_table(data, </span><br><span class="line">                             index = [<span class="string">&#x27;gu&#x27;</span>], </span><br><span class="line">                             values = [<span class="string">&#x27;gasolinePrice&#x27;</span>, <span class="string">&#x27;dieselPrice&#x27;</span>], </span><br><span class="line">                             aggfunc = np.mean)</span><br><span class="line">gu_Pivot</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_20.png" class="">
+<blockquote>
+<p><strong>셀프 유/무에 따른 지도 시각화</strong></p>
+<ul>
+<li>셀프주유가 가능할 경우 <strong>파란색(Blue</strong>)으로 표시</li>
+<li>셀프주유가 불가할 경우 <strong>빨간색(Red)</strong>으로 표시</li>
+</ul>
+</blockquote>
+<ul>
+<li>가솔린 평균 가격 시각화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 가솔린 평균 가격 시각화</span></span><br><span class="line">gasolineMap = folium.Map(location=[<span class="number">37.55</span>, <span class="number">126.98</span>],</span><br><span class="line">                    zoom_start = <span class="number">12</span>, </span><br><span class="line">                    tiles=<span class="string">&quot;Stamen Toner&quot;</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">folium.Choropleth(</span><br><span class="line">        geo_data = geo_str,</span><br><span class="line">        data = gu_Pivot,</span><br><span class="line">        columns = [gu_Pivot.index, <span class="string">&#x27;gasolinePrice&#x27;</span>],</span><br><span class="line">        key_on=<span class="string">&#x27;feature.id&#x27;</span>,</span><br><span class="line">        fill_color=<span class="string">&#x27;PuRd&#x27;</span>,</span><br><span class="line">        fill_opacity = <span class="number">0.7</span>,</span><br><span class="line">        line_opacity = <span class="number">0.2</span>,</span><br><span class="line">        <span class="comment">#legend_name = legend</span></span><br><span class="line">    ).add_to(gasolineMap)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, rows <span class="keyword">in</span> data.iterrows():</span><br><span class="line">    <span class="keyword">if</span> rows[<span class="string">&#x27;oilSelf&#x27;</span>] == <span class="string">&#x27;Y&#x27;</span>:</span><br><span class="line">            folium.CircleMarker(</span><br><span class="line">                location = [rows[<span class="string">&#x27;lat&#x27;</span>], rows[<span class="string">&#x27;lon&#x27;</span>]],</span><br><span class="line">                radius = <span class="number">12</span>,</span><br><span class="line">                fill = <span class="literal">True</span>,</span><br><span class="line">                color =<span class="string">&#x27;Blue&#x27;</span>,</span><br><span class="line">                fill_color =<span class="string">&#x27;Blue&#x27;</span>,</span><br><span class="line">        ).add_to(gasolineMap)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        folium.CircleMarker(</span><br><span class="line">            location = [rows[<span class="string">&#x27;lat&#x27;</span>], rows[<span class="string">&#x27;lon&#x27;</span>]],</span><br><span class="line">            radius = <span class="number">12</span>,</span><br><span class="line">            fill= <span class="literal">True</span>,</span><br><span class="line">            color =<span class="string">&#x27;Red&#x27;</span>,</span><br><span class="line">            fill_color =<span class="string">&#x27;Red&#x27;</span>,</span><br><span class="line">        ).add_to(gasolineMap)</span><br><span class="line">gasolineMap</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_21.png" class="">
+<ul>
+<li>디젤 평균 가격 시각화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 디젤 평균 가격 시각화</span></span><br><span class="line">dieselMap = folium.Map(location=[<span class="number">37.55</span>, <span class="number">126.98</span>],</span><br><span class="line">                    zoom_start = <span class="number">12</span>, </span><br><span class="line">                    tiles=<span class="string">&quot;Stamen Toner&quot;</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">folium.Choropleth(</span><br><span class="line">        geo_data = geo_str,</span><br><span class="line">        data = gu_Pivot,</span><br><span class="line">        columns = [gu_Pivot.index, <span class="string">&#x27;dieselPrice&#x27;</span>],</span><br><span class="line">        key_on=<span class="string">&#x27;feature.id&#x27;</span>,</span><br><span class="line">        fill_color=<span class="string">&#x27;YlGnBu&#x27;</span>,</span><br><span class="line">        fill_opacity = <span class="number">0.7</span>,</span><br><span class="line">        line_opacity = <span class="number">0.2</span>,</span><br><span class="line">    ).add_to(dieselMap)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> idx, rows <span class="keyword">in</span> data.iterrows():</span><br><span class="line">    <span class="keyword">if</span> rows[<span class="string">&#x27;oilSelf&#x27;</span>] == <span class="string">&#x27;Y&#x27;</span>:</span><br><span class="line">            folium.CircleMarker(</span><br><span class="line">                location = [rows[<span class="string">&#x27;lat&#x27;</span>], rows[<span class="string">&#x27;lon&#x27;</span>]],</span><br><span class="line">                radius = <span class="number">12</span>,</span><br><span class="line">                fill = <span class="literal">True</span>,</span><br><span class="line">                color =<span class="string">&#x27;Blue&#x27;</span>,</span><br><span class="line">                fill_color =<span class="string">&#x27;Blue&#x27;</span>,</span><br><span class="line">        ).add_to(dieselMap)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        folium.CircleMarker(</span><br><span class="line">            location = [rows[<span class="string">&#x27;lat&#x27;</span>], rows[<span class="string">&#x27;lon&#x27;</span>]],</span><br><span class="line">            radius = <span class="number">12</span>,</span><br><span class="line">            fill= <span class="literal">True</span>,</span><br><span class="line">            color =<span class="string">&#x27;Red&#x27;</span>,</span><br><span class="line">            fill_color =<span class="string">&#x27;Red&#x27;</span>,</span><br><span class="line">        ).add_to(dieselMap)</span><br><span class="line">dieselMap</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/SBS-OilPriceAnalysis/EDA_OilPriceAnalysis_22.png" class="">
+<p><br><br><br></p>
+<h1 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h1><h2 id="주유소-가격-비교-셀프-유-무"><a href="#주유소-가격-비교-셀프-유-무" class="headerlink" title="주유소 가격 비교 : 셀프 유/무"></a>주유소 가격 비교 : 셀프 유/무</h2><ol>
+<li>셀프 주유소의 휘발유/경유의 가격이 더 저렴한 것을 확인할 수 있음</li>
+<li>각 브랜드 별로 셀프 유/무에 따른 휘발유/경유 가격을 보았을 때, 전체적으로 셀프주유소가 가격이 더 저렴함<ul>
+<li>알뜰(ex), 자가상표는 비교 제외</li>
+</ul>
+</li>
+</ol>
+<p><br></p>
+<h2 id="브랜드-별-가격-비교"><a href="#브랜드-별-가격-비교" class="headerlink" title="브랜드 별 가격 비교"></a>브랜드 별 가격 비교</h2><ol>
+<li>브랜드 별로 평균 주유가격을 비교했을 때 휘발유/경유 모두 알뜰주유소의 가격이 가장 낮은 것을 확인할 수 있음</li>
+</ol>
+<p><br></p>
+<h2 id="서울시-구별-주유-가격-비교"><a href="#서울시-구별-주유-가격-비교" class="headerlink" title="서울시 구별 주유 가격 비교"></a>서울시 구별 주유 가격 비교</h2><ol>
+<li><strong>상/하위 가격 비교</strong><ul>
+<li>서울시에서 휘발유/경유 모두 주유 가격이 비싼 상위 10개의 주유소를 확인하였을 때, ‘용산구’, ‘중구’, ‘강남구’ 등의 지역이 휘발유 가격이 높은 비중을 차지</li>
+<li>서울시에서 휘발유/경유 모두 가격이 싼 주유소 상위 10개의 주유소를 확인해보면 ‘강서구’, ‘양천구’, ‘구로구’ 등의 지역이 휘발유 가격이 낮은 비중을 차지</li>
+<li>가격이 가장 비싼 주유소와 싼 주유소는 리터당 약 1,000원의 차이를 보임</li>
+</ul>
+</li>
+<li><strong>셀프주유 가능/불가능 확인</strong><ul>
+<li>가격이 비싼 주유소가 위치한 3개의 구(용산구, 중구, 강남구)를 보았을 때, ‘중구’의 경우 셀프 불가한 주유소 비중이 컸으나, ‘용산구’와 ‘강남구’는 큰 차이를 보이지 않음</li>
+<li>가격이 싼 주유소가 위치한 3개의 구(강서구, 양천구, 구로구)를 보았을 때, 3개의 구 모두 셀프 가능한 주유소 비중이 큼</li>
+<li>그러나, ‘중랑구’, ‘은평구’와 같이 셀프주유가능 주유소가 많음에도 가격이 싼 순위권에 많이 들지 못하는 것으로 보아, 셀프주유가능과 주유가격 간의 관계는 Weak correlation으로 생각됨</li>
+</ul>
+</li>
+<li><strong>그 외</strong><ul>
+<li>평균적으로 가장 비싼 구는 ‘중구’</li>
+<li>중구의 경우, 셀프 주유 가능이 1개로, 매우 적은 비중을 차지</li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/17/SBS-OilPriceAnalysis/">https://gyoungmin-lim.github.io/2024/02/17/SBS-OilPriceAnalysis/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/StepByStep/">StepByStep</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/17/EDA-OilPriceAnalysis/" title="(EDA) 주유소 데이터 분석"><img class="cover" src="/../cover_img/EDA_OilPriceAnalysis_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(EDA) 주유소 데이터 분석</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/17/Math-ItoSDE/" title="Ito Stochastic Differential Equation (Ito SDE)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Ito Stochastic Differential Equation (Ito SDE)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/SBS-StarbucksEdiya/" title="(Step by Step) 스타벅스, 이디야 매장 데이터 분석"><img class="cover" src="/../cover_img/EDA_StarbucksEdiya_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Step by Step) 스타벅스, 이디야 매장 데이터 분석</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">62</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">22</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91"><span class="toc-number">1.</span> <span class="toc-text">데이터 수집</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91-%EC%8B%9C-%EA%B5%AC"><span class="toc-number">1.1.</span> <span class="toc-text">데이터 수집 (시 &#x2F; 구)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%8B%9C-%EC%B6%94%EC%B6%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">시 추출</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B5%AC-%EC%B6%94%EC%B6%9C"><span class="toc-number">1.1.2.</span> <span class="toc-text">구 추출</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91-%EC%9C%A0%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%9C%A0-%EB%AC%B4"><span class="toc-number">1.2.</span> <span class="toc-text">데이터 수집 (유가 &#x2F; 서비스 유, 무)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EA%B0%9C%EC%9D%98-%EA%B5%AC-%EC%9D%B4%EB%A6%84%EC%9D%84-%ED%86%B5%ED%95%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91-%EB%8D%B0%EC%8A%A4%ED%8A%B8-%EC%A7%84%ED%96%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">1개의 구 이름을 통해 데이터 수집 데스트 진행</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B5%AC%EB%B3%84-%EC%A3%BC%EC%9C%A0%EC%86%8C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84-%EC%83%9D%EC%84%B1"><span class="toc-number">1.2.2.</span> <span class="toc-text">구별 주유소 데이터 수집 및 데이터프레임 생성</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9C%84%EB%8F%84-%EA%B2%BD%EB%8F%84-%EC%A0%95%EB%B3%B4-%EC%B6%94%EA%B0%80"><span class="toc-number">1.3.</span> <span class="toc-text">위도, 경도 정보 추가</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EDA"><span class="toc-number">2.</span> <span class="toc-text">EDA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-Type-%EB%B3%80%EA%B2%BD"><span class="toc-number">2.1.</span> <span class="toc-text">데이터 Type 변경</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A3%BC%EC%9C%A0-%EA%B0%80%EA%B2%A9-%EB%B3%84-%EC%A3%BC%EC%9C%A0%EC%86%8C-%ED%99%95%EC%9D%B8"><span class="toc-number">2.2.</span> <span class="toc-text">주유 가격 별 주유소 확인</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Visualization"><span class="toc-number">3.</span> <span class="toc-text">Visualization</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%85%80%ED%94%84-%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90"><span class="toc-number">3.1.</span> <span class="toc-text">셀프 주유소 가격 비교</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%B8%8C%EB%9E%9C%EB%93%9C%EB%B3%84-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90"><span class="toc-number">3.2.</span> <span class="toc-text">브랜드별 가격 비교</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%B8%8C%EB%9E%9C%EB%93%9C%EB%B3%84-%EC%9C%A0%EA%B0%80-%ED%8F%89%EA%B7%A0-%EB%B9%84%EA%B5%90"><span class="toc-number">3.3.</span> <span class="toc-text">브랜드별 유가 평균 비교</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9C%84-%EA%B2%BD%EB%8F%84-%EC%9D%B4%EC%9A%A9-%EC%A7%80%EB%8F%84-%EC%8B%9C%EA%B0%81%ED%99%94"><span class="toc-number">3.4.</span> <span class="toc-text">위&#x2F;경도 이용 지도 시각화</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%EA%B2%B0%EA%B3%BC"><span class="toc-number">4.</span> <span class="toc-text">결과</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A3%BC%EC%9C%A0%EC%86%8C-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90-%EC%85%80%ED%94%84-%EC%9C%A0-%EB%AC%B4"><span class="toc-number">4.1.</span> <span class="toc-text">주유소 가격 비교 : 셀프 유&#x2F;무</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%B8%8C%EB%9E%9C%EB%93%9C-%EB%B3%84-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90"><span class="toc-number">4.2.</span> <span class="toc-text">브랜드 별 가격 비교</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%84%9C%EC%9A%B8%EC%8B%9C-%EA%B5%AC%EB%B3%84-%EC%A3%BC%EC%9C%A0-%EA%B0%80%EA%B2%A9-%EB%B9%84%EA%B5%90"><span class="toc-number">4.3.</span> <span class="toc-text">서울시 구별 주유 가격 비교</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Mysql-withPython/" title="(MySQL) Python with MySQL"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(MySQL) Python with MySQL"/></a><div class="content"><a class="title" href="/2024/02/17/Mysql-withPython/" title="(MySQL) Python with MySQL">(MySQL) Python with MySQL</a><time datetime="2024-02-17T11:15:40.000Z" title="Created 2024-02-17 20:15:40">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Mysql-DBbackup/" title="(MySQL) 데이터 베이스 백업(backup)"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(MySQL) 데이터 베이스 백업(backup)"/></a><div class="content"><a class="title" href="/2024/02/17/Mysql-DBbackup/" title="(MySQL) 데이터 베이스 백업(backup)">(MySQL) 데이터 베이스 백업(backup)</a><time datetime="2024-02-17T11:04:32.000Z" title="Created 2024-02-17 20:04:32">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Mysql-File/" title="(MySQL) 파일(File)"><img src="/../cover_img/Mysql_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(MySQL) 파일(File)"/></a><div class="content"><a class="title" href="/2024/02/17/Mysql-File/" title="(MySQL) 파일(File)">(MySQL) 파일(File)</a><time datetime="2024-02-17T11:00:09.000Z" title="Created 2024-02-17 20:00:09">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Tableau-Application/" title="(Tableau) 다양한 기능 활용"><img src="/../cover_img/Tableau_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Tableau) 다양한 기능 활용"/></a><div class="content"><a class="title" href="/2024/02/17/Tableau-Application/" title="(Tableau) 다양한 기능 활용">(Tableau) 다양한 기능 활용</a><time datetime="2024-02-17T10:06:21.000Z" title="Created 2024-02-17 19:06:21">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Tableau-Chart/" title="(Tableau) 차트(Chart) 만들기"><img src="/../cover_img/Tableau_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Tableau) 차트(Chart) 만들기"/></a><div class="content"><a class="title" href="/2024/02/17/Tableau-Chart/" title="(Tableau) 차트(Chart) 만들기">(Tableau) 차트(Chart) 만들기</a><time datetime="2024-02-17T09:54:50.000Z" title="Created 2024-02-17 18:54:50">2024-02-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
