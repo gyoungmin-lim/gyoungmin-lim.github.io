@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Python) Package - Beautifulsoup | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Beautifulsoup BeautifulSoup은 파이썬으로 웹 스크래핑(웹 페이지에서 데이터 추출)을 할 때 주로 사용되는 강력한 라이브러리  HTML 및 XML 문서에서 데이터를 추출하는 작업이 훨씬 간단   웹 페이지의 구조를 탐색하고 필요한 데이터를 추출하는 데 사용  HTML 또는 XML 문서를 파싱하고, 요소를 검색하거나 특정 패턴을 가진 요소">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Python) Package - Beautifulsoup">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-bs4/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Beautifulsoup BeautifulSoup은 파이썬으로 웹 스크래핑(웹 페이지에서 데이터 추출)을 할 때 주로 사용되는 강력한 라이브러리  HTML 및 XML 문서에서 데이터를 추출하는 작업이 훨씬 간단   웹 페이지의 구조를 탐색하고 필요한 데이터를 추출하는 데 사용  HTML 또는 XML 문서를 파싱하고, 요소를 검색하거나 특정 패턴을 가진 요소">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Python_Package_cover.jpg">
+<meta property="article:published_time" content="2024-02-17T06:50:16.000Z">
+<meta property="article:modified_time" content="2024-02-17T07:01:11.698Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Package">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Python_Package_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-bs4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Python) Package - Beautifulsoup',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-17 16:01:11'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Python_Package_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Python) Package - Beautifulsoup</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-17T06:50:16.000Z" title="Created 2024-02-17 15:50:16">2024-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-17T07:01:11.698Z" title="Updated 2024-02-17 16:01:11">2024-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tool/">Tool</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tool/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Python) Package - Beautifulsoup"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Beautifulsoup"><a href="#Beautifulsoup" class="headerlink" title="Beautifulsoup"></a>Beautifulsoup</h2><ul>
+<li><p>BeautifulSoup은 파이썬으로 웹 스크래핑(웹 페이지에서 데이터 추출)을 할 때 주로 사용되는 강력한 라이브러리</p>
+<ul>
+<li>HTML 및 XML 문서에서 데이터를 추출하는 작업이 훨씬 간단</li>
+</ul>
+</li>
+<li><p>웹 페이지의 구조를 탐색하고 필요한 데이터를 추출하는 데 사용</p>
+<ul>
+<li>HTML 또는 XML 문서를 파싱하고, 요소를 검색하거나 특정 패턴을 가진 요소 탐색 가능</li>
+<li>웹사이트에서 원하는 정보를 추출하여 데이터 분석, 시각화, 머신 러닝 등 다양한 작업에 활용</li>
+</ul>
+</li>
+<li><p>특정 웹 페이지에서 제목, 링크, 이미지 등의 정보를 추출하거나, 웹 페이지의 특정 부분을 크롤링하여 데이터베이스에 저장하는 등의 작업을 할 때 매우 유용</p>
+<ul>
+<li>다양한 웹 스크래핑 프로젝트에서 널리 사용되며, 간단하고 직관적인 API를 제공하여 사용자가 쉽게 데이터를 추출하고 조작할 수 있도록 도와줌</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="주요-특징"><a href="#주요-특징" class="headerlink" title="주요 특징"></a>주요 특징</h3><ul>
+<li><p><strong>편한 사용법</strong></p>
+<ul>
+<li>BeautifulSoup은 사용하기 쉬운 API를 제공</li>
+<li>웹 스크래핑을 처음 접하는 사람들도 쉽게 사용</li>
+<li>HTML 또는 XML 문서를 파싱하고, 원하는 요소를 쉽게 찾을 수 있다</li>
+</ul>
+</li>
+<li><p><strong>유연성</strong></p>
+<ul>
+<li>BeautifulSoup은 잘못된 HTML이나 XML도 처리 가능</li>
+<li>일반적인 웹 페이지에서 발생하는 다양한 구조의 문제에 대처</li>
+</ul>
+</li>
+<li><p><strong>HTML/XML 파싱</strong></p>
+<ul>
+<li>HTML 및 XML 문서를 파싱하는 데 사용</li>
+<li>문서의 구조를 분석하고, 요소와 속성에 접근할 수 있다</li>
+</ul>
+</li>
+<li><p><strong>요소 탐색</strong></p>
+<ul>
+<li>특정 태그, 클래스, 아이디 등을 사용하여 요소를 검색할 수 있다</li>
+</ul>
+</li>
+<li><p><strong>데이터 추출</strong></p>
+<ul>
+<li>웹 페이지에서 텍스트, 링크, 이미지 등 다양한 종류의 데이터를 추출할 수 있다</li>
+</ul>
+</li>
+<li><p><strong>다양한 파서 선택</strong></p>
+<ul>
+<li>기본 파서인 <code>html.parser</code> 외에도 <code>lxml</code>, <code>html5lib</code> 등의 파서를 선택하여 사용할 수 있다</li>
+<li>이를 통해 빠른 처리 속도나 더 좋은 호환성을 얻을 수 있다.</li>
+</ul>
+</li>
+<li><p><strong>확장성</strong></p>
+<ul>
+<li>다른 라이브러리와 쉽게 통합될 수 있다</li>
+<li>웹 페이지에서 추출한 데이터를 pandas나 SQLite와 같은 데이터베이스에 저장할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="BeautifulSoup-Basic"><a href="#BeautifulSoup-Basic" class="headerlink" title="BeautifulSoup Basic"></a>BeautifulSoup Basic</h2><blockquote>
+<p><strong>참조링크</strong> : <a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a></p>
+</blockquote>
+<ul>
+<li>install</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- conda install -c anaconda beautifulsoup4</span><br><span class="line">- pip install beautifulsoup4</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>data 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import </span></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">page = <span class="built_in">open</span>(<span class="string">&quot;../data/03. zerobase.html&quot;</span>, <span class="string">&quot;r&quot;</span>).read()</span><br><span class="line">soup = BeautifulSoup(page, <span class="string">&quot;html.parser&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(soup.prettify())</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTML : 웹 페이지 표현</li>
+<li>Head : 문서에 필요한 헤더 정보 보관</li>
+<li>Body : 눈에 보이는 정보 보관</li>
+</ul>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_0.png" class="">
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_1.png" class="">
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_2.png" class="">
+<p><br></p>
+<h3 id="실습"><a href="#실습" class="headerlink" title="실습"></a>실습</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Very Simple HTML Code by ZeroBase<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_3.png" class="">
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Very Simple HTML Code by ZeroBase<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span> = <span class="string">&#x27;inner-text first-item&#x27;</span> <span class="attr">id</span> = <span class="string">&#x27;first&#x27;</span>&gt;</span></span><br><span class="line">            Happy ZeroBase.</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.pinkwink.kr&quot;</span> <span class="attr">id</span>=<span class="string">&#x27;pw-link&#x27;</span>&gt;</span>PinkWink&lt;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_4.png" class="">
+<ul>
+<li><code>target = &#39;_blink&#39;</code> : 새 창에서 열기</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Very Simple HTML Code by ZeroBase<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span> = <span class="string">&#x27;inner-text first-item&#x27;</span> <span class="attr">id</span> = <span class="string">&#x27;first&#x27;</span>&gt;</span></span><br><span class="line">            Happy ZeroBase.</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.pinkwink.kr&quot;</span> <span class="attr">id</span>=<span class="string">&#x27;pw-link&#x27;</span>&gt;</span>PinkWink</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;inner-text second-item&quot;</span>&gt;</span></span><br><span class="line">            Happy Data Science.</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span> = <span class="string">&quot;https://www.python.org&quot;</span> <span class="attr">target</span> = <span class="string">&#x27;_blink&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;py-link&#x27;</span>&gt;</span>python</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_5.png" class="">
+<ul>
+<li><code>&lt;b&gt;</code> : Bold</li>
+<li><code>&lt;i&gt;</code> : Italy</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span> Very Simple HTML Code by ZeroBase<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span> = <span class="string">&#x27;inner-text first-item&#x27;</span> <span class="attr">id</span> = <span class="string">&#x27;first&#x27;</span>&gt;</span></span><br><span class="line">            Happy ZeroBase.</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.pinkwink.kr&quot;</span> <span class="attr">id</span>=<span class="string">&#x27;pw-link&#x27;</span>&gt;</span>PinkWink</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;inner-text second-item&quot;</span>&gt;</span></span><br><span class="line">            Happy Data Science.</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span> = <span class="string">&quot;https://www.python.org&quot;</span> <span class="attr">target</span> = <span class="string">&#x27;_blink&#x27;</span> <span class="attr">id</span>=<span class="string">&#x27;py-link&#x27;</span>&gt;</span>python</span><br><span class="line">            <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;outer-text first-item&quot;</span> <span class="attr">id</span> = <span class="string">&#x27;second&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">b</span>&gt;</span>Data Sceience is funny<span class="tag">&lt;/<span class="name">b</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span> = <span class="string">&#x27;outer-text&#x27;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">i</span>&gt;</span>All I need is Love.<span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_6.png" class="">
+<p><br></p>
+<h2 id="태그-Tag-확인"><a href="#태그-Tag-확인" class="headerlink" title="태그(Tag) 확인"></a>태그(Tag) 확인</h2><ul>
+<li>head 태그 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># head 태그 확인</span></span><br><span class="line">soup.head</span><br></pre></td></tr></table></figure>
+<ul>
+<li>body 태그 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># body 태그 확인</span></span><br><span class="line">soup.body</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_7.png" class="">
+<ul>
+<li>p 태그 확인<ul>
+<li><strong>처음 발견</strong>한 p 태그만 출력</li>
+<li>find(“p”)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># p 태그 확인</span></span><br><span class="line"><span class="comment"># find() </span></span><br><span class="line">soup.p</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_8.png" class="">
+<p><br></p>
+<h3 id="find"><a href="#find" class="headerlink" title="find()"></a>find()</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup.find(<span class="string">&quot;p&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_9.png" class="">
+<ul>
+<li><code>class_</code> : class를 쓸 경우 파이썬 예약어와 겹치는 경우가 생기기 때문에 <strong>구분하기 위해 언더바(underbar, ‘_’ )</strong>를 사용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 파이썬 예약어 </span></span><br><span class="line"><span class="comment"># class, id, def, list, str, int, tuple...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup.find(<span class="string">&quot;p&quot;</span>, class_=<span class="string">&quot;innter-text second-item&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_10.png" class="">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup.find(<span class="string">&quot;p&quot;</span>, &#123;<span class="string">&quot;class&quot;</span>:<span class="string">&quot;outer-text first-item&quot;</span>&#125;).text.strip()</span><br></pre></td></tr></table></figure>
+<p><code>&#39;Data Science is funny.’</code></p>
+<ul>
+<li>다중 조건</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 다중 조건 </span></span><br><span class="line">soup.find(<span class="string">&quot;p&quot;</span>, &#123;<span class="string">&quot;class&quot;</span>:<span class="string">&quot;inner-text first-item&quot;</span>, <span class="string">&quot;id&quot;</span>:<span class="string">&quot;first&quot;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_11.png" class="">
+<ul>
+<li><code>find_all()</code> : <strong>여러 개의 태그(Tag)</strong>를 <strong>리스트(list) 형태</strong>로 반환</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup.find_all(<span class="string">&quot;p&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_12.png" class="">
+<ul>
+<li>특정 태그(Tag) 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 특정 태그 확인 </span></span><br><span class="line">soup.find_all(<span class="built_in">id</span>=<span class="string">&quot;pw-link&quot;</span>)[<span class="number">0</span>].text</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup.find_all(<span class="string">&quot;p&quot;</span>, class_=<span class="string">&quot;innter-text second-item&quot;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_13.png" class="">
+<ul>
+<li>길이</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">len</span>(soup.find_all(<span class="string">&quot;p&quot;</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>텍스트 속성만 출력하기</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># p 태그 리스트에서 텍스트 속성만 출력 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> each_tag <span class="keyword">in</span> soup.find_all(<span class="string">&quot;p&quot;</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;=&quot;</span> * <span class="number">50</span>)</span><br><span class="line">    <span class="built_in">print</span>(each_tag.text)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/17/Python-Package-bs4/Python_Package_bs4_14.png" class="">
+<ul>
+<li>속성값에 있는 값(Value) 추출</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a 태그에서 href 속성값에 있는 값 추출 </span></span><br><span class="line"></span><br><span class="line">links = soup.find_all(<span class="string">&quot;a&quot;</span>)</span><br><span class="line">links[<span class="number">0</span>].get(<span class="string">&quot;href&quot;</span>), links[<span class="number">1</span>][<span class="string">&quot;href&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><code>(&#39;[http://www.pinkwink.kr](http://www.pinkwink.kr/)&#39;, &#39;[https://www.python.org](https://www.python.org/)&#39;)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> links:</span><br><span class="line">    href = each.get(<span class="string">&quot;href&quot;</span>) <span class="comment"># each[&quot;href&quot;]</span></span><br><span class="line">    text = each.get_text()</span><br><span class="line">    <span class="built_in">print</span>(text + <span class="string">&quot;=&gt;&quot;</span> + href)</span><br></pre></td></tr></table></figure>
+<p><code>PinkWink=&gt;[http://www.pinkwink.kr](http://www.pinkwink.kr/)</code></p>
+<p><code>Python=&gt; [https://www.python.org](https://www.python.org/)</code></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-bs4/">https://gyoungmin-lim.github.io/2024/02/17/Python-Package-bs4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Package/">Package</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Python) Package - Selenium</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/17/Python-Package-seaborn/" title="(Python) 시각화 라이브러리 Package - seaborn"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Python) 시각화 라이브러리 Package - seaborn</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) Package - Folium</div></div></a></div><div><a href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-16</div><div class="title">(Python) 시각화 라이브러리 Package - matplotlib</div></div></a></div><div><a href="/2024/02/17/Python-Package-seaborn/" title="(Python) 시각화 라이브러리 Package - seaborn"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) 시각화 라이브러리 Package - seaborn</div></div></a></div><div><a href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) Package - Selenium</div></div></a></div><div><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 활성화 함수(Activation Function)</div></div></a></div><div><a href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 퍼셉트론(Perceptron)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Beautifulsoup"><span class="toc-number">1.</span> <span class="toc-text">Beautifulsoup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A3%BC%EC%9A%94-%ED%8A%B9%EC%A7%95"><span class="toc-number">1.1.</span> <span class="toc-text">주요 특징</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeautifulSoup-Basic"><span class="toc-number">2.</span> <span class="toc-text">BeautifulSoup Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%8B%A4%EC%8A%B5"><span class="toc-number">2.1.</span> <span class="toc-text">실습</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%83%9C%EA%B7%B8-Tag-%ED%99%95%EC%9D%B8"><span class="toc-number">3.</span> <span class="toc-text">태그(Tag) 확인</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#find"><span class="toc-number">3.1.</span> <span class="toc-text">find()</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 활성화 함수(Activation Function)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)">(DL) 활성화 함수(Activation Function)</a><time datetime="2024-02-17T07:30:04.000Z" title="Created 2024-02-17 16:30:04">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 퍼셉트론(Perceptron)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)">(DL) 퍼셉트론(Perceptron)</a><time datetime="2024-02-17T07:19:56.000Z" title="Created 2024-02-17 16:19:56">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Folium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium">(Python) Package - Folium</a><time datetime="2024-02-17T07:10:26.000Z" title="Created 2024-02-17 16:10:26">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Selenium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium">(Python) Package - Selenium</a><time datetime="2024-02-17T07:00:22.000Z" title="Created 2024-02-17 16:00:22">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Beautifulsoup"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup">(Python) Package - Beautifulsoup</a><time datetime="2024-02-17T06:50:16.000Z" title="Created 2024-02-17 15:50:16">2024-02-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

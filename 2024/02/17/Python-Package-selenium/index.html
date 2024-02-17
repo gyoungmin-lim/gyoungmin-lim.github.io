@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Python) Package - Selenium | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Selenium 링크 : https:&#x2F;&#x2F;www.selenium.dev&#x2F;documentation&#x2F;  주요 기능 웹 브라우저를 원격 조작하는 도구 자동으로 URL을 열고 클릭 등이 가능 스크롤, 문자의 입력, 화면 캡쳐 등   Beautiful Soup만으로 해결할 수 없는 것  접근할 웹 주소를 알 수 없을 때 자바스크립트를 사용하는 웹 페이지의 경우 웹 브">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Python) Package - Selenium">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-selenium/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Selenium 링크 : https:&#x2F;&#x2F;www.selenium.dev&#x2F;documentation&#x2F;  주요 기능 웹 브라우저를 원격 조작하는 도구 자동으로 URL을 열고 클릭 등이 가능 스크롤, 문자의 입력, 화면 캡쳐 등   Beautiful Soup만으로 해결할 수 없는 것  접근할 웹 주소를 알 수 없을 때 자바스크립트를 사용하는 웹 페이지의 경우 웹 브">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Python_Package_cover.jpg">
+<meta property="article:published_time" content="2024-02-17T07:00:22.000Z">
+<meta property="article:modified_time" content="2024-02-17T07:08:52.241Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Package">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Python_Package_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-selenium/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Python) Package - Selenium',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-17 16:08:52'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">15</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Python_Package_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Python) Package - Selenium</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-17T07:00:22.000Z" title="Created 2024-02-17 16:00:22">2024-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-17T07:08:52.241Z" title="Updated 2024-02-17 16:08:52">2024-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tool/">Tool</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Tool/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Python) Package - Selenium"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Selenium"><a href="#Selenium" class="headerlink" title="Selenium"></a>Selenium</h2><blockquote>
+<p><strong>링크</strong> : <a target="_blank" rel="noopener" href="https://www.selenium.dev/documentation/">https://www.selenium.dev/documentation/</a></p>
+</blockquote>
+<h3 id="주요-기능"><a href="#주요-기능" class="headerlink" title="주요 기능"></a>주요 기능</h3><ul>
+<li>웹 브라우저를 원격 조작하는 도구</li>
+<li>자동으로 URL을 열고 클릭 등이 가능</li>
+<li>스크롤, 문자의 입력, 화면 캡쳐 등</li>
+</ul>
+<blockquote>
+<p>Beautiful Soup만으로 해결할 수 없는 것</p>
+<ul>
+<li>접근할 웹 주소를 알 수 없을 때</li>
+<li>자바스크립트를 사용하는 웹 페이지의 경우</li>
+<li>웹 브라우저로 접근하지 않으면 안될 때</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h3 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h3><ul>
+<li>윈도우, Mac(intel)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install selenium</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Mac(m1)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install selenium</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="Selenium-세팅"><a href="#Selenium-세팅" class="headerlink" title="Selenium 세팅"></a>Selenium 세팅</h2><h3 id="Chrome-버전-확인"><a href="#Chrome-버전-확인" class="headerlink" title="Chrome 버전 확인"></a>Chrome 버전 확인</h3><ul>
+<li>크롬 오른쪽 상단 [맞춤 설정 및 제어] - [도움말] - [Chrome 정보]</li>
+</ul>
+<img src="/2024/02/17/Python-Package-selenium/Python_Package_selenium_0.png" class="">
+<ul>
+<li>Chrome 정보 확인</li>
+</ul>
+<img src="/2024/02/17/Python-Package-selenium/Python_Package_selenium_1.png" class="">
+<ul>
+<li>Google에서 <strong>Chromedriver</strong> 검색<ul>
+<li>링크 : <a target="_blank" rel="noopener" href="https://chromedriver.chromium.org/downloads">https://chromedriver.chromium.org/downloads</a></li>
+<li>크롬 버전 앞 부분 숫자에 맞는 것 중 선택<ul>
+<li>사용중인 OS 버전에 맞춰 다운로드</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/17/Python-Package-selenium/Python_Package_selenium_2.png" class="">
+<p><br></p>
+<h2 id="Selenium-webdriver-사용하기"><a href="#Selenium-webdriver-사용하기" class="headerlink" title="Selenium webdriver 사용하기"></a>Selenium webdriver 사용하기</h2><ul>
+<li>Module Load 및 크롬드라이버 경로 지정<br>※ Selenium Update로 인해 <code>webdriver.Chrome()</code> 크롬드라이버 <strong>경로지정 필요없음</strong> (설치도 X)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome() <span class="comment"># 크롬 드라이버 경로 지정 </span></span><br><span class="line">driver.get(<span class="string">&quot;https://www.naver.com&quot;</span>) <span class="comment"># get 명령으로 접근하고 싶은 주소 지정</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>리소스 낭비하지 않게 <code>driver.quit()</code> 명령어 사용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>새로운 크롬이 나타나면서 지정된 웹 주소에 접근</p>
+</li>
+<li><p>현재 브라우저 창 크기 확인</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 현재 브라우저 창 크기 </span></span><br><span class="line">driver.get_window_size()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="화면-스크롤"><a href="#화면-스크롤" class="headerlink" title="화면 스크롤"></a>화면 스크롤</h2><ul>
+<li>스크롤 가능한 높이(길이) 가져오기</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 스크롤 가능한 높이(길이) # 자바스크립트 코드 실행</span></span><br><span class="line">last_height = driver.execute_script(<span class="string">&quot;return document.body.scrollHeight&quot;</span>)</span><br><span class="line">last_height</span><br></pre></td></tr></table></figure>
+<ul>
+<li>화면 스크롤 : <strong>하단 이동</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 화면 스크롤 </span></span><br><span class="line">driver.execute_script(<span class="string">&quot;window.scrollTo(0, document.body.scrollHeight);&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>화면 스크린샷</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 스크린샷</span></span><br><span class="line">driver.save_screenshot(<span class="string">&quot;./last_height.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>화면 스크롤 : 상단 이동</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 스크롤 상단 이동 </span></span><br><span class="line">driver.execute_script(<span class="string">&quot;window.scrollTo(0, 0);&quot;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Selenium 태그 명령어</strong></p>
+<ul>
+<li><code>find_element_by_css_selector =&gt; find, select_one</code></li>
+<li><code>find_elements_by_css_selector =&gt; find_all, select</code></li>
+</ul>
+</blockquote>
+<ul>
+<li>특정 태그 지점까지 스크롤 이동</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 특정 태그 지점까지 스크롤 하는 코드 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver <span class="keyword">import</span> ActionChains</span><br><span class="line"></span><br><span class="line"><span class="comment"># some_tag = driver.find_element_by_xpath(&#x27;//*[@id=&quot;paging&quot;]/ul&#x27;)</span></span><br><span class="line">some_tag = driver.find_element_by_css_selector(<span class="string">&quot;#paging &gt; ul&quot;</span>) </span><br><span class="line">action = ActionChains(driver)</span><br><span class="line">action.move_to_element(some_tag).perform()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="검색어-입력"><a href="#검색어-입력" class="headerlink" title="검색어 입력"></a>검색어 입력</h2><ul>
+<li>입력 창에 글자 넣기<br>  ※ <strong>현재 화면에 보이지 않으면 입력 X</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 입력 창에 글자 넣기 </span></span><br><span class="line"><span class="comment"># 화면에 보이지 않으면 입력할 수 없습니다</span></span><br><span class="line"></span><br><span class="line">some_tag = driver.find_element_by_id(<span class="string">&quot;gsc-i-id1&quot;</span>)</span><br><span class="line">some_tag.send_keys(<span class="string">&quot;data science&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>브라우저 창 크기 조절<br>  ※ <strong>현재 보이는 화면에서만 가능</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 브라우저 창 크기 조절 </span></span><br><span class="line"><span class="comment"># 현재 보이는 화면에서만 액션을 취할 수 있습니다</span></span><br><span class="line">driver.set_window_size(<span class="number">1920</span>, <span class="number">1080</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>화면 최대화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 화면 최대화 </span></span><br><span class="line">driver.maximize_window()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>화면 최소화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 화면 최소화 </span></span><br><span class="line">driver.minimize_window()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>새로 입력 시, 뒤에 추가로 입력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 새로 입력하면 뒤에 추가로 붙음 </span></span><br><span class="line">some_tag.send_keys(<span class="string">&quot;python&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>초기화 후 검색어 입력</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 초기화 후 검색어 입력</span></span><br><span class="line"></span><br><span class="line">some_tag.clear() <span class="comment"># 초기화</span></span><br><span class="line">some_tag.send_keys(<span class="string">&quot;python&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="Xpath"><a href="#Xpath" class="headerlink" title="Xpath"></a>Xpath</h3><ul>
+<li>Xpath 태그 찾는 방법</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">방법</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>//</code></td>
+<td>최상위</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>*</code></td>
+<td>자손 태그 검색 =&gt; div form</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>/</code></td>
+<td>자식 태그 검색 =&gt; div &gt; form</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>&#39;td[2]&#39;</code></td>
+<td>td 중에서 2번째 태그</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Xpath 이용<br>  ※ <strong>BeautifulSoup</strong>에서는 Xpath 사용 불가능, <strong>Selenium</strong>에서는 사용 가능</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># xpath </span></span><br><span class="line">xpath = <span class="string">&#x27;//*[@id=&quot;___gcse_0&quot;]/div/form/table/tbody/tr/td[2]/button&#x27;</span></span><br><span class="line">some_tag = driver.find_element_by_xpath(xpath).click()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>css_selector 이용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># css_selector </span></span><br><span class="line">css_selector = <span class="string">&quot;#___gcse_0 &gt; div &gt; form &gt; table &gt; tbody &gt; tr &gt; td:nth-child(2) &gt; button&quot;</span></span><br><span class="line">some_tag = driver.find_element_by_css_selector(css_selector).click()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>현재 화면의 html 코드 가져오기</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 현재 화면의 html 코드 가져오기 </span></span><br><span class="line">driver.page_source</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/17/Python-Package-selenium/">https://gyoungmin-lim.github.io/2024/02/17/Python-Package-selenium/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Package/">Package</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Python) Package - Folium</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Python) Package - Beautifulsoup</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) Package - Beautifulsoup</div></div></a></div><div><a href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) Package - Folium</div></div></a></div><div><a href="/2024/02/16/Python-Package-matplotlib/" title="(Python) 시각화 라이브러리 Package - matplotlib"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-16</div><div class="title">(Python) 시각화 라이브러리 Package - matplotlib</div></div></a></div><div><a href="/2024/02/17/Python-Package-seaborn/" title="(Python) 시각화 라이브러리 Package - seaborn"><img class="cover" src="/../cover_img/Python_Package_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(Python) 시각화 라이브러리 Package - seaborn</div></div></a></div><div><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 활성화 함수(Activation Function)</div></div></a></div><div><a href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 퍼셉트론(Perceptron)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">47</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">15</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Selenium"><span class="toc-number">1.</span> <span class="toc-text">Selenium</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5"><span class="toc-number">1.1.</span> <span class="toc-text">주요 기능</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%84%A4%EC%B9%98"><span class="toc-number">1.2.</span> <span class="toc-text">설치</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selenium-%EC%84%B8%ED%8C%85"><span class="toc-number">2.</span> <span class="toc-text">Selenium 세팅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Chrome-%EB%B2%84%EC%A0%84-%ED%99%95%EC%9D%B8"><span class="toc-number">2.1.</span> <span class="toc-text">Chrome 버전 확인</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Selenium-webdriver-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="toc-number">3.</span> <span class="toc-text">Selenium webdriver 사용하기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%99%94%EB%A9%B4-%EC%8A%A4%ED%81%AC%EB%A1%A4"><span class="toc-number">4.</span> <span class="toc-text">화면 스크롤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B2%80%EC%83%89%EC%96%B4-%EC%9E%85%EB%A0%A5"><span class="toc-number">5.</span> <span class="toc-text">검색어 입력</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Xpath"><span class="toc-number">5.1.</span> <span class="toc-text">Xpath</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 활성화 함수(Activation Function)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)">(DL) 활성화 함수(Activation Function)</a><time datetime="2024-02-17T07:30:04.000Z" title="Created 2024-02-17 16:30:04">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 퍼셉트론(Perceptron)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)">(DL) 퍼셉트론(Perceptron)</a><time datetime="2024-02-17T07:19:56.000Z" title="Created 2024-02-17 16:19:56">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Folium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium">(Python) Package - Folium</a><time datetime="2024-02-17T07:10:26.000Z" title="Created 2024-02-17 16:10:26">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Selenium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium">(Python) Package - Selenium</a><time datetime="2024-02-17T07:00:22.000Z" title="Created 2024-02-17 16:00:22">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Beautifulsoup"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-bs4/" title="(Python) Package - Beautifulsoup">(Python) Package - Beautifulsoup</a><time datetime="2024-02-17T06:50:16.000Z" title="Created 2024-02-17 15:50:16">2024-02-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
