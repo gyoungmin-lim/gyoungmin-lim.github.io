@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Ito Stochastic Differential Equation (Ito SDE) | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Ito Stochastic Differential Equation (Ito SDE) 영국의 한 식물학자가 물에 떨어져있는 꽃가루를 보고서 현미경으로 관찰하였는데, 이 꽃가루가 살아있는 생명체인 미생물처럼 끊임없이 움직였다. 처음 발견한 것이 로버트 브라운 주로 금융, 물리학, 생물학 및 기타 분야에서 불확실성 및 확률적인 요소를 고려하여 모델을 구축할 때">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ito Stochastic Differential Equation (Ito SDE)">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/17/Math-ItoSDE/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Ito Stochastic Differential Equation (Ito SDE) 영국의 한 식물학자가 물에 떨어져있는 꽃가루를 보고서 현미경으로 관찰하였는데, 이 꽃가루가 살아있는 생명체인 미생물처럼 끊임없이 움직였다. 처음 발견한 것이 로버트 브라운 주로 금융, 물리학, 생물학 및 기타 분야에서 불확실성 및 확률적인 요소를 고려하여 모델을 구축할 때">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-02-17T07:38:55.000Z">
+<meta property="article:modified_time" content="2024-02-17T07:51:43.080Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Mathematics">
+<meta property="article:tag" content="Stochastic">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/17/Math-ItoSDE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Ito Stochastic Differential Equation (Ito SDE)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-17 16:51:43'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">16</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Ito Stochastic Differential Equation (Ito SDE)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-17T07:38:55.000Z" title="Created 2024-02-17 16:38:55">2024-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-17T07:51:43.080Z" title="Updated 2024-02-17 16:51:43">2024-02-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Mathematics/">Mathematics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Ito Stochastic Differential Equation (Ito SDE)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Ito-Stochastic-Differential-Equation-Ito-SDE"><a href="#Ito-Stochastic-Differential-Equation-Ito-SDE" class="headerlink" title="Ito Stochastic Differential Equation (Ito SDE)"></a>Ito Stochastic Differential Equation (Ito SDE)</h2><ul>
+<li>영국의 한 식물학자가 물에 떨어져있는 꽃가루를 보고서 현미경으로 관찰하였는데, 이 꽃가루가 살아있는 생명체인 미생물처럼 끊임없이 움직였다.</li>
+<li>처음 발견한 것이 로버트 브라운</li>
+<li>주로 금융, 물리학, 생물학 및 기타 분야에서 불확실성 및 확률적인 요소를 고려하여 모델을 구축할 때 사용</li>
+</ul>
+<p><br></p>
+<ul>
+<li><strong>General Fomula</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+  dX_t = \mu(X_t, t)dt + \sigma (X_t,t)dW_t</script><ul>
+<li>$\mu(X_t, t)$ is the <strong>drift term</strong>, which describes the deterministic part of the change.</li>
+<li>$\sigma(X_t, t)$ is the <strong>diffusion term</strong>, which represents the contribution of the stochastic (random) process.</li>
+<li>$dW_t$ is the differential of a Wiener process (Brownian motion), which represents the random fluctuations.</li>
+</ul>
+<blockquote>
+<p><strong>이해하기</strong></p>
+<ul>
+<li>좌변 : 우리가 구하고 싶은 함수 $S(t)$의 움직임</li>
+<li>우변<ul>
+<li>첫 항 $\mu(X_t, t)dt$ : 움직임이 예측가능한 부분(deterministic)</li>
+<li>둘째 항 $\sigma(X_t, t) dW_t$ : 움직임이 예측불가능한 부분(stochastic)</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="Standard-Brownian-Motion"><a href="#Standard-Brownian-Motion" class="headerlink" title="Standard Brownian Motion"></a>Standard Brownian Motion</h2><ol>
+<li>$W_0 = 0$</li>
+<li><strong>(Independent Increments)</strong> For any <script type="math/tex">0 < t_1 < \cdots < t_n</script>, the random variable <script type="math/tex">(W_{t_1}, W_{t_2}- W_{t_1}, \cdots, W_n - W_{n-1})</script> are independent.</li>
+<li><strong>(Stationary)</strong> $W_t - W_s \sim N(0, t-s)$, for $0 \leq s &lt; t$</li>
+</ol>
+<p><br></p>
+<h2 id="Properties-of-Brownian-Motion"><a href="#Properties-of-Brownian-Motion" class="headerlink" title="Properties of Brownian Motion"></a>Properties of Brownian Motion</h2><ol>
+<li>Markov property</li>
+<li>Martingale property</li>
+<li>Gaussian process</li>
+<li>$\frac{1}{2}$-self similar property</li>
+<li>미분 불가능</li>
+<li>Brownian Motion의 sample path는 오직 $p&gt;2$일 때, bounded $p$-variation을 갖는 유계 $p$-변동함수이다.</li>
+<li>Reflection Property</li>
+</ol>
+<p><br></p>
+<h3 id="Markov-property"><a href="#Markov-property" class="headerlink" title="Markov property"></a>Markov property</h3><p>For any $s&gt;0$, $W_{t+s} - W_s$ is independent with $F_s$</p>
+<script type="math/tex; mode=display">
+  P(W_{t+s} - W_s | F_s ) = P(W_{t+s} - W_s | W_s)</script><ul>
+<li>과거의 경로에 독립적</li>
+<li>마르코프 확률 과정은 ‘기억하지 않는’ 확률 과정이다.</li>
+<li>마르코프 확률 과정에서 미래를 유추하려 한다면, 오직 현재의 값만이 쓸모가 있으며, 과거의 값들은 아무 추가 정보를 제공하지 못한다.</li>
+</ul>
+<p><br></p>
+<h3 id="Martingale-Property"><a href="#Martingale-Property" class="headerlink" title="Martingale Property"></a>Martingale Property</h3><p>For any $s&gt;0$,</p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E[W_{t+s}|F_t] & = E[(W_{t+s} - W_t) + W_t | F_t ] \\
+    & = E \left[ (W_{t+s} - W_t) | F_t \right] + E[W_t | F_t] \\
+    & = E[(W_{t+s} - W_t)] + W_t \\
+    & = 0 + W_t \\
+    & = W_t
+  \end{align*}</script><ul>
+<li>과거의 모든 정보를 알고 있다면 미래의 <a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/%EA%B8%B0%EB%8C%93%EA%B0%92">기댓값</a>이 현재 값과 동일한 과정</li>
+</ul>
+<p><br></p>
+<h3 id="Gaussian-Process"><a href="#Gaussian-Process" class="headerlink" title="Gaussian Process"></a>Gaussian Process</h3><ul>
+<li>확률과정 <script type="math/tex">[X_t| t \geq 0]</script>가 자연수 $n$ 그리고 실수 <script type="math/tex">0 < t_1 < \cdots < t_n</script> 을 어떻게 선택하더라도 $n$개의 확률변수 <script type="math/tex">X_{t_1}, X_{t_2}, \cdots , X_{t_n}</script>이 <strong>다변량 정규분포</strong>를 따를 때, <script type="math/tex">[X_t| t \geq 0]</script>를 Gaussian Process라고 한다.</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>다변량 정규분포</strong></p>
+</blockquote>
+<p>Let $n$-dimensional 확률 벡터 $X = \left[ x_1, x_2, \cdots, x_n \right]^T$.<br>For any constants $a_1, a_2, \cdots, a_n$,</p>
+<script type="math/tex; mode=display">
+  \sum_{i=1}^n a_i x_i \sim N</script><p>then $X$를 $n$-dimensional 다변량 정규분포를 따른다.</p>
+<p><span style="color:blue"> <strong>Ex</strong> </span></p>
+<script type="math/tex; mode=display">
+X \sim N_n(\mu, \sum)</script><p><em>where</em></p>
+<ul>
+<li><strong>Mean</strong> </li>
+</ul>
+<script type="math/tex; mode=display">
+  \mu = [\mu_1, \mu_2, \cdots, \mu_n]^T</script><ul>
+<li><strong>Variance</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+  \sum = 
+  \begin{bmatrix}
+    \sigma_{11} & \cdots & \sigma_{1n} \\
+    \vdots & \ddots & \vdots \\
+    \sigma_{n1} & \cdots & \sigma_{nn}
+  \end{bmatrix}</script><p><br></p>
+<h3 id="H-Self-Similar-Property"><a href="#H-Self-Similar-Property" class="headerlink" title="H-Self-Similar Property"></a>H-Self-Similar Property</h3><p>For any stochastic process $X_t$, there exist $H&gt;0$ on $n$-finite dimensional distribution such that for any $a&gt;0$,</p>
+<script type="math/tex; mode=display">
+  X_t = \left( X_{at_1}, X_{at_2}, \cdots, X_{at_n} \right) =^d a^H \left( X_{t_1}, X_{t_2}, \cdots, X_{t_n} \right) = a^H X_t</script><ul>
+<li>Notation $=^d$ : same distribution</li>
+<li>(<strong>1/2-self similar property</strong>)<br>For $a&gt;0$, Wiener process satisfies $\frac{1}{2}$-self similar property<script type="math/tex; mode=display">
+  W_{at} =^d \sqrt{a} W_t</script></li>
+</ul>
+<p><br></p>
+<h3 id="미분-불가능"><a href="#미분-불가능" class="headerlink" title="미분 불가능"></a>미분 불가능</h3><p>For any given $t, h &gt;0$,</p>
+<script type="math/tex; mode=display">
+  Y_t := \frac{W_{t+h} - W_t}{h} \sim N(0, h)</script><script type="math/tex; mode=display">
+  \begin{align*}
+    E \left(\frac{W_{t+h} - W_t}{h} \right) & = \frac{1}{h} E(W_{t+h} - W_t ) \\
+    & = 0
+  \end{align*}</script><script type="math/tex; mode=display">
+  \begin{align*}
+    Var \left(\frac{W_{t+h} - W_t}{h} \right) & = \frac{1}{h^2} Var(W_{t+h} - W_t ) \\
+    & = \frac{1}{h^2} \cdot h \\
+    & = \frac{1}{h}
+  \end{align*}</script><p>Hence, There exist $Z \sim N(0, 1)$ such that $Y_k = \frac{1}{\sqrt{h}} Z$</p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    Y_k := \frac{W_{t+h}-W_t}{h} 
+    & =^d \frac{W_h}{h} \\
+    ^{\frac{1}{2}-SS}& = \frac{\sqrt{h}}{h}W_1 \\
+    & = \frac{\sqrt{h}}{h}Z
+  \end{align*}</script><p>Letting $h \rightarrow 0$</p>
+<script type="math/tex; mode=display">
+  \lim_{h \rightarrow 0^+} \frac{W_{t+h} - W_t}{h} 
+  = \lim_{h \rightarrow 0^+} \frac{\sqrt{h}}{h}Z = \infty</script><p>Hence, $W_t$는 모든 $t$에 대해서 연속이지만, 어떤 $t$에 대해서도 미분 불가능</p>
+<p><br></p>
+<h3 id="Bounded-P-varaiation"><a href="#Bounded-P-varaiation" class="headerlink" title="Bounded P-varaiation"></a>Bounded P-varaiation</h3><p>함수 $f:[a, b] \rightarrow \mathbb{R}$가 적당한 $p&gt;0$에 대해서 다음 조건을 만족할 때 $f$는 Bounded $p$-variation이라고 한다.</p>
+<script type="math/tex; mode=display">
+  \sup \sum^{n}_{k=1} \left| f(t_k) - f(t_{k-1}) \right|^p < \infty</script><ul>
+<li>여기서 supremum은 $[a, b]$의 모든 분할 $r_n : a = t_0 &lt; t_1 &lt; t_n = b$에 대해 취한다.</li>
+<li>Brownian motion의 표본경로는 $p&gt;2$일 때 폐구간 $[a,b]$에서 bounded $p$-variation이고  $0 &lt; p \leq 2$인 경우 유계변동이 아니다.<ul>
+<li>유한이면 리만스틸체스 적분 가능한데, 안 된다.</li>
+</ul>
+</li>
+<li>따라서, 함수 $f$가 $[a, b]$에서 연속이라도, Riemann-Stieltjes 적분 $\int_{a}^{b}f(t)dW_t$가 존재하지 않는 경우가 발생</li>
+</ul>
+<p><span style="color:blue"> <strong>Ex</strong> </span></p>
+<p>$f(t) = W_t(w)$인 경우,</p>
+<script type="math/tex; mode=display">
+\int_{0}^{1}W_t dW_t(w)</script><p>Riemann-Stieltjes 적분으로 계산할 수 없다.</p>
+<p><br></p>
+<h3 id="Reflection-Property"><a href="#Reflection-Property" class="headerlink" title="Reflection Property"></a>Reflection Property</h3><script type="math/tex; mode=display">
+  P(T_a \leq t, \ W_t < a ) = P(T_a \leq t, W_t > a), \qquad T_a = \min(t>0 | W_t = a )</script><p><br></p>
+<h2 id="Simple-Example"><a href="#Simple-Example" class="headerlink" title="Simple Example"></a>Simple Example</h2><p>Suppose we have the following Ito SDE:</p>
+<script type="math/tex; mode=display">
+  dX_t = \mu X_t dt + \sigma X_t dW_t</script><ul>
+<li>$X_t$ is the stochastic process we’re interested in. We suppose $X_0$ as initial condition.</li>
+<li>$\mu, \ \sigma$ are constants.</li>
+<li>$W_t$ is a Wiener process or Brownian motion.</li>
+</ul>
+<p>To solve this SDE, we can use the method of separation of variables. </p>
+<p>The idea is to separate variables and integrate both sides. The solution can be found by solving the resulting ordinary differential equation (ODE).</p>
+<ul>
+<li><strong>Separate Variables:</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+  \frac{1}{X_t} dX_t = \mu dt + \sigma dW_t</script><ul>
+<li><strong>Integrate:</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    \int \frac{1}{X_t} dX_t & = \int \mu dt + \int \sigma dW_t \\ 
+    & = \mu t + \sigma W_t + C
+  \end{align*}</script><p>where $C$ is an integration constant.</p>
+<p>To evaluate the integral on the left hand side we use the $It \hat{o} \ formula$ for the function</p>
+<script type="math/tex; mode=display">
+  g(t,x) = \ln x, \quad x>0</script><p>we take</p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    d(\ln X_t) & = 
+    \frac{1}{X_t} \cdot dX_t + \frac{1}{2} \left( -\frac{1}{X_t^2} \right)(dX_t)^2 \\
+    & = \frac{dX_t}{X_t} - \frac{1}{2X_t^2}\cdot \sigma^2X_t^2 dt \\
+    & = \frac{dX_t}{X_t} - \frac{1}{2} \sigma^2 dt
+  \end{align*}</script><p>Hence,</p>
+<script type="math/tex; mode=display">
+  \frac{dX_t}{X_t} = d(\ln X_t) + \frac{1}{2}\sigma^2dt</script><p>By Application to (2),</p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    \int \frac{1}{X_t} dX_t & = 
+    \int \left[ d(\ln X_t) + \frac{1}{2}\sigma^2 dt \right] \\
+    & = \ln X_t + \frac{1}{2}\sigma^2 t - \ln X_0 \\
+    & = \mu t + \sigma W_t
+  \end{align*}</script><p>So, we conclude</p>
+<script type="math/tex; mode=display">
+  \ln \frac{X_t}{X_0} = \left( \mu - \frac{1}{2}\sigma^2 \right)t + \sigma W_t</script><p>Hence, the solution to the Ito SDE $dX_t = \mu X_t dt + \sigma X_t dW_t$ is given by</p>
+<script type="math/tex; mode=display">
+  X_t = X_0 e^{ \left( \mu - \frac{\sigma^2}{2} \right) t + \sigma W_t}</script><hr>
+<script type="math/tex; mode=display">
+  X_t = X_0 + \int_0^t b(s, X_s ) ds +  \int_0^t \sigma(s, X_s)dB_s</script></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/17/Math-ItoSDE/">https://gyoungmin-lim.github.io/2024/02/17/Math-ItoSDE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Mathematics/">Mathematics</a><a class="post-meta__tags" href="/tags/Stochastic/">Stochastic</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/Python_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(DL) 활성화 함수(Activation Function)</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">48</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">16</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ito-Stochastic-Differential-Equation-Ito-SDE"><span class="toc-number">1.</span> <span class="toc-text">Ito Stochastic Differential Equation (Ito SDE)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Brownian-Motion"><span class="toc-number">2.</span> <span class="toc-text">Standard Brownian Motion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Properties-of-Brownian-Motion"><span class="toc-number">3.</span> <span class="toc-text">Properties of Brownian Motion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Markov-property"><span class="toc-number">3.1.</span> <span class="toc-text">Markov property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Martingale-Property"><span class="toc-number">3.2.</span> <span class="toc-text">Martingale Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gaussian-Process"><span class="toc-number">3.3.</span> <span class="toc-text">Gaussian Process</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#H-Self-Similar-Property"><span class="toc-number">3.4.</span> <span class="toc-text">H-Self-Similar Property</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%AF%B8%EB%B6%84-%EB%B6%88%EA%B0%80%EB%8A%A5"><span class="toc-number">3.5.</span> <span class="toc-text">미분 불가능</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bounded-P-varaiation"><span class="toc-number">3.6.</span> <span class="toc-text">Bounded P-varaiation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reflection-Property"><span class="toc-number">3.7.</span> <span class="toc-text">Reflection Property</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simple-Example"><span class="toc-number">4.</span> <span class="toc-text">Simple Example</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/02/17/Math-ItoSDE/" title="Ito Stochastic Differential Equation (Ito SDE)">Ito Stochastic Differential Equation (Ito SDE)</a><time datetime="2024-02-17T07:38:55.000Z" title="Created 2024-02-17 16:38:55">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 활성화 함수(Activation Function)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)">(DL) 활성화 함수(Activation Function)</a><time datetime="2024-02-17T07:30:04.000Z" title="Created 2024-02-17 16:30:04">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(DL) 퍼셉트론(Perceptron)"/></a><div class="content"><a class="title" href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)">(DL) 퍼셉트론(Perceptron)</a><time datetime="2024-02-17T07:19:56.000Z" title="Created 2024-02-17 16:19:56">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Folium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-folium/" title="(Python) Package - Folium">(Python) Package - Folium</a><time datetime="2024-02-17T07:10:26.000Z" title="Created 2024-02-17 16:10:26">2024-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium"><img src="/../cover_img/Python_Package_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Package - Selenium"/></a><div class="content"><a class="title" href="/2024/02/17/Python-Package-selenium/" title="(Python) Package - Selenium">(Python) Package - Selenium</a><time datetime="2024-02-17T07:00:22.000Z" title="Created 2024-02-17 16:00:22">2024-02-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
