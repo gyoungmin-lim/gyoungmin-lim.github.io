@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Statistics) 통계학 소개(Introduction) | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="통계학(Statistics) 산술적 방법을 기초로 하여 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야       기술통계학(descriptive statistics) 추론통계학(inferential statistics)     데이터를 수집하고 수집된 데이터를 쉽게 이해하고 설명할 수 있도록 정리요약 설명하는 방법론 모집단에서">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Statistics) 통계학 소개(Introduction)">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/18/Math-Statistics-Intro/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="통계학(Statistics) 산술적 방법을 기초로 하여 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야       기술통계학(descriptive statistics) 추론통계학(inferential statistics)     데이터를 수집하고 수집된 데이터를 쉽게 이해하고 설명할 수 있도록 정리요약 설명하는 방법론 모집단에서">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Mathematics_Statistics_cover.jpg">
+<meta property="article:published_time" content="2024-02-18T10:27:27.000Z">
+<meta property="article:modified_time" content="2024-02-18T10:40:48.808Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Statistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Mathematics_Statistics_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/18/Math-Statistics-Intro/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Statistics) 통계학 소개(Introduction)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-18 19:40:48'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">77</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Mathematics_Statistics_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Statistics) 통계학 소개(Introduction)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-18T10:27:27.000Z" title="Created 2024-02-18 19:27:27">2024-02-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-18T10:40:48.808Z" title="Updated 2024-02-18 19:40:48">2024-02-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Mathematics/">Mathematics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Statistics) 통계학 소개(Introduction)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="통계학-Statistics"><a href="#통계학-Statistics" class="headerlink" title="통계학(Statistics)"></a>통계학(Statistics)</h2><ul>
+<li>산술적 방법을 기초로 하여 다량의 데이터를 관찰하고 정리 및 분석하는 방법을 연구하는 수학의 한 분야</li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_0.png" class="">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">기술통계학(descriptive statistics)</th>
+<th style="text-align:center">추론통계학(inferential statistics)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">데이터를 수집하고 수집된 데이터를 쉽게 이해하고 설명할 수 있도록 정리요약 설명하는 방법론</td>
+<td style="text-align:center">모집단에서 추출한 표본 데이터를 분석하여 모집단의 여러가지 특성을 추측하는 방법론</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_1.png" class="">
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_2.png" class="">
+<p><br></p>
+<h2 id="데이터와-그래프"><a href="#데이터와-그래프" class="headerlink" title="데이터와 그래프"></a>데이터와 그래프</h2><h3 id="변수-Variable"><a href="#변수-Variable" class="headerlink" title="변수(Variable)"></a>변수(Variable)</h3><blockquote>
+<p><strong>수학(Mathmatics)</strong></p>
+<ul>
+<li>어떤 정해지지 않은 임의의 값을 표현하기 위해 사용된 ‘기호’</li>
+<li>보통 쉽게 설명하기 위해서 ‘변하는 숫자’ 라는 표현을 자주 사용</li>
+</ul>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><strong>통계학(Statistics)</strong></p>
+<ul>
+<li>조사 목적에 따라 관측된 자료값</li>
+<li>해당 변수에 대하여 관측된 값들이 바로 자료(Data)가 됨</li>
+</ul>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>질적 자료</th>
+<th>양적 자료</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>- 관측된 데이터가 성별, 주소지(시군구), 업종 등과 같이 몇 개의 범주로 구분하여 표현할 수 있는 데이터 <br> - 데이터 입력시 1은 남자, 2는 여자로 표현 가능하나 여기서 숫자의 의미는 없음 <br> - (순서형 변수: 교육수준, 건강상태)</td>
+<td>- 관측된 데이터가 숫자의 형태로 숫자의 크기가 의미를 갖고 있음 <br> - 숫자를 표현할 때 는 이산형 데이터와 연속형 데이터로 구분</td>
+</tr>
+</tbody>
+</table>
+</div>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_3.png" class="">
+<p><br></p>
+<h3 id="Exploratory-Data-Analysis-EDA"><a href="#Exploratory-Data-Analysis-EDA" class="headerlink" title="Exploratory Data Analysis (EDA)"></a>Exploratory Data Analysis (EDA)</h3><ul>
+<li>데이터를 분석하는 과정 중 가장 많이 사용하는 분석 방법</li>
+<li>데이터를 탐색하는 분석 방법으로 도표, 그래프, 요약 통계 등을 사용하여 데이터를 체계적으로 분석하는 하나의 방법</li>
+</ul>
+<blockquote>
+<p><strong>목적</strong></p>
+</blockquote>
+<ul>
+<li>데이터 분석 프로젝트 초기 <strong>가설 수립</strong></li>
+<li>데이터 분석 프로젝트 초기 <strong>적절한 모델</strong> 및 <strong>기법 선정</strong></li>
+<li>변수 간 <strong>트렌드, 패턴, 관계</strong> 등을 찾고 통계적 추론을 기반으로 가정을 평가</li>
+<li>분석데이터에 적절한가 <strong>평가, 추가 수집, 이상치 발견</strong> 등 활용</li>
+</ul>
+<p><br></p>
+<h3 id="데이터-시각화-Data-Visualization"><a href="#데이터-시각화-Data-Visualization" class="headerlink" title="데이터 시각화 (Data Visualization)"></a>데이터 시각화 (Data Visualization)</h3><ul>
+<li>데이터 분석 결과를 쉽게 이해할 수 있도록 <strong>시각적으로 표현하고 전달되는 과정</strong></li>
+<li>데이터 시각화의 목적 : 도표(graph)라는 수단을 통해 <strong>정보를 명확하고 효과적으로 전달하는 것</strong></li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_4.png" class="">
+<ul>
+<li>그래프 예시</li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_5.png" class="">
+<p><br></p>
+<h2 id="데이터-기초-통계량"><a href="#데이터-기초-통계량" class="headerlink" title="데이터 기초 통계량"></a>데이터 기초 통계량</h2><h3 id="기초-통계량"><a href="#기초-통계량" class="headerlink" title="기초 통계량"></a>기초 통계량</h3><ul>
+<li>통계량(statistic)<ul>
+<li>표본으로 산출한 값, <strong>기술 통계량</strong>이라고도 표현</li>
+<li>통계량을 통해 <strong>데이터(표본)가 갖는 특성을 이해 할 수 있음</strong></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="중심-경향치"><a href="#중심-경향치" class="headerlink" title="중심 경향치"></a>중심 경향치</h3><ul>
+<li>표본(데이터)를 이해하기 위해 표본의 중심에 대해서 관심을 가짐</li>
+<li>표본의 중심을 설명하는 값, <strong>대표값</strong>이라고도 표현<ul>
+<li>평균, 중앙값, 최빈값, 절사 평균 등이 있음</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>평균</strong></p>
+</blockquote>
+<ul>
+<li>모집단으로부터 관측된 $n$개의 $x$가 주어졌을 때 아래와 같이 정의</li>
+</ul>
+<script type="math/tex; mode=display">
+  \bar{X} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{1}{n} \sum_{i=1}^{n}{x_i}</script><ul>
+<li>표본 평균(sample mean) : 표본으로 추출된 평균. $\bar{x}$로 표기</li>
+<li>모평균 : 모집단의 평균. $\mu$라고 표기</li>
+</ul>
+<blockquote>
+<p><strong>중앙값 (Median)</strong></p>
+</blockquote>
+<ul>
+<li>표본으로부터 관측치를 크기순으로 나열 했을 때, 가운데 위치하는 값</li>
+<li><p>이상치가 포함된 데이터에 대해 사용</p>
+</li>
+<li><p><strong>관측치 갯수</strong></p>
+<ul>
+<li>홀수 일 경우 : 중앙을 취하는 값<script type="math/tex; mode=display">
+  m = x_{(k+1)} \quad \text{if} \quad n = 2k + 1</script></li>
+<li>짝수 일 경우 : 가운데 두개의 값을 산술 평균한 <script type="math/tex; mode=display">
+  m = \frac{x_{(k)} +x_{(k+1)}}{2} \quad \text{if} \quad n = 2k</script></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>최빈값 (Mode)</strong></p>
+</blockquote>
+<ul>
+<li>관측치 중 <strong>가장 많이 관측되는 값</strong></li>
+<li>옷사이즈와 같이 <strong>명목형 데이터의 경우 사용</strong></li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_6.png" class="">
+<p><br></p>
+<h3 id="산포도"><a href="#산포도" class="headerlink" title="산포도"></a>산포도</h3><ul>
+<li>데이터가 어떻게 흩어져 있는지를 확인하기 위해 <strong>중심경향치</strong>와 함께 <strong>산포에 대한 측도</strong>를 같이 고려해야 함</li>
+<li>데이터의 산포도를 나타내는 측도 : <strong>범위, 사분위수, 분산, 표준편차, 변동 계수</strong> 등</li>
+</ul>
+<blockquote>
+<p><strong>범위(Range)</strong></p>
+</blockquote>
+<ul>
+<li>데이터의 최대값과 최소값의 차이</li>
+</ul>
+<blockquote>
+<p><strong>사분위수(quartile)</strong></p>
+</blockquote>
+<ul>
+<li>전체 데이터를 오름차순으로 정렬하여 4등분을 하였을 때, 첫 번째를 제1사분위수(Q1), 두 번째를 제2사분위수(Q2), 􏰀 번째를 제3사분위수(Q3)이라고 함</li>
+</ul>
+<blockquote>
+<p><strong>사분위수 범위(interquartile range)</strong></p>
+</blockquote>
+<script type="math/tex; mode=display">
+  IQR = Q3 - Q1</script><blockquote>
+<p><strong>백분위수(percentile)</strong></p>
+</blockquote>
+<ul>
+<li>전체 데이터를 오름차순으로 정렬하여 주어진 비율에 의해 등분한 값</li>
+<li>제 $p$백분위수는 $p$<strong>%에 위치한 자료 값</strong>을 말함</li>
+<li>데이터를 오름차수로 배열하고 자료가 $n$개가 있을 때, 제 $(100 * p)$ 백분위수는 아래와 같음<ul>
+<li>$np$가 <strong>정수</strong>이면, $np$번째와 $(np + 1)$번째 자료의 평균</li>
+<li>$np$가 <strong>정수</strong>가 아니면, $np$보다 큰 최소의 정수를 $m$이라고 할 때 $m$번째 자료</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>분산 (Variance)</strong></p>
+</blockquote>
+<ul>
+<li>데이터의 분포가 <strong>얼마나 흩어져 있는지</strong>를 알 수 있는 측도</li>
+<li>데이터의 각각의 값들의 편차 제곱합으로 계산</li>
+</ul>
+<script type="math/tex; mode=display">
+  S^2 = \frac{1}{n-1} \sum_{i=1}^{n}{(x_i - \bar{x})^2}</script><blockquote>
+<p><strong>표준 편차(Standard Deviation)</strong></p>
+</blockquote>
+<ul>
+<li>분산의 제곱근으로 정의</li>
+</ul>
+<script type="math/tex; mode=display">
+  s = \sqrt{S^2}</script><p><strong>모분산</strong></p>
+<ul>
+<li>크기가 $N$인 모집단의 평균을 $\mu$라고 할 때 모분산 $\sigma^2$</li>
+</ul>
+<script type="math/tex; mode=display">
+  \sigma^2 = \frac{1}{N} \sum_{i=1}^{N}{(x_i - \mu)^2}</script><ul>
+<li>크기가 $N$인 모집단의 평균을 $\mu$라고 할 때 모표준편차 $\sigma$</li>
+</ul>
+<script type="math/tex; mode=display">
+  \sigma = \sqrt{\sigma^2}</script><blockquote>
+<p><strong>변동계수(Coefficient of Variation, CV)</strong></p>
+</blockquote>
+<ul>
+<li>평균이 다른 두 개 이상의 그룹의 <strong>표준편차를 비교할 때</strong> 사용</li>
+<li>변동계수는 표준편차를 평균으로 나누어서 산출</li>
+<li><strong>단위나 조건에 상관없이 서로 다른 그룹의 산포를 비교</strong></li>
+<li>실제 분석에서 자주 사용</li>
+</ul>
+<script type="math/tex; mode=display">
+  CV = \frac{s}{\bar{x}}</script><p><br></p>
+<h3 id="정규분포-Standard-Distribution"><a href="#정규분포-Standard-Distribution" class="headerlink" title="정규분포(Standard Distribution)"></a>정규분포(Standard Distribution)</h3><ul>
+<li>평균과 분산에 따라서 모양이 변화</li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_7.png" class="">
+<ul>
+<li>분산이 크면 분포가 넓어지며, 분산이 작으면 분산이 좁아짐</li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_8.png" class="">
+<blockquote>
+<p><strong>왜도 (Skew)</strong></p>
+</blockquote>
+<ul>
+<li>자료의 분포가 얼마나 비대칭적인지 표현하는 지표</li>
+<li>왜도가 0이면 <strong>좌우가 대칭</strong></li>
+<li>0에서 클수록 <strong>우측꼬리가 길고</strong> 0에서 작을수록 <strong>좌측 꼬리가 김</strong></li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_9.png" class="">
+<blockquote>
+<p><strong>첨도(Kurtosis)</strong></p>
+</blockquote>
+<ul>
+<li>확률분포의 꼬리가 두꺼운 정도를 나타내는 척도</li>
+<li>첨도값(K)이 3에 가까우면 산포도가 정규분포에 가까움</li>
+<li>3보다 작을 경우(K&lt;3) 산포는 정규분포보다 꼬리가 얇은 분포로 판단</li>
+<li>첨도값이 3보다 클 경우(K&gt;3) 정규분포보다 꼬리가 두꺼운 분포로 판단</li>
+</ul>
+<img src="/2024/02/18/Math-Statistics-Intro/Math_Statistics_Intro_10.png" class=""></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/18/Math-Statistics-Intro/">https://gyoungmin-lim.github.io/2024/02/18/Math-Statistics-Intro/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Statistics/">Statistics</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/02/18/Git-RemoteRepository/" title="(Git) Remote Repository"><img class="cover" src="/../cover_img/Github_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Git) Remote Repository</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">77</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%86%B5%EA%B3%84%ED%95%99-Statistics"><span class="toc-number">1.</span> <span class="toc-text">통계학(Statistics)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%99%80-%EA%B7%B8%EB%9E%98%ED%94%84"><span class="toc-number">2.</span> <span class="toc-text">데이터와 그래프</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%B3%80%EC%88%98-Variable"><span class="toc-number">2.1.</span> <span class="toc-text">변수(Variable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exploratory-Data-Analysis-EDA"><span class="toc-number">2.2.</span> <span class="toc-text">Exploratory Data Analysis (EDA)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%8B%9C%EA%B0%81%ED%99%94-Data-Visualization"><span class="toc-number">2.3.</span> <span class="toc-text">데이터 시각화 (Data Visualization)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B8%B0%EC%B4%88-%ED%86%B5%EA%B3%84%EB%9F%89"><span class="toc-number">3.</span> <span class="toc-text">데이터 기초 통계량</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B8%B0%EC%B4%88-%ED%86%B5%EA%B3%84%EB%9F%89"><span class="toc-number">3.1.</span> <span class="toc-text">기초 통계량</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A4%91%EC%8B%AC-%EA%B2%BD%ED%96%A5%EC%B9%98"><span class="toc-number">3.2.</span> <span class="toc-text">중심 경향치</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%82%B0%ED%8F%AC%EB%8F%84"><span class="toc-number">3.3.</span> <span class="toc-text">산포도</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A0%95%EA%B7%9C%EB%B6%84%ED%8F%AC-Standard-Distribution"><span class="toc-number">3.4.</span> <span class="toc-text">정규분포(Standard Distribution)</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/18/Math-Statistics-Intro/" title="(Statistics) 통계학 소개(Introduction)"><img src="/../cover_img/Mathematics_Statistics_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Statistics) 통계학 소개(Introduction)"/></a><div class="content"><a class="title" href="/2024/02/18/Math-Statistics-Intro/" title="(Statistics) 통계학 소개(Introduction)">(Statistics) 통계학 소개(Introduction)</a><time datetime="2024-02-18T10:27:27.000Z" title="Created 2024-02-18 19:27:27">2024-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/18/Git-RemoteRepository/" title="(Git) Remote Repository"><img src="/../cover_img/Github_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Git) Remote Repository"/></a><div class="content"><a class="title" href="/2024/02/18/Git-RemoteRepository/" title="(Git) Remote Repository">(Git) Remote Repository</a><time datetime="2024-02-18T10:11:01.000Z" title="Created 2024-02-18 19:11:01">2024-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/18/Git-Branch/" title="(Git) Branch"><img src="/../cover_img/Github_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Git) Branch"/></a><div class="content"><a class="title" href="/2024/02/18/Git-Branch/" title="(Git) Branch">(Git) Branch</a><time datetime="2024-02-18T10:03:05.000Z" title="Created 2024-02-18 19:03:05">2024-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/18/Git-LocalRepository/" title="(Git) Local Repository"><img src="/../cover_img/Github_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Git) Local Repository"/></a><div class="content"><a class="title" href="/2024/02/18/Git-LocalRepository/" title="(Git) Local Repository">(Git) Local Repository</a><time datetime="2024-02-18T09:56:53.000Z" title="Created 2024-02-18 18:56:53">2024-02-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/18/Git-Command/" title="(Git) 기본 용어(Command)"><img src="/../cover_img/Github_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Git) 기본 용어(Command)"/></a><div class="content"><a class="title" href="/2024/02/18/Git-Command/" title="(Git) 기본 용어(Command)">(Git) 기본 용어(Command)</a><time datetime="2024-02-18T09:54:46.000Z" title="Created 2024-02-18 18:54:46">2024-02-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
