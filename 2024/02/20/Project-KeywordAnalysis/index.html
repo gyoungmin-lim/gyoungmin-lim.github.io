@@ -1,0 +1,806 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>키워드, 시간대별 응답률 분석 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : 데이터 분석 정보 공유방에서 키워드, 시간대별로 응답률을 분석하여 정보를 더욱 효율적으로 얻는 전략 수립  수행기간  : 2023. 11. 21 ~ 2023. 12.27  수행내용  오픈채팅방에서 평균적으로 월요일에 유입&#x2F;이탈이 활발한 것을 확인하였으며, 주말(토, 일)요일의 경우 유입&#x2F;이탈 인원이 확연히 감소함 요일별 전">
+<meta property="og:type" content="article">
+<meta property="og:title" content="키워드, 시간대별 응답률 분석">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/20/Project-KeywordAnalysis/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : 데이터 분석 정보 공유방에서 키워드, 시간대별로 응답률을 분석하여 정보를 더욱 효율적으로 얻는 전략 수립  수행기간  : 2023. 11. 21 ~ 2023. 12.27  수행내용  오픈채팅방에서 평균적으로 월요일에 유입&#x2F;이탈이 활발한 것을 확인하였으며, 주말(토, 일)요일의 경우 유입&#x2F;이탈 인원이 확연히 감소함 요일별 전">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_Keyword_cover.jpg">
+<meta property="article:published_time" content="2024-02-20T02:51:34.000Z">
+<meta property="article:modified_time" content="2024-02-20T08:31:08.229Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_Keyword_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/20/Project-KeywordAnalysis/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '키워드, 시간대별 응답률 분석',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-20 17:31:08'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_Keyword_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">키워드, 시간대별 응답률 분석</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-20T02:51:34.000Z" title="Created 2024-02-20 11:51:34">2024-02-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-20T08:31:08.229Z" title="Updated 2024-02-20 17:31:08">2024-02-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Project/">Project</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="키워드, 시간대별 응답률 분석"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>데이터 분석 정보 공유방에서 키워드, 시간대별로 응답률을 분석하여 정보를 더욱 효율적으로 얻는 전략 수립</strong></li>
+<li><span style="color:blue"> <strong>수행기간</strong> </span> : <strong>2023. 11. 21 ~ 2023. 12.27</strong></li>
+<li><span style="color:violet"> <strong>수행내용</strong> </span><ul>
+<li>오픈채팅방에서 평균적으로 <strong>월요일</strong>에 유입/이탈이 활발한 것을 확인하였으며, 주말(토, 일)요일의 경우 유입/이탈 인원이 확연히 감소함</li>
+<li>요일별 전체 활동량을 보았을 때 <strong>주중(월, 화, 수, 목, 금)</strong>의 경우 활동이 활발하게 일어났으며, <strong>주말(토, 일)</strong>의 경우 활동량이 미비함.<ul>
+<li>채팅 참여의 경우 참여자는 317명(65%), 미참여자의 경우 167명(35%)으로 나타남</li>
+<li>채팅 참여의 경우 <strong>주중</strong>에서도 <strong>화요일, 수요일</strong>에 특히 <strong>활동이 많은 것</strong>을 확인</li>
+</ul>
+</li>
+<li>채팅 참여자의 직군을 확인하였을 때, 대학생, 데이터분석가, 마케터 직군 순으로 많은 참여자가 분포<ul>
+<li>경력별로 확인해보았을 때, 경력이 높아질수록 대화자의 수가 적어졌으며, 전체 대화의 33%가 0년차(신입)에서 이뤄지며, 인원대비 대화 참여율은 10년차가 가장 높게 나타남</li>
+</ul>
+</li>
+<li>이탈자 중 채팅 참여 여부를 보았을 때 이탈자 중 채팅 참여비율은 <strong>전체 127명 중 14명(11%)</strong>로 확인하였으며, 가장 많이 채팅한 이탈자의 경우 7건으로 나타남</li>
+<li>질문/답변을 구분하기 위해 적용시킨 ML Model 3가지를 비교하였을 때, 3개의 선정 모델 중 RF(Random Forest)모델이 가장 높은 성능으로 나타남</li>
+<li>Model Performance를 <u><strong>Accuracy로 봤을 경우는 Random Forest(RF)가 가장 높게</strong></u> 보여주나, <u><strong>시간비용을 고려한다면 Logistic Regrssion(LR)를 고려</strong></u>하는 것도 좋은 선택지라 생각됨</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><ul>
+<li><strong>사용자가 원하는 정보를 얻을 수 있는 방법 중 하나</strong>로, 다양한 오픈채팅방이 존재</li>
+<li>오픈채팅방을 통하여 정보를 얻거나 공유할 수 있으나, <u><strong>항상 원하는 답변과 내용을 얻을 수 있는 것은 아니다</strong></u></li>
+<li>질문 및 답변이 활발한 <u><strong>시간대</strong></u>와 원하는 정보와 관련된 <u><strong>키워드</strong></u>를 효율적으로 배치하여 <u><strong>답변을 얻는 전략</strong></u>이 필요</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_0.png" class="">
+<h3 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h3><ul>
+<li>[데이터리안] 데이터 분석 정보 공유방 (2023-08-13 ~ 2023-12-03)<ul>
+<li>6,000 rows+</li>
+</ul>
+</li>
+</ul>
+<h3 id="PIPELINE"><a href="#PIPELINE" class="headerlink" title="PIPELINE"></a>PIPELINE</h3><img src="/2024/02/20/Project-KeywordAnalysis/ML_goal_0.png" class="">
+<ul>
+<li>오픈채팅방 비정형 데이터의 정형화<ul>
+<li>텍스트 데이터를 정제해서 닉네임/직군/경력/카톡내용/시간으로 구분하여 저장</li>
+</ul>
+</li>
+<li>질문/답변/질문끝 라벨링</li>
+<li>카톡 내용 한국어 전처리를 통한 키워드 분류</li>
+<li>(필요시 Classification) 질문/답변 학습 후 모델 생성</li>
+<li>분석 및 인사이트 도출<ul>
+<li>키워드별 응답률, 활동시간대별 응답률</li>
+<li>경력/직군별 키워드 및 응답률</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="Preprocessing"><a href="#Preprocessing" class="headerlink" title="Preprocessing"></a>Preprocessing</h1><h2 id="Raw-Data"><a href="#Raw-Data" class="headerlink" title="Raw Data"></a>Raw Data</h2><ul>
+<li>텍스트 파일(<code>.txt</code>)로 구성</li>
+<li><strong>시간, 닉네임, 직무분야, 경력, 대화내용, 입/퇴장 여부</strong> 등 <u><strong>다양한 데이터</strong></u>가 존재</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_1.png" class="">
+<p><br></p>
+<h2 id="데이터-정형화"><a href="#데이터-정형화" class="headerlink" title="데이터 정형화"></a>데이터 정형화</h2><ul>
+<li>위의 <strong>Raw Data</strong>를 활용하여 데이터를 <strong>Tabular 형태</strong>로 변환</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_2.png" class="">
+<ul>
+<li><strong>Variable</strong></li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_3.png" class="">
+<p><br></p>
+<h2 id="Keyword-분석을-위한-Hand-Labeling"><a href="#Keyword-분석을-위한-Hand-Labeling" class="headerlink" title="Keyword 분석을 위한 Hand-Labeling"></a>Keyword 분석을 위한 Hand-Labeling</h2><ul>
+<li><code>질문</code>과 <code>답변</code>을 구분하기 위해 Hand-Labeling 진행</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_4.png" class="">
+<ul>
+<li><p><code>group_num</code></p>
+<ul>
+<li>특정 질문에 대한 대화를 그룹핑</li>
+<li>다른 주제에 대해 질의응답을 한 경우 다른 <code>group_num</code> 부어</li>
+</ul>
+</li>
+<li><p><code>msg_lab</code></p>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_Keyword_ppt_5.png" class="">
+<p><br><br><br></p>
+<h1 id="EDA"><a href="#EDA" class="headerlink" title="EDA"></a>EDA</h1><h2 id="In-and-Out-인원-파악"><a href="#In-and-Out-인원-파악" class="headerlink" title="In_and_Out 인원 파악"></a>In_and_Out 인원 파악</h2><ul>
+<li>kakaotalk 채팅방 유입/이탈 인원을 확인하기 위해 데이터 셋 생성<ul>
+<li><code>action_msg</code> 확인 결과 들어오기, 나가기, 메시지 가리기 3개의 항목으로만 구성되어 있음</li>
+<li>들어온 인원의 경우 <code>0</code>, 나간 인원의 경우 <code>1</code>, 메시지 가리기인 경우 <code>2</code>로 분류 진행</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="전체-유입-이탈-인원-파악-일"><a href="#전체-유입-이탈-인원-파악-일" class="headerlink" title="전체 유입/이탈 인원 파악 (일)"></a>전체 유입/이탈 인원 파악 (일)</h3><ul>
+<li>시간 기준 : 일별</li>
+<li><code>action_msg</code> 중 ‘메시지 가리기’를 제외, 유입/이탈 인원을 <code>count</code>로 계산<ul>
+<li><span style="color:red"> Red Solid Line </span> : Out</li>
+<li><span style="color:blue"> Blue Dotted Line </span> : In</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_0.png" class="">
+<ul>
+<li><p><code>talk_date</code> 데이터타입이 object로 확인하여 <code>datetime</code>으로 변경<br>  ※ 그래프를 <strong>시계열로 그려 확인하기 위해</strong></p>
+</li>
+<li><p>일별 시간을 기준으로 유입/이탈 인원 수를 입/퇴장 여부(<code>action_msg</code>)를 기준으로 시계열 그래프로 표현</p>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_1.png" class="">
+<p><br></p>
+<h3 id="월-단위-유입-이탈-인원-파악"><a href="#월-단위-유입-이탈-인원-파악" class="headerlink" title="월 단위 유입/이탈 인원 파악"></a>월 단위 유입/이탈 인원 파악</h3><ul>
+<li><p>월별 전체 유입/이탈 인원 파악</p>
+<ul>
+<li>월(<code>month</code>)을 기준으로 전체 유입/이탈 인원 <code>count</code></li>
+</ul>
+</li>
+<li><p>월(<code>month</code>) 기준 유입/이탈 인원 수를 입/퇴장 여부(<code>action_msg</code>)를 기준으로 시계열 그래프로 표현</p>
+<ul>
+<li><span style="color:red"> Red Solid Line </span> : Out</li>
+<li><span style="color:blue"> Blue Dotted Line </span> : In</li>
+<li>오픈채팅방에 들어오는 인원은 <strong>지속적으로 감소하는 추세를 보임</strong></li>
+<li>12월 이상적으로 낮은 <code>count</code>를 확인</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_2.png" class="">
+<p><br></p>
+<h3 id="월-Month-에-따른-일-Day-별-유입-이탈-인원-파악"><a href="#월-Month-에-따른-일-Day-별-유입-이탈-인원-파악" class="headerlink" title="월(Month)에 따른 일(Day)별 유입/이탈 인원 파악"></a>월(Month)에 따른 일(Day)별 유입/이탈 인원 파악</h3><ul>
+<li>가시성을 위해 월(<code>Month</code>) 숫자형을 <strong>영문 표기형</strong>으로 변경</li>
+<li>월(Month)에 따른 일(Day)별 유입/이탈 인원을 시계열 그래프를 표현<ul>
+<li><span style="color:red"> Red Solid Line </span> : Out</li>
+<li><span style="color:blue"> Blue Dotted Line </span> : In</li>
+<li>12월의 경우 데이터가 23-12-02까지 존재하여 <code>count</code> 수가 낮음</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Month</th>
+<th>Figure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>August</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_3.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>September</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_4.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>October</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_5.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>November</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_6.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>December</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_7.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="요일별-유입-이탈-인원-파악"><a href="#요일별-유입-이탈-인원-파악" class="headerlink" title="요일별 유입/이탈 인원 파악"></a>요일별 유입/이탈 인원 파악</h3><ul>
+<li><p>요일별 유입/이탈 인원 파악을 위해 데이터 셋 생성</p>
+<ul>
+<li>그래프를 그리기 이전 요일 정렬을 위해 <code>custom_order</code> 리스트 생성</li>
+</ul>
+</li>
+<li><p>요일별 유입/이탈 인원을 파악하기 위해 시계열 그래프로 표현</p>
+<ul>
+<li><span style="color:red"> Red Solid Line </span> : Out</li>
+<li><span style="color:blue"> Blue Dotted Line </span> : In</li>
+</ul>
+</li>
+<li><p>평균적으로 <strong>월요일</strong>에 유입/이탈이 활발한 것을 확인</p>
+</li>
+<li>주말(토, 일)요일의 경우 <strong>유입/이탈 인원이 확연히 감소</strong></li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_8.png" class="">
+<p><br></p>
+<h2 id="메세지-갯수를-통한-활동량-파악"><a href="#메세지-갯수를-통한-활동량-파악" class="headerlink" title="메세지 갯수를 통한 활동량 파악"></a>메세지 갯수를 통한 활동량 파악</h2><blockquote>
+<p><strong>활동량 기준 : <u>메세지의 갯수</u></strong></p>
+</blockquote>
+<p><br></p>
+<h3 id="월별-전체-활동량-파악"><a href="#월별-전체-활동량-파악" class="headerlink" title="월별 전체 활동량 파악"></a>월별 전체 활동량 파악</h3><ul>
+<li>8월, 12월의 경우 기간의 차이로 인해 적게 나타남</li>
+<li>전체적으로 비슷한 활동량을 보임</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_9.png" class="">
+<p><br></p>
+<h3 id="요일별-전체-활동량-파악"><a href="#요일별-전체-활동량-파악" class="headerlink" title="요일별 전체 활동량 파악"></a>요일별 전체 활동량 파악</h3><ul>
+<li>요일별 활동량을 막대그래프로 표현<ul>
+<li>주중(월, 화, 수, 목, 금)의 경우 활동이 활발하게 일어남</li>
+<li>주말(토, 일)의 경우 활동량이 미비함</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_10.png" class="">
+<ul>
+<li>월별 요일별 활동량 파악<ul>
+<li>전체적으로 주중에 공통적으로 활발하게 활동하는 것으로 나타남</li>
+<li>그러나, 특정 요일에 활발하다는 결론은 내지 못함</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Month</th>
+<th>Figure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>August</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_11.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>September</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_12.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>October</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_13.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>November</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_14.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>December</strong></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_15.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="시간대별-활동량"><a href="#시간대별-활동량" class="headerlink" title="시간대별 활동량"></a>시간대별 활동량</h3><ul>
+<li>활동시간(09시 ~ 18시) 내 커뮤니케이션이 활발하게 일어남</li>
+<li>특히, 15 ~ 17시 가장 높은 분포를 보임</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_002.png" class="">
+<p><br></p>
+<h2 id="채팅-참여자-파악"><a href="#채팅-참여자-파악" class="headerlink" title="채팅 참여자 파악"></a>채팅 참여자 파악</h2><h3 id="채팅-참여-여부-판단"><a href="#채팅-참여-여부-판단" class="headerlink" title="채팅 참여 여부 판단"></a>채팅 참여 여부 판단</h3><ul>
+<li>채팅 여부 판단<ul>
+<li>채팅방 내 채팅에 참여한 사람과 참여하지 않은 사람의 비율을 파악</li>
+<li>참여자의 경우 <strong>317명(65%)</strong>, 미참여자의 경우 <strong>167명(35%)</strong>으로 나타남</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_16.png" class="">
+<p><br></p>
+<h3 id="요일별-채팅-참여-여부-파악"><a href="#요일별-채팅-참여-여부-파악" class="headerlink" title="요일별 채팅 참여 여부 파악"></a>요일별 채팅 참여 여부 파악</h3><ul>
+<li>요일별 채팅 참여자 및 대화내용 수를 막대그래프로 표현</li>
+<li>채팅 참여의 경우 <strong>주중</strong>에서도 <strong>화요일, 수요일</strong>에 특히 <strong>활동이 많은 것</strong>을 확인</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_17.png" class="">
+<p><br></p>
+<h3 id="직군별-참여자-파악"><a href="#직군별-참여자-파악" class="headerlink" title="직군별 참여자 파악"></a>직군별 참여자 파악</h3><ul>
+<li>같은 직군임에도 불구하고 직군의 이름이 다양하게 분류<br><span style="color:blue"> ex) </span> 데이터분석, 데이터분석가, DA</li>
+<li>직군 분류 2차 가공 진행</li>
+<li>대학생, 데이터분석가, 마케터 직군 순으로 많은 참여자가 분포</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>2차 가공</th>
+<th>참여자 분포</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_007.png" class=""></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_001.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="참여자-별-대화내용-수-파악"><a href="#참여자-별-대화내용-수-파악" class="headerlink" title="참여자 별 대화내용 수 파악"></a>참여자 별 대화내용 수 파악</h3><ul>
+<li><code>groupby</code>를 통해 참여자별 전체 채팅 갯수 내림차순으로 표시<ul>
+<li>이 중, 전체 채팅 수가 많은 20명의 참여자를 <code>chat_top20</code>에 할당</li>
+</ul>
+</li>
+<li>채팅수가 많은 Top20의 채팅 수를 막대그래프로 표현</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_18.png" class="">
+<p><br></p>
+<h3 id="경력별-참여자-파악"><a href="#경력별-참여자-파악" class="headerlink" title="경력별 참여자 파악"></a>경력별 참여자 파악</h3><ul>
+<li>대학생의 경우, 0년차(신입)으로 가정</li>
+<li>경력이 높아질수록 대화자의 수가 적어짐</li>
+<li>전체 대화의 33%가 0년차(신입)에서 이뤄지며, 인원대비 대화 참여율은 10년차가 가장 높게 나타남</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_006.png" class="">
+<p><br></p>
+<h2 id="이탈자-채팅-여부-파악"><a href="#이탈자-채팅-여부-파악" class="headerlink" title="이탈자 채팅 여부 파악"></a>이탈자 채팅 여부 파악</h2><ul>
+<li><p>이탈자 채팅 횟수를 파악</p>
+<ul>
+<li>이탈자 중 채팅에 참여했던 인원 파악 : 14명</li>
+</ul>
+</li>
+<li><p>이탈자 중 채팅 참여자 수 및 비율을 그래프로 표현</p>
+<ul>
+<li>이탈자 중 채팅 참여비율은 <strong>전체 127명 중 14명(11%)</strong>로 확인</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_19.png" class="">
+<ul>
+<li>이탈자 중 채팅 참여자의 채팅 수 확인<ul>
+<li>가장 많이 채팅한 이탈자의 경우 7건으로 나타남</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_20.png" class="">
+<p><br></p>
+<h2 id="질문-amp-답변-키워드-파악"><a href="#질문-amp-답변-키워드-파악" class="headerlink" title="질문&amp;답변 키워드 파악"></a>질문&amp;답변 키워드 파악</h2><h3 id="키워드-빈도-수"><a href="#키워드-빈도-수" class="headerlink" title="키워드 빈도 수"></a>키워드 빈도 수</h3><ul>
+<li>질문과 답변을 구분할 수 있는 키워드를 탐색하기 위해 채팅 내 키워드 빈도수를 확인</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>채팅 내 키워드 빈도 수 Top 10</th>
+<th>질문자의 최초 질문 키워드 Top 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_003.png" class=""></td>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_004.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><code>‘데이터’</code>, <code>‘이벤트’</code>, <code>‘프로젝트‘</code>, <code>’페이지‘</code> 단어의 경우 전체 채팅과 질문자의 채팅에서 두드러지게 나타남</li>
+<li><u><strong>질문과 답변을 구분하는 키워드로는 적절하지 않다</strong></u>고 판단</li>
+</ul>
+<p><br></p>
+<h3 id="시간대별-답변-수"><a href="#시간대별-답변-수" class="headerlink" title="시간대별 답변 수"></a>시간대별 답변 수</h3><ul>
+<li>활동시간(09:00 ~ 18:00) 내 일반적으로 답변이 활발하게 일어남</li>
+<li>10:00, 15:00, 09:00 순으로 가장 많은 답변을 보임</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Project_KeywordAnalysis_008.png" class="">
+<ul>
+<li>채팅 활동량과 답변 수를 비교하였을 떄, <u><strong>오전 10시, 오후 9시 이후 약 10%</strong></u>를 차지</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><h2 id="Application-with-ML"><a href="#Application-with-ML" class="headerlink" title="Application with ML"></a>Application with ML</h2><ul>
+<li><u><strong>질문을 구분하는 것을 목표로 선정</strong></u>하였으며, <u><strong>총 3가지의 Maching Learning Model을 통하여 각 모델의 성능을 비교</strong></u>하고자 한다.</li>
+</ul>
+<p><br></p>
+<ul>
+<li>전처리된 채팅 데이터를 활용하여 질문 분류 예측 모델을 만듬</li>
+<li>이용자의 채팅 내용을 통해 이용자의 채팅이 질문인지 아닌지를 예측하여 이용자의 의도를 파악하는 것</li>
+<li>모델의 X 값(즉, feature 값)은 이용자 채팅 내용이 되겠고, 모델의 Y 값(즉, label 값)은 질문 여부<ul>
+<li>질문과 답변을 라벨링한 것에 대해, 질문일 경우 <code>1</code>, 질문이 아닐 경우 <code>0</code>으로 라벨링을 진행</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/ML_goal_2.png" class="">
+<p><br></p>
+<h2 id="Logistic-Regression-Model"><a href="#Logistic-Regression-Model" class="headerlink" title="Logistic Regression Model"></a>Logistic Regression Model</h2><ul>
+<li>모델 학습 결과</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Skill Score</th>
+<th style="text-align:center">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accuracy</td>
+<td style="text-align:center">0.86</td>
+</tr>
+<tr>
+<td style="text-align:center">Precision</td>
+<td style="text-align:center">1.00</td>
+</tr>
+<tr>
+<td style="text-align:center">Recall</td>
+<td style="text-align:center">0.11</td>
+</tr>
+<tr>
+<td style="text-align:center">F1 score</td>
+<td style="text-align:center">0.20</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Confusion Matrix<ul>
+<li>모델 평가결과를 살펴보면, 모델이 지나치게 질문이 아닌 것<code>(0)</code>으로만 예측하는 경향을 보임</li>
+<li>따라서 질문이 아닌 것을 잘 예측하지만, 질문인 것에 대한 <strong>예측 정확도가 매우 낮게 나타남</strong></li>
+<li>이는 <u><strong>샘플데이터의 클래스 불균형</strong></u>으로 인한 문제로 보임</li>
+<li>따라서, 클래스 불균형 조정을 진행</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/ConfusionMatrix.png" class="">
+<p><br></p>
+<h3 id="샘플링-재조정"><a href="#샘플링-재조정" class="headerlink" title="샘플링 재조정"></a>샘플링 재조정</h3><ul>
+<li>1:1 샘플링<ul>
+<li><strong>과적합(Overfitting)을 방지하기 위해</strong> 샘플의 갯수를 1:1 비율로 수정</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="LR-Model-재학습"><a href="#LR-Model-재학습" class="headerlink" title="LR Model 재학습"></a>LR Model 재학습</h3><ul>
+<li>모델 학습 결과</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Skill Score</th>
+<th style="text-align:center">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accuracy</td>
+<td style="text-align:center">0.84</td>
+</tr>
+<tr>
+<td style="text-align:center">Precision</td>
+<td style="text-align:center">0.84</td>
+</tr>
+<tr>
+<td style="text-align:center">Recall</td>
+<td style="text-align:center">0.80</td>
+</tr>
+<tr>
+<td style="text-align:center">F1 score</td>
+<td style="text-align:center">0.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Confusion Matrix<ul>
+<li>모델이 <code>‘질문’</code> 케이스와 <code>‘질문이 아닌’</code> 케이스를 모두 적당히 잘 맞춘 것을 확인</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/ConfusionMatrix(LR).png" class="">
+<p><br></p>
+<h2 id="질문-답변-키워드-분석"><a href="#질문-답변-키워드-분석" class="headerlink" title="질문/답변 키워드 분석"></a>질문/답변 키워드 분석</h2><ul>
+<li>학습된 Logistic Regression 모델을 이용하여 키워드 추출<ul>
+<li>추출된 키워드를 통해서 사용자의 의도가 질문인지 아닌지 판단할 수 있고, 채팅의 주 관심사에 대해서도 어느정도 판단할 수 있다.</li>
+</ul>
+</li>
+<li><p>질문, 질문이 아닌 키워드를 추출하기 위해 먼저 Logistic Regression 모델에 각 단어의 coeficient를 확인</p>
+</li>
+<li><p>시각화</p>
+<ul>
+<li>계수가 양인 경우는 단어가 질문인 경우라고 볼 수 있고, 반면에 음인 경우는 질문이 아닌 키워드라고 볼 수 있다.</li>
+<li>이 계수들을 크기순으로 정렬하면, Quesiton / Nonquestion 키워드를 출력하는 지표로 사용</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/LR_coef.png" class="">
+<ul>
+<li>전체 단어가 포함한 <strong>‘질문 키워드 리스트’</strong>와 <strong>‘질문이 아닌 키워드 리스트’</strong>를 정의하고 출력</li>
+<li>index를 단어로 변환하여 <strong>‘질문 키워드 리스트’</strong>와 <strong>‘질문이 아닌 키워드 리스트’</strong>의 Top 20 단어를 출력</li>
+<li><u><strong>키워드를 살펴보면</strong></u><br>보통 <code>혹시, 질문, 관련, 경험, 경우, 해결</code> 등 직무와 관련된 분야에 대한 해결 경험 등을 질문하는 것으로 보임<br>하지만 <code>답변, 아하, 한번, 말씀, 감사, 생각</code> 등 질문이 아닌 키워드에서는 주로 질문에 대해 답변하는 키워드로 보임</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Question Keyword Top20</th>
+<th>Nonquestion Keyword Top20</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/20/Project-KeywordAnalysis/QuestionKeyword_Top20.png" class=""></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="Support-Vector-Machine-SVM"><a href="#Support-Vector-Machine-SVM" class="headerlink" title="Support Vector Machine(SVM)"></a>Support Vector Machine(SVM)</h2><ul>
+<li>모델 학습 결과</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Skill Score</th>
+<th style="text-align:center">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accuracy</td>
+<td style="text-align:center">0.79</td>
+</tr>
+<tr>
+<td style="text-align:center">Precision</td>
+<td style="text-align:center">0.78</td>
+</tr>
+<tr>
+<td style="text-align:center">Recall</td>
+<td style="text-align:center">0.76</td>
+</tr>
+<tr>
+<td style="text-align:center">F1 score</td>
+<td style="text-align:center">0.77</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Confusion Matrix</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/ConfusionMatrix(SVM).png" class="">
+<p><br></p>
+<h2 id="Random-Forest-RF"><a href="#Random-Forest-RF" class="headerlink" title="Random Forest(RF)"></a>Random Forest(RF)</h2><ul>
+<li>모델 학습 결과</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Skill Score</th>
+<th style="text-align:center">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Accuracy</td>
+<td style="text-align:center">0.85</td>
+</tr>
+<tr>
+<td style="text-align:center">Precision</td>
+<td style="text-align:center">0.87</td>
+</tr>
+<tr>
+<td style="text-align:center">Recall</td>
+<td style="text-align:center">0.78</td>
+</tr>
+<tr>
+<td style="text-align:center">F1 score</td>
+<td style="text-align:center">0.82</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Confusion Matrix</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/ConfusionMatrix(RF).png" class="">
+<h2 id="모델-성능-비교"><a href="#모델-성능-비교" class="headerlink" title="모델 성능 비교"></a>모델 성능 비교</h2><ul>
+<li>위 세 가지 모델의 Skill Score를 비교<ul>
+<li>3개의 선정 모델 중 RF(Random Forest)모델이 가장 높은 성능으로 나타남</li>
+<li>Model Performance를 Accuracy로 봤을 경우는 Random Forest(RF)가 가장 높게 보여주나, 시간비용을 고려한다면 Logistic Regrssion(LR)를 고려하는 것도 좋은 선택지라 생각됨</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/20/Project-KeywordAnalysis/Performance_Comparision_table.png" class="">
+<img src="/2024/02/20/Project-KeywordAnalysis/Performance_Comparision.png" class="">
+<p><br></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><h2 id="시간에-따른-유입-활동량"><a href="#시간에-따른-유입-활동량" class="headerlink" title="시간에 따른 유입/활동량"></a>시간에 따른 유입/활동량</h2><ul>
+<li>오픈채팅방에서 평균적으로 <strong>월요일</strong>에 유입/이탈이 활발한 것을 확인하였으며, 주말(토, 일)요일의 경우 유입/이탈 인원이 확연히 감소함</li>
+<li>요일별 전체 활동량을 보았을 때 <strong>주중(월, 화, 수, 목, 금)</strong>의 경우 활동이 활발하게 일어났으며, <strong>주말(토, 일)</strong>의 경우 활동량이 미비함<ul>
+<li>전체적으로 주중에 공통적으로 활발하게 활동하는 것으로 나타났으나, 특정 요일에 활발하다는 결론은 내지 못함</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="채팅-참여"><a href="#채팅-참여" class="headerlink" title="채팅 참여"></a>채팅 참여</h2><ul>
+<li><p>활동시간(09시 ~ 18시) 내 커뮤니케이션이 활발하게 일어나며, 특히, 15 ~ 17시 가장 높은 분포를 보임</p>
+<ul>
+<li>채팅 참여의 경우 참여자는 317명(65%), 미참여자의 경우 167명(35%)으로 나타남</li>
+<li>채팅 참여의 경우 <strong>주중</strong>에서도 <strong>화요일, 수요일</strong>에 특히 <strong>활동이 많은 것</strong>을 확인</li>
+</ul>
+</li>
+<li><p>채팅 참여자의 직군을 확인하였을 때, 대학생, 데이터분석가, 마케터 직군 순으로 많은 참여자가 분포</p>
+<ul>
+<li>경력별로 확인해보았을 때, 경력이 높아질수록 대화자의 수가 적어졌으며, 전체 대화의 33%가 0년차(신입)에서 이뤄지며, 인원대비 대화 참여율은 10년차가 가장 높게 나타남</li>
+</ul>
+</li>
+<li><p>이탈자 중 채팅 참여 여부를 보았을 때 이탈자 중 채팅 참여비율은 <strong>전체 127명 중 14명(11%)</strong>로 확인하였으며, 가장 많이 채팅한 이탈자의 경우 7건으로 나타남</p>
+</li>
+<li>채팅 키워드로 <code>‘데이터’</code>, <code>‘이벤트’</code>, <code>‘프로젝트‘</code>, <code>’페이지‘</code> 단어의 경우 전체 채팅과 질문자의 채팅에서 두드러지게 나타남</li>
+<li>답변 수를 <strong>시간대별로 비교</strong>하였을 때, 10:00, 15:00, 09:00 순으로 가장 많은 답변을 보임</li>
+</ul>
+<p><br></p>
+<h2 id="질문-답변-구분"><a href="#질문-답변-구분" class="headerlink" title="질문/답변 구분"></a>질문/답변 구분</h2><ul>
+<li>질문/답변을 구분하기 위해 적용시킨 ML Model 3가지를 비교하였을 때, 3개의 선정 모델 중 RF(Random Forest)모델이 가장 높은 성능으로 나타남</li>
+<li>질문/답변을 구분하는 키워드를 보았을 때, <code>혹시, 질문, 관련, 경험, 경우, 해결</code> 등 <u><strong>직무와 관련된 분야에 대한 해결 경험 등을 질문</strong></u>하는 것으로 보임. <code>답변, 아하, 한번, 말씀, 감사, 생각</code> 등 <u><strong>질문이 아닌 키워드에서는 주로 질문에 대해 답변하는 키워드</strong></u>로 보임</li>
+<li>Model Performance를 <u><strong>Accuracy로 봤을 경우는 Random Forest(RF)가 가장 높게</strong></u> 보여주나, <u><strong>시간비용을 고려한다면 Logistic Regrssion(LR)를 고려</strong></u>하는 것도 좋은 선택지라 생각됨</li>
+</ul>
+<blockquote>
+<p><strong>참고</strong></p>
+<ul>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/20/SBS-KeywordAnalysis-EDA/">(Step) 키워드, 시간대별 응답률 분석 - EDA</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/20/SBS-KeywordAnalysis-MakingBoW/">(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/20/SBS-KeywordAnalysis-Application/">(Step) 키워드, 시간대별 응답률 분석 - Application</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/20/Project-KeywordAnalysis/">https://gyoungmin-lim.github.io/2024/02/20/Project-KeywordAnalysis/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Project/">Project</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/20/SBS-KeywordAnalysis-EDA/" title="(Step) 키워드, 시간대별 응답률 분석 - EDA"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Step) 키워드, 시간대별 응답률 분석 - EDA</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/19/Python-MissingData/" title="(Python) Missing Data(NA, NaN) 결측 값 처리"><img class="cover" src="/../cover_img/Python_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Python) Missing Data(NA, NaN) 결측 값 처리</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/14/Project-HYCOM/" title="HYCOM 수온, 염도 데이터 분석 및 비교"><img class="cover" src="/../cover_img/Project_HYCOM_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">HYCOM 수온, 염도 데이터 분석 및 비교</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">82</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">21</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B0%9C%EC%9A%94"><span class="toc-number">1.</span> <span class="toc-text">개요</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Background"><span class="toc-number">1.1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dataset"><span class="toc-number">1.2.</span> <span class="toc-text">Dataset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PIPELINE"><span class="toc-number">1.3.</span> <span class="toc-text">PIPELINE</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preprocessing"><span class="toc-number"></span> <span class="toc-text">Preprocessing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Raw-Data"><span class="toc-number">1.</span> <span class="toc-text">Raw Data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%ED%98%95%ED%99%94"><span class="toc-number">2.</span> <span class="toc-text">데이터 정형화</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keyword-%EB%B6%84%EC%84%9D%EC%9D%84-%EC%9C%84%ED%95%9C-Hand-Labeling"><span class="toc-number">3.</span> <span class="toc-text">Keyword 분석을 위한 Hand-Labeling</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EDA"><span class="toc-number"></span> <span class="toc-text">EDA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#In-and-Out-%EC%9D%B8%EC%9B%90-%ED%8C%8C%EC%95%85"><span class="toc-number">1.</span> <span class="toc-text">In_and_Out 인원 파악</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A0%84%EC%B2%B4-%EC%9C%A0%EC%9E%85-%EC%9D%B4%ED%83%88-%EC%9D%B8%EC%9B%90-%ED%8C%8C%EC%95%85-%EC%9D%BC"><span class="toc-number">1.1.</span> <span class="toc-text">전체 유입&#x2F;이탈 인원 파악 (일)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9B%94-%EB%8B%A8%EC%9C%84-%EC%9C%A0%EC%9E%85-%EC%9D%B4%ED%83%88-%EC%9D%B8%EC%9B%90-%ED%8C%8C%EC%95%85"><span class="toc-number">1.2.</span> <span class="toc-text">월 단위 유입&#x2F;이탈 인원 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9B%94-Month-%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%9D%BC-Day-%EB%B3%84-%EC%9C%A0%EC%9E%85-%EC%9D%B4%ED%83%88-%EC%9D%B8%EC%9B%90-%ED%8C%8C%EC%95%85"><span class="toc-number">1.3.</span> <span class="toc-text">월(Month)에 따른 일(Day)별 유입&#x2F;이탈 인원 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9A%94%EC%9D%BC%EB%B3%84-%EC%9C%A0%EC%9E%85-%EC%9D%B4%ED%83%88-%EC%9D%B8%EC%9B%90-%ED%8C%8C%EC%95%85"><span class="toc-number">1.4.</span> <span class="toc-text">요일별 유입&#x2F;이탈 인원 파악</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%A9%94%EC%84%B8%EC%A7%80-%EA%B0%AF%EC%88%98%EB%A5%BC-%ED%86%B5%ED%95%9C-%ED%99%9C%EB%8F%99%EB%9F%89-%ED%8C%8C%EC%95%85"><span class="toc-number">2.</span> <span class="toc-text">메세지 갯수를 통한 활동량 파악</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9B%94%EB%B3%84-%EC%A0%84%EC%B2%B4-%ED%99%9C%EB%8F%99%EB%9F%89-%ED%8C%8C%EC%95%85"><span class="toc-number">2.1.</span> <span class="toc-text">월별 전체 활동량 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9A%94%EC%9D%BC%EB%B3%84-%EC%A0%84%EC%B2%B4-%ED%99%9C%EB%8F%99%EB%9F%89-%ED%8C%8C%EC%95%85"><span class="toc-number">2.2.</span> <span class="toc-text">요일별 전체 활동량 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84-%ED%99%9C%EB%8F%99%EB%9F%89"><span class="toc-number">2.3.</span> <span class="toc-text">시간대별 활동량</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%B1%84%ED%8C%85-%EC%B0%B8%EC%97%AC%EC%9E%90-%ED%8C%8C%EC%95%85"><span class="toc-number">3.</span> <span class="toc-text">채팅 참여자 파악</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%B1%84%ED%8C%85-%EC%B0%B8%EC%97%AC-%EC%97%AC%EB%B6%80-%ED%8C%90%EB%8B%A8"><span class="toc-number">3.1.</span> <span class="toc-text">채팅 참여 여부 판단</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9A%94%EC%9D%BC%EB%B3%84-%EC%B1%84%ED%8C%85-%EC%B0%B8%EC%97%AC-%EC%97%AC%EB%B6%80-%ED%8C%8C%EC%95%85"><span class="toc-number">3.2.</span> <span class="toc-text">요일별 채팅 참여 여부 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A7%81%EA%B5%B0%EB%B3%84-%EC%B0%B8%EC%97%AC%EC%9E%90-%ED%8C%8C%EC%95%85"><span class="toc-number">3.3.</span> <span class="toc-text">직군별 참여자 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%B0%B8%EC%97%AC%EC%9E%90-%EB%B3%84-%EB%8C%80%ED%99%94%EB%82%B4%EC%9A%A9-%EC%88%98-%ED%8C%8C%EC%95%85"><span class="toc-number">3.4.</span> <span class="toc-text">참여자 별 대화내용 수 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B2%BD%EB%A0%A5%EB%B3%84-%EC%B0%B8%EC%97%AC%EC%9E%90-%ED%8C%8C%EC%95%85"><span class="toc-number">3.5.</span> <span class="toc-text">경력별 참여자 파악</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9D%B4%ED%83%88%EC%9E%90-%EC%B1%84%ED%8C%85-%EC%97%AC%EB%B6%80-%ED%8C%8C%EC%95%85"><span class="toc-number">4.</span> <span class="toc-text">이탈자 채팅 여부 파악</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A7%88%EB%AC%B8-amp-%EB%8B%B5%EB%B3%80-%ED%82%A4%EC%9B%8C%EB%93%9C-%ED%8C%8C%EC%95%85"><span class="toc-number">5.</span> <span class="toc-text">질문&amp;답변 키워드 파악</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%82%A4%EC%9B%8C%EB%93%9C-%EB%B9%88%EB%8F%84-%EC%88%98"><span class="toc-number">5.1.</span> <span class="toc-text">키워드 빈도 수</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%8B%9C%EA%B0%84%EB%8C%80%EB%B3%84-%EB%8B%B5%EB%B3%80-%EC%88%98"><span class="toc-number">5.2.</span> <span class="toc-text">시간대별 답변 수</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Application"><span class="toc-number"></span> <span class="toc-text">Application</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Application-with-ML"><span class="toc-number">1.</span> <span class="toc-text">Application with ML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logistic-Regression-Model"><span class="toc-number">2.</span> <span class="toc-text">Logistic Regression Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%83%98%ED%94%8C%EB%A7%81-%EC%9E%AC%EC%A1%B0%EC%A0%95"><span class="toc-number">2.1.</span> <span class="toc-text">샘플링 재조정</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LR-Model-%EC%9E%AC%ED%95%99%EC%8A%B5"><span class="toc-number">2.2.</span> <span class="toc-text">LR Model 재학습</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A7%88%EB%AC%B8-%EB%8B%B5%EB%B3%80-%ED%82%A4%EC%9B%8C%EB%93%9C-%EB%B6%84%EC%84%9D"><span class="toc-number">3.</span> <span class="toc-text">질문&#x2F;답변 키워드 분석</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Support-Vector-Machine-SVM"><span class="toc-number">4.</span> <span class="toc-text">Support Vector Machine(SVM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Random-Forest-RF"><span class="toc-number">5.</span> <span class="toc-text">Random Forest(RF)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%AA%A8%EB%8D%B8-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90"><span class="toc-number">6.</span> <span class="toc-text">모델 성능 비교</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number"></span> <span class="toc-text">Conclusion</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%8B%9C%EA%B0%84%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%9C%A0%EC%9E%85-%ED%99%9C%EB%8F%99%EB%9F%89"><span class="toc-number">1.</span> <span class="toc-text">시간에 따른 유입&#x2F;활동량</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%B1%84%ED%8C%85-%EC%B0%B8%EC%97%AC"><span class="toc-number">2.</span> <span class="toc-text">채팅 참여</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A7%88%EB%AC%B8-%EB%8B%B5%EB%B3%80-%EA%B5%AC%EB%B6%84"><span class="toc-number">3.</span> <span class="toc-text">질문&#x2F;답변 구분</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/20/SBS-KeywordAnalysis-MakingBoW/" title="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)"><img src="/../cover_img/Project_Keyword_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)"/></a><div class="content"><a class="title" href="/2024/02/20/SBS-KeywordAnalysis-MakingBoW/" title="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)">(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)</a><time datetime="2024-02-20T08:01:31.000Z" title="Created 2024-02-20 17:01:31">2024-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/20/SBS-KeywordAnalysis-Application/" title="(Step) 키워드, 시간대별 응답률 분석 - Application"><img src="/../cover_img/Project_Keyword_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 키워드, 시간대별 응답률 분석 - Application"/></a><div class="content"><a class="title" href="/2024/02/20/SBS-KeywordAnalysis-Application/" title="(Step) 키워드, 시간대별 응답률 분석 - Application">(Step) 키워드, 시간대별 응답률 분석 - Application</a><time datetime="2024-02-20T06:40:55.000Z" title="Created 2024-02-20 15:40:55">2024-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/20/SBS-KeywordAnalysis-EDA/" title="(Step) 키워드, 시간대별 응답률 분석 - EDA"><img src="/../cover_img/Project_Keyword_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 키워드, 시간대별 응답률 분석 - EDA"/></a><div class="content"><a class="title" href="/2024/02/20/SBS-KeywordAnalysis-EDA/" title="(Step) 키워드, 시간대별 응답률 분석 - EDA">(Step) 키워드, 시간대별 응답률 분석 - EDA</a><time datetime="2024-02-20T04:05:50.000Z" title="Created 2024-02-20 13:05:50">2024-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/20/Project-KeywordAnalysis/" title="키워드, 시간대별 응답률 분석"><img src="/../cover_img/Project_Keyword_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="키워드, 시간대별 응답률 분석"/></a><div class="content"><a class="title" href="/2024/02/20/Project-KeywordAnalysis/" title="키워드, 시간대별 응답률 분석">키워드, 시간대별 응답률 분석</a><time datetime="2024-02-20T02:51:34.000Z" title="Created 2024-02-20 11:51:34">2024-02-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/19/Python-MissingData/" title="(Python) Missing Data(NA, NaN) 결측 값 처리"><img src="/../cover_img/Python_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Python) Missing Data(NA, NaN) 결측 값 처리"/></a><div class="content"><a class="title" href="/2024/02/19/Python-MissingData/" title="(Python) Missing Data(NA, NaN) 결측 값 처리">(Python) Missing Data(NA, NaN) 결측 값 처리</a><time datetime="2024-02-19T03:57:06.000Z" title="Created 2024-02-19 12:57:06">2024-02-19</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
