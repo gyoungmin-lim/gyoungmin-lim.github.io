@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>야구선수 연봉 예측 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : 야구선수 ‘최동원’의 연봉 예측하기  수행기간  : 2023. 12. 11 ~ 2023. 12. 18  수행내용  결과 연봉과 상관관계가 0.2 이상인 Feature들을 추출한 LinearRegression(cor&gt;0.2)와 RidgeRegression(cor&gt;0.2)를 보았을 때, 최동원 선수의 1983-198">
+<meta property="og:type" content="article">
+<meta property="og:title" content="야구선수 연봉 예측">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/21/EDA-BaseballSalaryPrediction/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : 야구선수 ‘최동원’의 연봉 예측하기  수행기간  : 2023. 12. 11 ~ 2023. 12. 18  수행내용  결과 연봉과 상관관계가 0.2 이상인 Feature들을 추출한 LinearRegression(cor&gt;0.2)와 RidgeRegression(cor&gt;0.2)를 보았을 때, 최동원 선수의 1983-198">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/EDA_Baseball_cover.jpg">
+<meta property="article:published_time" content="2024-02-21T05:36:08.000Z">
+<meta property="article:modified_time" content="2024-02-21T06:02:48.518Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="EDA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/EDA_Baseball_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/21/EDA-BaseballSalaryPrediction/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '야구선수 연봉 예측',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-21 15:02:48'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/EDA_Baseball_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">야구선수 연봉 예측</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-21T05:36:08.000Z" title="Created 2024-02-21 14:36:08">2024-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-21T06:02:48.518Z" title="Updated 2024-02-21 15:02:48">2024-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/EDA/">EDA</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="야구선수 연봉 예측"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>야구선수 ‘최동원’의 연봉 예측하기</strong></li>
+<li><span style="color:blue"> <strong>수행기간</strong> </span> : <strong>2023. 12. 11 ~ 2023. 12. 18</strong></li>
+<li><span style="color:violet"> <strong>수행내용</strong> </span><ul>
+<li><strong>결과</strong><ul>
+<li>연봉과 상관관계가 0.2 이상인 Feature들을 추출한 LinearRegression(cor&gt;0.2)와 RidgeRegression(cor&gt;0.2)를 보았을 때, 최동원 선수의 1983-1988년 선수기록으로 보아 각 연도 연봉은 각각 <strong>1983년 : 8.25억, 1984년 : 13.1억, 1985년 : 10.4억, 1986년 : 12.5억, 1987년 : 9.8억</strong>으로 예상된다.</li>
+<li>모델 성능이 전체적으로 좋지 않으나… <strong>r2_score &lt; 0</strong> 인 <code>DT Regression</code>을 제외하며, <code>Linear Regression</code> 모델에서 연봉 또한 음수가 나오게 되므로 제외</li>
+</ul>
+</li>
+<li><strong>문제점 및 해결방안</strong><ul>
+<li>물가상승률을 적용하였을 때, 1980년대 당시 연봉으로 변환할 수 있을 것 같음</li>
+<li>모델 성능을 올려보기 위해, scaler를 시도했으나 <strong>r2_score</strong>를 기준으로 별다른 변화가 없었다.</li>
+<li>적은 데이터 및 데이터 산포도가 넓어 발생한다고 생각한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="데이터-수집"><a href="#데이터-수집" class="headerlink" title="데이터 수집"></a>데이터 수집</h2><ul>
+<li>Module Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.by <span class="keyword">import</span> By</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> platform</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager, rc</span><br><span class="line"></span><br><span class="line">path = <span class="string">&#x27;C://Windows/Fonts/malgun.ttf&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> platform.system() == <span class="string">&#x27;Darwin&#x27;</span>:</span><br><span class="line">    rc(<span class="string">&#x27;font&#x27;</span>, family = <span class="string">&#x27;Arial Unicode MS&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Mac&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> platform.system() == <span class="string">&#x27;Windows&#x27;</span>:</span><br><span class="line">    font_name = font_manager.FontProperties(fname = path).get_name()</span><br><span class="line">    rc(<span class="string">&#x27;font&#x27;</span>, family = font_name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Windows&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Unknown System.. Sry&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="연봉-데이터"><a href="#연봉-데이터" class="headerlink" title="연봉 데이터"></a>연봉 데이터</h3><ul>
+<li>STATIZ<ul>
+<li>링크 : <a target="_blank" rel="noopener" href="http://www.statiz.co.kr/salary.php?opt=0&amp;sopt=2020&amp;te=">http://www.statiz.co.kr/salary.php?opt=0&amp;sopt=2020&amp;te=</a></li>
+</ul>
+</li>
+<li>웹 페이지의 형태가 <strong>연도별 링크</strong>로 되어있다.</li>
+</ul>
+<h3 id="선수-경기데이터"><a href="#선수-경기데이터" class="headerlink" title="선수 경기데이터"></a>선수 경기데이터</h3><ul>
+<li><p>Korea Baseball Organization (KBO)</p>
+<ul>
+<li>링크 : <a target="_blank" rel="noopener" href="https://www.koreabaseball.com/Record/Player/PitcherBasic/Basic1.aspx?sort=ERA_RT">https://www.koreabaseball.com/Record/Player/PitcherBasic/Basic1.aspx?sort=ERA_RT</a></li>
+</ul>
+</li>
+<li><p>선수 경기기록을 구할 수 있다.</p>
+<ul>
+<li>연도별 선수 경기기록 데이터를 가져오기</li>
+</ul>
+</li>
+<li><p><code>column</code>명 확인</p>
+<ul>
+<li>1985~1988년과 2015~2020년 선수기록 <strong>column명이 다른 것</strong>을 확인</li>
+<li><strong>추후 데이터 병합 후 전처리 시</strong> 참고</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>데이터 저장</strong></p>
+<ul>
+<li>연봉 데이터와 경기기록 데이터를 저장</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="데이터-전처리"><a href="#데이터-전처리" class="headerlink" title="데이터 전처리"></a>데이터 전처리</h2><h3 id="데이터-병합"><a href="#데이터-병합" class="headerlink" title="데이터 병합"></a>데이터 병합</h3><ul>
+<li>1983년 ~ 1988년 데이터와 2015년~2020년 데이터의 칼럼이 다르므로 최신 데이터의 칼럼을 기준으로 데이터 통합</li>
+<li><p>데이터 병합을 위해 column명 변경</p>
+<ul>
+<li>연봉데이터의 column명을 선수명으로 변경</li>
+</ul>
+</li>
+<li><p><u><strong>선수기록 데이터를 기준</strong></u>으로 데이터 병합</p>
+<ul>
+<li>연도, 선수명 column을 기준으로 데이터 병합</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="column-제거"><a href="#column-제거" class="headerlink" title="column 제거"></a>column 제거</h3><ul>
+<li><p>1983년~1988년 데이터와 2015년~2020년 데이터의 컬럼 구성이 다름을 확인</p>
+<ul>
+<li>구 데이터(1983년~1988년)<ul>
+<li>순위 선수명 팀명 ERA G CG SHO W L SV HLD WPCT TBF IP H HR BB HBP SO R ER</li>
+</ul>
+</li>
+<li>최신 데이터(2015년~2020년)<ul>
+<li>순위 선수명 팀명 ERA G W L SV HLD WPCT IP H HR BB HBP SO R ER WHIP</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>최신 데이터에서 <strong>CG, SHO 기록</strong>이 없음</p>
+<ul>
+<li>최신 데이터인 2015년~2020년 데이터의 컬럼 구성</li>
+<li>데이터 중 <code>IP</code> 컬럼의 경우 <strong>숫자 + 분수의 문자형</strong>(<code>str</code>)로 되어 있어, 이를 변환</li>
+<li>IP 컬럼  <code>str</code> ▶︎<code>float</code>형 변환</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>시각화(Visualization)에 앞서, 과거 데이터(1985~1988)의 경우 <code>NaN</code>값이 많아 모델의 성능에 악영향을 끼칠 것으로 판단하여 최신 데이터(2015~2020)를 사용하기로 함</strong></p>
+</blockquote>
+<ul>
+<li>각 element의 상관관계(correlation)을 히트맵으로 표현<ul>
+<li>선수의 status를 나타내는 요소로서 아래와 같이 지정<ul>
+<li>‘연도’, ‘연봉(만원)’, ‘WAR’, ‘순위’, ‘ERA’, ‘G’, ‘W’, ‘L’, ‘SV’, ‘HLD’, ‘WPCT’, ‘H’, ‘HR’, ‘BB’, ‘HBP’, ‘SO’, ‘R’, ‘ER’, ‘WHIP’, ‘Processed_IP’</li>
+</ul>
+</li>
+<li>SO, Processed_IP, HBP, W, WAR 순으로 연봉과 높은 상관관계를 보임</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_0.png" class="">
+<ul>
+<li>예측모델을 돌리기 앞서, column 확인<ul>
+<li>최동원 선수의 데이터를 확인 결과, WAR, WHIP의 정보가 없음(<code>NaN</code>)</li>
+<li>해당 column을 <strong>미활용</strong>하도록 함</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="머신러닝-모델을-통한-연봉-예측"><a href="#머신러닝-모델을-통한-연봉-예측" class="headerlink" title="머신러닝 모델을 통한 연봉 예측"></a>머신러닝 모델을 통한 연봉 예측</h2><ul>
+<li>최동원 선수<ul>
+<li><code>main</code> dataframe에서 최동원 선수의 선수정보를 변수에 저장</li>
+<li><code>WAR</code>, <code>WHIP</code> column 및 연봉의 경우 <code>NaN</code>값으로 채워져 있어 <strong>column 삭제</strong> (불필요하다 판단)</li>
+<li>1983~1987년 총 5년의 데이터가 존재함</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Model별 소개 전 공통사항</strong></p>
+<ul>
+<li>Train : Test 비율은 8 : 2로 설정</li>
+<li><code>random_state = 19</code>로 고정</li>
+</ul>
+</blockquote>
+<h3 id="선형-회귀모델-Linear-Regression"><a href="#선형-회귀모델-Linear-Regression" class="headerlink" title="선형 회귀모델(Linear Regression)"></a>선형 회귀모델(Linear Regression)</h3><ul>
+<li>모델 학습 및 학습된 모델을 바탕으로, 연봉 예측</li>
+<li><p>Linear Regression Model을 활용한 최동원 선수 연봉 예측</p>
+<ul>
+<li>예측 결과 내 <u><strong>음수 발생</strong></u><ul>
+<li>결과 :  <code>-229141.15357301, -147885.0751165 , -331129.00287688, 86231.44294151,  -20811.43998642</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>모델의 성능을 확인하기 위해 $\mathcal{R}^2$-score 및 RMSE(Root Mean Square Error)를 계산</p>
+<ul>
+<li>$\mathcal{R}^2$-score : <code>0.16749094702107603</code></li>
+<li>RMSE(Root Mean Square Error) : <code>(32714.199888100997, 56960.51781353058)</code></li>
+</ul>
+</li>
+<li><p>실제값과 예측값 사이 관계를 Figure Out</p>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_1.png" class="">
+<p><br></p>
+<h3 id="선형-회귀모델-Linear-Regression-상관관계-0-2-이상"><a href="#선형-회귀모델-Linear-Regression-상관관계-0-2-이상" class="headerlink" title="선형 회귀모델(Linear Regression) : 상관관계 0.2 이상"></a>선형 회귀모델(Linear Regression) : 상관관계 0.2 이상</h3><ul>
+<li><code>연봉</code> column과 <strong>상관관계가 0.2 이상</strong>인 elements 선택 후 선택한 column들의 heatmap을 시각화하여 관계를 간소화</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_2.png" class="">
+<ul>
+<li><p>회귀분석 모델 학습 및 학습된 모델을 바탕으로 연봉 예측</p>
+<ul>
+<li>Feature Selection을 통한 최동원 선수 정보 갱신</li>
+</ul>
+</li>
+<li><p>Linear Regression Model을 활용한 최동원 선수 연봉 예측</p>
+<ul>
+<li>예측 결과 (단위 : 만원) : <code>82458.51776258, 130796.22833405, 104398.50155624, 124607.90794157, 97516.37406594</code></li>
+</ul>
+</li>
+<li><p>모델의 성능을 확인하기 위해 $\mathcal{R}^2$-score 및 RMSE(Root Mean Square Error)를 계산</p>
+<ul>
+<li>$\mathcal{R}^2$-score : <code>0.1592636146588381</code></li>
+<li>RMSE(Root Mean Square Error) : <code>(35970.853037626155, 57241.284113068345)</code></li>
+</ul>
+</li>
+<li><p>실제값과 예측값 사이 관계를 Figure Out</p>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_3.png" class="">
+<p><br></p>
+<h3 id="DecisionTree-Regression"><a href="#DecisionTree-Regression" class="headerlink" title="DecisionTree Regression"></a>DecisionTree Regression</h3><ul>
+<li><p>조건은 <strong>위와 동일</strong>하며, ML Model을 DecisionTree Regression으로 설정</p>
+<ul>
+<li>조건 : <code>연봉</code> column과 상관관계(Correlation)이 0.2 이상인 feature들을 사용</li>
+</ul>
+</li>
+<li><p>모델의 성능을 확인하기 위해 $\mathcal{R}^2$-score 및 RMSE(Root Mean Square Error)를 계산</p>
+<ul>
+<li>$\mathcal{R}^2$-score : <code>-0.37280737134095476</code></li>
+<li>RMSE(Root Mean Square Error) : <code>(0.0, 73144.93318063802)</code></li>
+</ul>
+</li>
+<li><p>실제값과 예측값 사이 관계를 Figure Out</p>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_4.png" class="">
+<ul>
+<li>DecisionTree Regression Model을 활용한 최동원 선수 연봉 예측<ul>
+<li>예측 결과 (단위 : 만원) : <code>35000., 120000., 120000., 170000., 120000.</code></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="Ridge-Regression"><a href="#Ridge-Regression" class="headerlink" title="Ridge Regression"></a>Ridge Regression</h3><ul>
+<li><p>조건은 <strong>위와 동일</strong>하며, ML Model을 Ridge Regression으로 설정</p>
+<ul>
+<li>조건 : <code>연봉</code> column과 상관관계(Correlation)이 0.2 이상인 feature들을 사용</li>
+</ul>
+</li>
+<li><p>모델의 성능을 확인하기 위해 $\mathcal{R}^2$-score 및 RMSE(Root Mean Square Error)를 계산</p>
+<ul>
+<li>$\mathcal{R}^2$-score : <code>0.15923077200153235</code></li>
+<li>RMSE(Root Mean Square Error) : <code>(35970.854062307226, 57242.402143375635)</code></li>
+</ul>
+</li>
+<li><p>실제값과 예측값 사이 관계를 Figure Out</p>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_5.png" class="">
+<ul>
+<li>Ridge Regression Model을 활용한 최동원 선수 연봉 예측<ul>
+<li>예측 결과 (단위 : 만원) <code>82468.40029239, 130790.53241845, 104388.73203039, 124607.66312679, 97518.15339589</code></li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="모델-성능-비교"><a href="#모델-성능-비교" class="headerlink" title="모델 성능 비교"></a>모델 성능 비교</h2><ul>
+<li><p>이번 프로젝트를 진행하면서 3개의 모델을 사용</p>
+<ul>
+<li>3개의 모델에서 나타나는 성능을 비교</li>
+</ul>
+</li>
+<li><p>모델의 성능을 비교할 수 있는 데이터프레임 생성</p>
+<ul>
+<li>RMSE(Train/Test), R2 Score를 모델별 비교</li>
+</ul>
+</li>
+<li><p>column별로 모델의 성능을 보기 위해 FigureOut</p>
+</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_6.png" class="">
+<ul>
+<li>모델별 최동원 선수 연봉  예측결과</li>
+</ul>
+<img src="/2024/02/21/EDA-BaseballSalaryPrediction/EDA_BaseballSalaryPrediction_7.png" class="">
+<p><br></p>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><h3 id="예측결과"><a href="#예측결과" class="headerlink" title="예측결과"></a>예측결과</h3><ul>
+<li>모델 성능이 전체적으로 좋지 않으나….. r2_score &lt; 인 DT Regression을 제외하며, LinearRegression 모델에서 연봉 또한 음수가 나오게 되므로 제외</li>
+<li>연봉과 상관관계가 0.2 이상인 Feature들을 추출한 LinearRegression(cor&gt;0.2)와 RidgeRegression(cor&gt;0.2)를 보았을 때, 최동원 선수의 1983-1988년 선수기록으로 보아 각 연도 연봉은 각각 <strong>1983년 : 8.25억, 1984년 : 13.1억, 1985년 : 10.4억, 1986년 : 12.5억, 1987년 : 9.8억</strong>으로 예상된다.</li>
+</ul>
+<p><br></p>
+<h3 id="문제점-및-해결방안"><a href="#문제점-및-해결방안" class="headerlink" title="문제점 및 해결방안"></a>문제점 및 해결방안</h3><ul>
+<li>물가상승률을 적용하였을 때, 1980년대 당시 연봉으로 변환할 수 있을 것 같음</li>
+<li>모델 성능을 올려보기 위해, scaler를 시도했으나 r2_score를 기준으로 별다른 변화가 없었다.</li>
+<li>적은 데이터 및 데이터 산포도가 넓어 발생한다고 생각한다.</li>
+</ul>
+<p><br></p>
+<h2 id="여담"><a href="#여담" class="headerlink" title="여담"></a>여담</h2><h3 id="Min-Max-Scaler-사용"><a href="#Min-Max-Scaler-사용" class="headerlink" title="Min-Max Scaler 사용"></a>Min-Max Scaler 사용</h3><ul>
+<li>Min-Max Scailing Fitting &amp; transform 진행</li>
+<li><p>Scaling 된 결과를 통해 LinearRegression을 적용</p>
+<ul>
+<li>모델의 성능을 확인하기 위해 $\mathcal{R}^2$-score 및 RMSE(Root Mean Square Error)를 계산<ul>
+<li>$\mathcal{R}^2$-score : <code>0.15926361465883832</code></li>
+<li>RMSE(Root Mean Square Error)<ul>
+<li>rmse_tr : <code>0.17128977636964834</code></li>
+<li>rmse_test : <code>0.2725775433955635</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>최동원 선수 연봉 예측</p>
+<ul>
+<li>예측 결과 : <code>31.82613848, 47.64136078, 35.83938509, 45.06252814, 35.55708864</code></li>
+</ul>
+</li>
+<li><p>결론 : $\mathcal{R}^2$-score가 <strong>Scaling 전</strong>과 비슷하게 나와서.. Scaling은 의미가 없는 것 같다.</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>참고</strong></p>
+<ul>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-BaseballSalaryPrediction/">(Step) 야구선수 연봉 예측</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/ETC-BaseballWord/">야구용어 정리</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/21/EDA-BaseballSalaryPrediction/">https://gyoungmin-lim.github.io/2024/02/21/EDA-BaseballSalaryPrediction/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/EDA/">EDA</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/21/Project-DL-Zerobase01/" title="독거노인 위급 행동 구별"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">독거노인 위급 행동 구별</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/21/ETC-BaseballWord/" title="(Baseball) 야구용어 정리"><img class="cover" src="/../cover_img/EDA_Baseball_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Baseball) 야구용어 정리</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/EDA-OilPriceAnalysis/" title="주유소 데이터 분석"><img class="cover" src="/../cover_img/EDA_OilPriceAnalysis_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">주유소 데이터 분석</div></div></a></div><div><a href="/2024/02/17/EDA-StarbucksEdiya/" title="스타벅스, 이디야 매장 데이터 분석"><img class="cover" src="/../cover_img/EDA_StarbucksEdiya_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">스타벅스, 이디야 매장 데이터 분석</div></div></a></div><div><a href="/2024/02/18/Python-EDA-001/" title="(EDA) Analysis Seoul CCTV"><img class="cover" src="/../cover_img/Python_EDA_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-18</div><div class="title">(EDA) Analysis Seoul CCTV</div></div></a></div><div><a href="/2024/02/18/Python-EDA-002/" title="(EDA) Analysis Crime in Seoul"><img class="cover" src="/../cover_img/Python_EDA_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-18</div><div class="title">(EDA) Analysis Crime in Seoul</div></div></a></div><div><a href="/2024/02/18/Python-EDA-003/" title="(EDA) Chicago restaurant data analysis"><img class="cover" src="/../cover_img/Python_EDA_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-18</div><div class="title">(EDA) Chicago restaurant data analysis</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%88%98%EC%A7%91"><span class="toc-number">1.</span> <span class="toc-text">데이터 수집</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%97%B0%EB%B4%89-%EB%8D%B0%EC%9D%B4%ED%84%B0"><span class="toc-number">1.1.</span> <span class="toc-text">연봉 데이터</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%84%A0%EC%88%98-%EA%B2%BD%EA%B8%B0%EB%8D%B0%EC%9D%B4%ED%84%B0"><span class="toc-number">1.2.</span> <span class="toc-text">선수 경기데이터</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%84%EC%B2%98%EB%A6%AC"><span class="toc-number">2.</span> <span class="toc-text">데이터 전처리</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%91%ED%95%A9"><span class="toc-number">2.1.</span> <span class="toc-text">데이터 병합</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#column-%EC%A0%9C%EA%B1%B0"><span class="toc-number">2.2.</span> <span class="toc-text">column 제거</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-%EB%AA%A8%EB%8D%B8%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%97%B0%EB%B4%89-%EC%98%88%EC%B8%A1"><span class="toc-number">3.</span> <span class="toc-text">머신러닝 모델을 통한 연봉 예측</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%84%A0%ED%98%95-%ED%9A%8C%EA%B7%80%EB%AA%A8%EB%8D%B8-Linear-Regression"><span class="toc-number">3.1.</span> <span class="toc-text">선형 회귀모델(Linear Regression)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%84%A0%ED%98%95-%ED%9A%8C%EA%B7%80%EB%AA%A8%EB%8D%B8-Linear-Regression-%EC%83%81%EA%B4%80%EA%B4%80%EA%B3%84-0-2-%EC%9D%B4%EC%83%81"><span class="toc-number">3.2.</span> <span class="toc-text">선형 회귀모델(Linear Regression) : 상관관계 0.2 이상</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DecisionTree-Regression"><span class="toc-number">3.3.</span> <span class="toc-text">DecisionTree Regression</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ridge-Regression"><span class="toc-number">3.4.</span> <span class="toc-text">Ridge Regression</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%AA%A8%EB%8D%B8-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90"><span class="toc-number">4.</span> <span class="toc-text">모델 성능 비교</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B2%B0%EB%A1%A0"><span class="toc-number">5.</span> <span class="toc-text">결론</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%98%88%EC%B8%A1%EA%B2%B0%EA%B3%BC"><span class="toc-number">5.1.</span> <span class="toc-text">예측결과</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%AC%B8%EC%A0%9C%EC%A0%90-%EB%B0%8F-%ED%95%B4%EA%B2%B0%EB%B0%A9%EC%95%88"><span class="toc-number">5.2.</span> <span class="toc-text">문제점 및 해결방안</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%97%AC%EB%8B%B4"><span class="toc-number">6.</span> <span class="toc-text">여담</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Min-Max-Scaler-%EC%82%AC%EC%9A%A9"><span class="toc-number">6.1.</span> <span class="toc-text">Min-Max Scaler 사용</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SBS_SST_DataConfiguration"/></a><div class="content"><a class="title" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration">SBS_SST_DataConfiguration</a><time datetime="2024-02-22T09:36:17.000Z" title="Created 2024-02-22 18:36:17">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온 예측"/></a><div class="content"><a class="title" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측">위성자료를 활용한 표층수온 예측</a><time datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"/></a><div class="content"><a class="title" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</a><time datetime="2024-02-22T09:09:46.000Z" title="Created 2024-02-22 18:09:46">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - Application"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application">(Step) 독거노인 위급 행동 구별 - Application</a><time datetime="2024-02-21T11:41:17.000Z" title="Created 2024-02-21 20:41:17">2024-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - EDA"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA">(Step) 독거노인 위급 행동 구별 - EDA</a><time datetime="2024-02-21T07:52:17.000Z" title="Created 2024-02-21 16:52:17">2024-02-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

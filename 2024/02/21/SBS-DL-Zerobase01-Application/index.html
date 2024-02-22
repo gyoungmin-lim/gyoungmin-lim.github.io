@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Step) 독거노인 위급 행동 구별 - Application | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="참고  (Project) 독거노인 위급 행동 구별 (Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular (Step) 독거노인 위급 행동 구별 - EDA     전체 Dataset에 Model 적용에 앞서, One DataSet을 우선 적용  Case : One Dataset on In">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Step) 독거노인 위급 행동 구별 - Application">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-Application/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="참고  (Project) 독거노인 위급 행동 구별 (Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular (Step) 독거노인 위급 행동 구별 - EDA     전체 Dataset에 Model 적용에 앞서, One DataSet을 우선 적용  Case : One Dataset on In">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase01_cover.jpg">
+<meta property="article:published_time" content="2024-02-21T11:41:17.000Z">
+<meta property="article:modified_time" content="2024-02-22T09:06:33.550Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Step">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase01_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-Application/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Step) 독거노인 위급 행동 구별 - Application',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-22 18:06:33'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_DL_Zerobase01_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Step) 독거노인 위급 행동 구별 - Application</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-21T11:41:17.000Z" title="Created 2024-02-21 20:41:17">2024-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-22T09:06:33.550Z" title="Updated 2024-02-22 18:06:33">2024-02-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Step-By-Step/">Step By Step</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Step) 독거노인 위급 행동 구별 - Application"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>참고</strong></p>
+<ul>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/Project-DL-Zerobase01/">(Project) 독거노인 위급 행동 구별</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-DataConfiguration/">(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-EDA/">(Step) 독거노인 위급 행동 구별 - EDA</a></li>
+</ul>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p><strong>전체 Dataset에 Model 적용에 앞서, One DataSet을 우선 적용</strong></p>
+</blockquote>
+<h2 id="Case-One-Dataset-on-Index-17"><a href="#Case-One-Dataset-on-Index-17" class="headerlink" title="Case : One Dataset on Index 17"></a>Case : One Dataset on Index 17</h2><ul>
+<li>모델 구동을 위한 Module Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.models <span class="keyword">import</span> Sequential</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras.layers <span class="keyword">import</span> LSTM, Dense</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure>
+<ul>
+<li>전체 데이터셋 Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터프레임 로드</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;Total_merged_data.csv&#x27;</span>)</span><br><span class="line">df.drop(<span class="string">&#x27;Unnamed: 0&#x27;</span>, axis = <span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line">df[<span class="string">&#x27;Frame&#x27;</span>] = df[<span class="string">&#x27;Frame&#x27;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Target Point 지정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># targt point</span></span><br><span class="line"><span class="comment"># | 0 | nose</span></span><br><span class="line"><span class="comment"># | 15 | left wrist</span></span><br><span class="line"><span class="comment"># | 16 | right wrist</span></span><br><span class="line"><span class="comment"># | 31 | left foot index</span></span><br><span class="line"><span class="comment"># | 32 | right foot index</span></span><br><span class="line"></span><br><span class="line">target_pt = [<span class="number">0</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">31</span>, <span class="number">32</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Index 17 (머리 드라이기로 말리기) Group 1번 Camera 001</strong>를 <u><strong>One Dataset</strong></u>으로 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### TEST 01. Index : 17 Group : 001 Camera : 001</span></span><br><span class="line"><span class="comment">### Landmark : 0 (Nose)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Index 17 Group 1 Camera 1 데이터 탐색</span></span><br><span class="line">test_df = df[(df[<span class="string">&#x27;index&#x27;</span>] == <span class="string">&#x27;A017&#x27;</span>) &amp; (df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P001&#x27;</span>) &amp; (df[<span class="string">&#x27;group&#x27;</span>] == <span class="string">&#x27;G001&#x27;</span>) &amp; (df[<span class="string">&#x27;camera&#x27;</span>] == <span class="string">&#x27;C001&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target Point 데이터 선택</span></span><br><span class="line">test_df = test_df[test_df[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br><span class="line">test_df = test_df[[<span class="string">&#x27;Frame&#x27;</span>, <span class="string">&#x27;Landmark_ID&#x27;</span>, <span class="string">&#x27;lm.x&#x27;</span>, <span class="string">&#x27;lm.y&#x27;</span>, <span class="string">&#x27;lm.z&#x27;</span>]]</span><br><span class="line">test_df.set_index(<span class="string">&#x27;Frame&#x27;</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">test_df.head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-Application/Project_DL_Zerobase01_24.png" class="">
+<ul>
+<li>Min-Max Scaler 적용하여 Train/Test set 분할<ul>
+<li>Train : Test = 8 : 2</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 전처리</span></span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">scaled_data = scaler.fit_transform(test_df)  <span class="comment"># 시계열 열 스케일링</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분할</span></span><br><span class="line">train_size = <span class="built_in">int</span>(<span class="built_in">len</span>(scaled_data) * <span class="number">0.8</span>)</span><br><span class="line">train_data, test_data = scaled_data[:train_size], scaled_data[train_size:]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence 생성</li>
+</ul>
+<blockquote>
+<p><strong>Set Index</strong></p>
+<ul>
+<li>Index로 ‘<u><strong>설정했을 때</strong></u>‘와 ‘<u><strong>설정하지 않았을 때</strong></u>‘의 Sequence 생성 방법이 다름<ul>
+<li>현 프로젝트를 진행하면서 세팅하는 Index는 <code>Frame</code>으로, <code>시간(time)</code>을 나타냄</li>
+</ul>
+</li>
+<li>이유는 아직 찾지 못했으나, 만일의 경우를 대비하여 두 개의 function으로 만들어 놓음</li>
+<li>두 <code>Case</code> 중 <strong>택 1</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>Case 1</strong>: Set Index 설정했을 때</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set Index 설정했을 때</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_sequences</span>(<span class="params">data, seq_length</span>):</span><br><span class="line">    X, y = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data) - seq_length):</span><br><span class="line">        X.append(data[i:i+seq_length, <span class="number">1</span>:])  <span class="comment"># NumPy 배열의 슬라이싱을 통해 lm.x, lm.y, lm.z 열만을 추출하여 시퀀스 생성</span></span><br><span class="line">        y.append(data[i+seq_length, <span class="number">1</span>:])  <span class="comment"># 다음 시간 단계의 값만을 타겟으로 설정</span></span><br><span class="line">    <span class="keyword">return</span> np.array(X), np.array(y)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Case 2</strong>: Set Index 설정 안했을 떄</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set Index 설정 안했을 때</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_sequences</span>(<span class="params">data, seq_length</span>):</span><br><span class="line">    X, y = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data) - seq_length):</span><br><span class="line">        X.append(data.iloc[i:i+seq_length, <span class="number">1</span>:].values)  <span class="comment"># 데이터프레임에서 lm.x, lm.y, lm.z 열만을 추출하여 넘파이 배열로 변환하여 시퀀스 생성</span></span><br><span class="line">        y.append(data.iloc[i+seq_length, <span class="number">1</span>:].values)  <span class="comment"># 다음 시간 단계의 값만을 타겟으로 설정</span></span><br><span class="line">    <span class="keyword">return</span> np.array(X), np.array(y)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence 길이 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sequence_length = <span class="number">5</span>  <span class="comment"># 시퀀스 길이 설정</span></span><br><span class="line">X_train, y_train = create_sequences(train_data, sequence_length)</span><br><span class="line">X_test, y_test = create_sequences(test_data, sequence_length)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LSTM 모델 적용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LSTM 모델 구축</span></span><br><span class="line">model = Sequential([</span><br><span class="line">    LSTM(<span class="number">50</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>, input_shape=(X_train.shape[<span class="number">1</span>], X_train.shape[<span class="number">2</span>])),</span><br><span class="line">    Dense(<span class="number">3</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)  <span class="comment"># 출력 노드의 개수는 3 (다음 시간 단계의 값을 예측)</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=<span class="string">&#x27;adam&#x27;</span>, loss=<span class="string">&#x27;mse&#x27;</span>)  <span class="comment"># 모델 컴파일</span></span><br><span class="line">model.fit(X_train, y_train, epochs=<span class="number">300</span>, batch_size=<span class="number">32</span>)  <span class="comment"># 모델 학습</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>모델 평가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 모델 평가</span></span><br><span class="line">train_loss = model.evaluate(X_train, y_train, verbose=<span class="number">0</span>)</span><br><span class="line">test_loss = model.evaluate(X_test, y_test, verbose=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Train Loss: <span class="subst">&#123;train_loss:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Test Loss: <span class="subst">&#123;test_loss:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델을 사용하여 예측</span></span><br><span class="line">predicted = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예측 결과 시각화</span></span><br><span class="line">f, ax = plt.subplots(<span class="number">3</span>, <span class="number">1</span>, figsize=(<span class="number">15</span>, <span class="number">4</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(y_test.shape[<span class="number">1</span>]):</span><br><span class="line">    sns.lineplot(x = <span class="built_in">range</span>(<span class="built_in">len</span>(y_test)), y=y_test[:, i], label=<span class="string">&#x27;True&#x27;</span>, ax=ax[i])</span><br><span class="line">    sns.lineplot(x = <span class="built_in">range</span>(<span class="built_in">len</span>(predicted)), y=predicted[:, i], label=<span class="string">&#x27;Predicted&#x27;</span>, ax=ax[i])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-Application/Project_DL_Zerobase01_25.png" class="">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Train Loss</th>
+<th style="text-align:center">Test Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.0068</td>
+<td style="text-align:center">0.0066</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Train/Test, Predicted Data shape 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;X_train shape:&quot;</span>, X_train.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;y_train shape:&quot;</span>, y_train.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;X_test shape:&quot;</span>, X_test.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;y_test shape:&quot;</span>, y_test.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;predicted shape:&quot;</span>, predicted.shape)</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Variable</th>
+<th style="text-align:center">Shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>X_train</code></td>
+<td style="text-align:center">(155, 5, 3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>y_train</code></td>
+<td style="text-align:center">(155, 3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>X_test</code></td>
+<td style="text-align:center">(35, 5, 3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>y_test</code></td>
+<td style="text-align:center">(35, 3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>predicted</code></td>
+<td style="text-align:center">(35, 3)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>RMSE 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score, mean_squared_error</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예측 결과 계산</span></span><br><span class="line">predicted = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># RMSE 계산</span></span><br><span class="line">rmse = np.sqrt(mean_squared_error(y_test, predicted))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;RMSE: <span class="subst">&#123;rmse:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.0810</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="Case-One-Dataset-on-Index-53"><a href="#Case-One-Dataset-on-Index-53" class="headerlink" title="Case : One Dataset on Index 53"></a>Case : One Dataset on Index 53</h2><ul>
+<li>진행방향은 위와 동일하며, Index 53 (쓰러지기)에 대한 One Dataset을 적용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터프레임 로드</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;Total_merged_data.csv&#x27;</span>)</span><br><span class="line">df.drop(<span class="string">&#x27;Unnamed: 0&#x27;</span>, axis = <span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line">df[<span class="string">&#x27;Frame&#x27;</span>] = df[<span class="string">&#x27;Frame&#x27;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### TEST 03. Index : 53 Group : 001 Camera : 001</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Index 53 Group 1 Camera 1 데이터 탐색</span></span><br><span class="line">test_df = df[(df[<span class="string">&#x27;index&#x27;</span>] == <span class="string">&#x27;A053&#x27;</span>) &amp; (df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P019&#x27;</span>) &amp; (df[<span class="string">&#x27;group&#x27;</span>] == <span class="string">&#x27;G001&#x27;</span>) &amp; (df[<span class="string">&#x27;camera&#x27;</span>] == <span class="string">&#x27;C001&#x27;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target Point 데이터 선택</span></span><br><span class="line">test_df = test_df[test_df[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br><span class="line">test_df = test_df[[<span class="string">&#x27;Frame&#x27;</span>, <span class="string">&#x27;Landmark_ID&#x27;</span>, <span class="string">&#x27;lm.x&#x27;</span>, <span class="string">&#x27;lm.y&#x27;</span>, <span class="string">&#x27;lm.z&#x27;</span>]]</span><br><span class="line">test_df.set_index(<span class="string">&#x27;Frame&#x27;</span>, inplace=<span class="literal">True</span>)</span><br><span class="line">test_df.head(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-Application/Project_DL_Zerobase01_26.png" class="">
+<ul>
+<li>Min-Max Scaler 적용하여 Train/Test set 분할<ul>
+<li>Train : Test = 8 : 2</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 데이터 전처리</span></span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">scaled_data = scaler.fit_transform(test_df)  <span class="comment"># 시계열 열 스케일링</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 데이터 분할</span></span><br><span class="line">train_size = <span class="built_in">int</span>(<span class="built_in">len</span>(scaled_data) * <span class="number">0.8</span>)</span><br><span class="line">train_data, test_data = scaled_data[:train_size], scaled_data[train_size:]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set Index 설정했을 때</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_sequences</span>(<span class="params">data, seq_length</span>):</span><br><span class="line">    X, y = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data) - seq_length):</span><br><span class="line">        X.append(data[i:i+seq_length, <span class="number">1</span>:])  <span class="comment"># NumPy 배열의 슬라이싱을 통해 lm.x, lm.y, lm.z 열만을 추출하여 시퀀스 생성</span></span><br><span class="line">        y.append(data[i+seq_length, <span class="number">1</span>:])  <span class="comment"># 다음 시간 단계의 값만을 타겟으로 설정</span></span><br><span class="line">    <span class="keyword">return</span> np.array(X), np.array(y)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Sequence 길이 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sequence_length = <span class="number">5</span>  <span class="comment"># 시퀀스 길이 설정</span></span><br><span class="line">X_train, y_train = create_sequences(train_data, sequence_length)</span><br><span class="line">X_test, y_test = create_sequences(test_data, sequence_length)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>LSTM 모델 구축 및 적용</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># LSTM 모델 구축</span></span><br><span class="line">model = Sequential([</span><br><span class="line">    LSTM(<span class="number">50</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>, input_shape=(X_train.shape[<span class="number">1</span>], X_train.shape[<span class="number">2</span>])),</span><br><span class="line">    Dense(<span class="number">3</span>, activation=<span class="string">&#x27;sigmoid&#x27;</span>)  <span class="comment"># 출력 노드의 개수는 3 (다음 시간 단계의 값을 예측)</span></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer=<span class="string">&#x27;adam&#x27;</span>, loss=<span class="string">&#x27;mse&#x27;</span>)  <span class="comment"># 모델 컴파일</span></span><br><span class="line">model.fit(X_train, y_train, epochs=<span class="number">300</span>, batch_size=<span class="number">32</span>)  <span class="comment"># 모델 학습</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>모델 평가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 모델 평가</span></span><br><span class="line">train_loss = model.evaluate(X_train, y_train, verbose=<span class="number">0</span>)</span><br><span class="line">test_loss = model.evaluate(X_test, y_test, verbose=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Train Loss: <span class="subst">&#123;train_loss:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Test Loss: <span class="subst">&#123;test_loss:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 모델을 사용하여 예측</span></span><br><span class="line">predicted = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예측 결과 시각화</span></span><br><span class="line">f, ax = plt.subplots(<span class="number">3</span>, <span class="number">1</span>, figsize=(<span class="number">15</span>, <span class="number">4</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(y_test.shape[<span class="number">1</span>]):</span><br><span class="line">    sns.lineplot(x = <span class="built_in">range</span>(<span class="built_in">len</span>(y_test)), y=y_test[:, i], label=<span class="string">&#x27;True&#x27;</span>, ax=ax[i])</span><br><span class="line">    sns.lineplot(x = <span class="built_in">range</span>(<span class="built_in">len</span>(predicted)), y=predicted[:, i], label=<span class="string">&#x27;Predicted&#x27;</span>, ax=ax[i])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-Application/Project_DL_Zerobase01_27.png" class="">
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Train Loss</th>
+<th style="text-align:center">Test Loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.0029</td>
+<td style="text-align:center">0.0025</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>RMSE 계산</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> r2_score, mean_squared_error</span><br><span class="line"></span><br><span class="line"><span class="comment"># 예측 결과 계산</span></span><br><span class="line">predicted = model.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># RMSE 계산</span></span><br><span class="line">rmse = np.sqrt(mean_squared_error(y_test, predicted))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;RMSE: <span class="subst">&#123;rmse:<span class="number">.4</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">RMSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0.05</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-Application/">https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-Application/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Step/">Step</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Step) 독거노인 위급 행동 구별 - EDA</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/21/SBS-DL-Zerobase01-DataConfiguration/" title="(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular</div></div></a></div><div><a href="/2024/02/21/SBS-BaseballSalaryPrediction/" title="(Step) 야구선수 연봉 예측"><img class="cover" src="/../cover_img/EDA_Baseball_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 야구선수 연봉 예측</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-Application/" title="(Step) 키워드, 시간대별 응답률 분석 - Application"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - Application</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-EDA/" title="(Step) 키워드, 시간대별 응답률 분석 - EDA"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - EDA</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-MakingBoW/" title="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)</div></div></a></div><div><a href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 독거노인 위급 행동 구별 - EDA</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Case-One-Dataset-on-Index-17"><span class="toc-number">1.</span> <span class="toc-text">Case : One Dataset on Index 17</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Case-One-Dataset-on-Index-53"><span class="toc-number">2.</span> <span class="toc-text">Case : One Dataset on Index 53</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SBS_SST_DataConfiguration"/></a><div class="content"><a class="title" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration">SBS_SST_DataConfiguration</a><time datetime="2024-02-22T09:36:17.000Z" title="Created 2024-02-22 18:36:17">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온 예측"/></a><div class="content"><a class="title" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측">위성자료를 활용한 표층수온 예측</a><time datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"/></a><div class="content"><a class="title" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</a><time datetime="2024-02-22T09:09:46.000Z" title="Created 2024-02-22 18:09:46">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - Application"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application">(Step) 독거노인 위급 행동 구별 - Application</a><time datetime="2024-02-21T11:41:17.000Z" title="Created 2024-02-21 20:41:17">2024-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - EDA"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA">(Step) 독거노인 위급 행동 구별 - EDA</a><time datetime="2024-02-21T07:52:17.000Z" title="Created 2024-02-21 16:52:17">2024-02-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

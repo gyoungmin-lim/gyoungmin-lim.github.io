@@ -1,0 +1,853 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Statistics) 통계학 기초 - 확률(Probability), 확률변수(Random Variable), 확률분포(Probability Distribution) | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="확률 (Probability) 모든경우의 수에 대한 특정 사건이 발생하는 비율 0과 1 사이의 확률에 100을 곱하여 0과 100 사이의 백분율(%)로 나타냄 할·푼·리로 나타내기도 함   표본 공간 (Sample Space) 표본 공간이란 어떤 실험에서 나올 수 있는 모든 가능한 결과들의 집합 사건 $A$가 일어날 확률을 $P(A)$라고 하고, 표본 공간">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Statistics) 통계학 기초 - 확률(Probability), 확률변수(Random Variable), 확률분포(Probability Distribution)">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/21/Math-Statistics-Basic-001/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="확률 (Probability) 모든경우의 수에 대한 특정 사건이 발생하는 비율 0과 1 사이의 확률에 100을 곱하여 0과 100 사이의 백분율(%)로 나타냄 할·푼·리로 나타내기도 함   표본 공간 (Sample Space) 표본 공간이란 어떤 실험에서 나올 수 있는 모든 가능한 결과들의 집합 사건 $A$가 일어날 확률을 $P(A)$라고 하고, 표본 공간">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Mathematics_Statistics_cover.jpg">
+<meta property="article:published_time" content="2024-02-21T02:55:57.000Z">
+<meta property="article:modified_time" content="2024-02-21T04:49:39.750Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Statistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Mathematics_Statistics_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/21/Math-Statistics-Basic-001/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Statistics) 통계학 기초 - 확률(Probability), 확률변수(Random Variable), 확률분포(Probability Distribution)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-21 13:49:39'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Mathematics_Statistics_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Statistics) 통계학 기초 - 확률(Probability), 확률변수(Random Variable), 확률분포(Probability Distribution)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-21T02:55:57.000Z" title="Created 2024-02-21 11:55:57">2024-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-21T04:49:39.750Z" title="Updated 2024-02-21 13:49:39">2024-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Mathematics/">Mathematics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Statistics) 통계학 기초 - 확률(Probability), 확률변수(Random Variable), 확률분포(Probability Distribution)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="확률-Probability"><a href="#확률-Probability" class="headerlink" title="확률 (Probability)"></a>확률 (Probability)</h1><ul>
+<li>모든경우의 수에 대한 특정 사건이 발생하는 비율</li>
+<li>0과 1 사이의 확률에 100을 곱하여 0과 100 사이의 백분율(%)로 나타냄</li>
+<li>할·푼·리로 나타내기도 함</li>
+</ul>
+<p><br></p>
+<h2 id="표본-공간-Sample-Space"><a href="#표본-공간-Sample-Space" class="headerlink" title="표본 공간 (Sample Space)"></a>표본 공간 (Sample Space)</h2><ul>
+<li>표본 공간이란 어떤 실험에서 나올 수 있는 모든 가능한 결과들의 집합</li>
+<li>사건 $A$가 일어날 확률을 $P(A)$라고 하고, 표본 공간 $S$가 유한집합 일 때 표본 공간의 모든 원소들이 일어날 확률이 같을 경우</li>
+</ul>
+<script type="math/tex; mode=display">
+  P(A) = \frac{n(A)}{n(S)}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 동전던지기</p>
+<ul>
+<li>앞면 : Head($H$), 뒷면 : Tail($T$)</li>
+<li><p>표본공간 $S = { H, T}$</p>
+</li>
+<li><p>주사위던지기</p>
+<ul>
+<li>표본공간 $S = { 1,2,3,4,5,6 }$</li>
+</ul>
+</li>
+</ul>
+<p><span style="color:blue"> <strong>[Ex]</strong> </span> 동전 두 개를 던져서 뒷면이 한번만 나오는 확률</p>
+<ul>
+<li>앞면 : Head($H$), 뒷면 : Tail($T$)</li>
+<li>표본공간 $S = { (H, H), (H, T), (T, H), (T, T) }$</li>
+<li>사건 $A = { (H,T), (T,H) }$</li>
+</ul>
+<script type="math/tex; mode=display">
+  P(A) = \frac{2}{4} = \frac{1}{2}</script><p><br></p>
+<h2 id="통계적-확률"><a href="#통계적-확률" class="headerlink" title="통계적 확률"></a>통계적 확률</h2><ul>
+<li>상대도수 : 어떤 시행을 $N$번 반복했을 때, 사건 $A$에 해당하는 결과가 $r$번 일어난 경우</li>
+</ul>
+<script type="math/tex; mode=display">
+  \frac{r}{N}</script><ul>
+<li>$N$이 무한히 커지면 상대도수는 일정한 수로 수렴</li>
+</ul>
+<script type="math/tex; mode=display">
+  \lim_{N \rightarrow \infty} \frac{r}{N}</script><p>이를 사건 A의 <strong>통계적 확률</strong> 또는 <strong>경험적 확률</strong>이라고함</p>
+<blockquote>
+<p><span style="color:blue"> <strong>[Ex]</strong> </span></p>
+<ul>
+<li>타자가 타석에서 안타를 칠 확률</li>
+<li>공정에서 제품이 정상일 확률(수율)</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="확률의-성질"><a href="#확률의-성질" class="headerlink" title="확률의 성질"></a>확률의 성질</h2><h3 id="집합-성질"><a href="#집합-성질" class="headerlink" title="집합 성질"></a>집합 성질</h3><ul>
+<li><p>합사건(Union)</p>
+<ul>
+<li>사건 $A$ <strong>또는</strong> $B$가 일어날 확률</li>
+<li>$A \cup B$</li>
+</ul>
+</li>
+<li><p>곱사건(Intersection)</p>
+<ul>
+<li>사건 $A$와 $B$가 <strong>동시에</strong> 일어날 확률</li>
+<li>$A \cap B$</li>
+</ul>
+</li>
+<li><p>배반사건(Mutually Exclusive Event)</p>
+<ul>
+<li>사건 $A$와 $B$가 동시에 일어날 수 없을 경우</li>
+<li><strong>독립(Independent) 관계</strong>라고도 함.</li>
+<li>$A \cap B = \emptyset$</li>
+</ul>
+</li>
+<li><p>여사건(Complement)</p>
+<ul>
+<li>사건 $A$가 일어나지 않을 경우</li>
+<li>$A^c$</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h3 id="확률-법칙"><a href="#확률-법칙" class="headerlink" title="확률 법칙"></a>확률 법칙</h3><ul>
+<li>$P(A\cup B) = P(A) + P(B) - P(A\cap B)$</li>
+<li>$P(A \cap B) = P(\emptyset) = 0$ $\quad \quad \text{If 사건 $A$와 $B$가 독립(Independent)일 경우}$</li>
+<li>$A$의 여사건이 $A^c$이면, $P(A) + P(A^c) = 1$</li>
+</ul>
+<p><br></p>
+<h2 id="순열-Permutation-조합-Combination"><a href="#순열-Permutation-조합-Combination" class="headerlink" title="순열 (Permutation), 조합 (Combination)"></a>순열 (Permutation), 조합 (Combination)</h2><ul>
+<li>Factorial<ul>
+<li>$n$개를 일렬로 늘여 놓은 경우의 수</li>
+<li>$n!$ 로 표기</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  n! = n(n-1)(n-2)\cdots</script><ul>
+<li>순열(Permutation)<ul>
+<li>순서를 고려</li>
+<li>$n$개 중 $r$개를 뽑아서 배열하는 경우의 수</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  _n P_r = \frac{n!}{(n-r)!}</script><ul>
+<li>조합(Combination)<ul>
+<li>순서를 고려하지 않음</li>
+<li>$n$개 중 $r$개를 뽑아서 배열하는 경우의 수</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  _n C_r = \frac{_n P_r}{r!} = \frac{n!}{r!(n-r)!}</script><p><br></p>
+<h2 id="조건부-확률-Conditional-Probability"><a href="#조건부-확률-Conditional-Probability" class="headerlink" title="조건부 확률 (Conditional Probability)"></a>조건부 확률 (Conditional Probability)</h2><ul>
+<li>어떤 사건 $A$가 발생한 상황에서 사건 $B$가 발생할 확률</li>
+</ul>
+<script type="math/tex; mode=display">
+  P(B|A) = \frac{P(A \cap B)}{P(A)}, \qquad P(A) \neq 0</script><script type="math/tex; mode=display">
+  P(A|B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) \neq 0</script><ul>
+<li>확률의 곱셈법칙</li>
+</ul>
+<script type="math/tex; mode=display">
+  P(A \cap B) = P(A|B) \cdot P(B) = P(B|A) \cdot P(A)</script><p>※ 사건 $A$와 $B$가 독립일 경우, $P(A \cap B) = P(A) \cdot P(B)$</p>
+<p><br></p>
+<h3 id="베이즈-정리-Bayes’-Theorem"><a href="#베이즈-정리-Bayes’-Theorem" class="headerlink" title="베이즈 정리(Bayes’ Theorem)"></a>베이즈 정리(Bayes’ Theorem)</h3><ul>
+<li>표본 공간 $S$에서 서로 독립인 사건 $B_1 , B_2 , \cdots, B_k$에 의해 분할되어 있을 때, 임의의 사건 $A$에 대해 다음이 성립</li>
+</ul>
+<script type="math/tex; mode=display">
+  P(B_i | A) = \frac{P(B_i \cap A)}{P(A)} = \frac{P(A|B_i) \cdot P(B_i) }{\sum_{j=1}^{k}{P(A|B_j} \cdot P(B_j)}</script><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_0.png" class="">
+<p><br><br><br></p>
+<h1 id="확률-변수-Random-Variable"><a href="#확률-변수-Random-Variable" class="headerlink" title="확률 변수 (Random Variable)"></a>확률 변수 (Random Variable)</h1><ul>
+<li>표본공간에서 각 사건에 실수를 대응시키는 함수</li>
+<li>확률 변수의 값은 하나의 사건에 대하여 하나의 값을 가지며, 실험의 결과에 의하여 변함</li>
+<li><p>일반적으로 확률 변수는 대문자$(X, Y)$로 표현하며, 확률변수의 특정 값을 소문자$(x, y)$로 표현</p>
+</li>
+<li><p>확률 변수의 평균</p>
+<ul>
+<li>기댓값(Expected Value)이라고도 함</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) &= \sum_{i=1}^{n}{x_i P(x_i)} \\ &= x_1P(x_1) + x_2(P(x_2) + \cdots + x_n P(x_n)
+  \end{align*}</script><ul>
+<li>확률 변수의 분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  Var(X) = \frac{1}{N}{\sum_{i=1}^{N}{(x_i - \mu)^2}}</script><p><br></p>
+<h2 id="성질-Property"><a href="#성질-Property" class="headerlink" title="성질 (Property)"></a>성질 (Property)</h2><h3 id="기대값-Expected-Value-의-성질"><a href="#기대값-Expected-Value-의-성질" class="headerlink" title="기대값 (Expected Value)의 성질"></a>기대값 (Expected Value)의 성질</h3><p>$a,b$가 상수이고, $X, Y$를 임의의 확률 변수라고 할 때, 다음이 성립</p>
+<ul>
+<li>$E(a) = a$</li>
+<li>$E(aX) = aE(x)$</li>
+<li>$E(aX + b) = aE(x) + b$</li>
+<li>$E(aX \pm bY) = aE(X) \pm bE(Y)$</li>
+<li>$E(XY) = E(X)E(Y) \qquad if \quad X,Y \ \  is \ \ \  independent$</li>
+</ul>
+<p><br></p>
+<h3 id="분산-Variance-의-성질"><a href="#분산-Variance-의-성질" class="headerlink" title="분산 (Variance)의 성질"></a>분산 (Variance)의 성질</h3><p>$a,b$가 상수이고, $X, Y$를 임의의 확률 변수라고 할 때, 다음이 성립</p>
+<ul>
+<li>$Var(a) = 0$</li>
+<li>$Var(aX) = a^2 Var(X)$</li>
+<li>$Var(X+Y) = Var(X) + Var(Y) + 2 \text{Cov}(X, Y)$</li>
+<li>$Var(aX \pm bY ) = a^2 Var(X) \pm b^2 Var(Y) + 2\text{Cov}(X,Y)$</li>
+<li>$Var(XY) = 0 \qquad if \quad X,Y \ \  is \ \ \  independent$</li>
+<li>$Var(X) = E(X^2) - [E(X)]^2$</li>
+</ul>
+<p><br></p>
+<h2 id="공분산-Covariance"><a href="#공분산-Covariance" class="headerlink" title="공분산 (Covariance)"></a>공분산 (Covariance)</h2><ul>
+<li><strong>2개의 확률변수의 선형 관계를 나타내는 값</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    \text{Cov}(X,Y) &= E[(X-E(X)][Y-E(Y)] \\
+    & = \frac{\sum_{i}^{n}{(X_i - \bar{X})(Y_i - \bar{Y})}}{n-1}
+  \end{align*}</script><ul>
+<li>$\text{Cov}(X,Y) &gt; 0$ : $X$가 상승할 때 $Y$도 상승 (양의 상관관계)</li>
+<li>$\text{Cov}(X,Y) &lt; 0$ : $X$가 상승할 때 $Y$는 하락 (음의 상관관계)</li>
+<li>$\text{Cov}(X,Y) \approx 0$ : $X,Y$는 관계가 없음</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_1.png" class="">
+<p><br><br><br></p>
+<h1 id="확률-분포-Probability-Distribution"><a href="#확률-분포-Probability-Distribution" class="headerlink" title="확률 분포 (Probability Distribution)"></a>확률 분포 (Probability Distribution)</h1><ul>
+<li>확률 변수 $X$가 취할 수 있는 모든 값과 그 값을 나타날 확률을 표현한 함수</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_2.png" class="">
+<p><br></p>
+<h2 id="이산-확률-분포-Discrete-Probability-Distribution"><a href="#이산-확률-분포-Discrete-Probability-Distribution" class="headerlink" title="이산 확률 분포 (Discrete Probability Distribution)"></a>이산 확률 분포 (Discrete Probability Distribution)</h2><blockquote>
+<p><strong>Summary</strong></p>
+</blockquote>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_3.png" class="">
+<p><br></p>
+<h3 id="이산형-균등분포-Discrete-Uniform-Distribution"><a href="#이산형-균등분포-Discrete-Uniform-Distribution" class="headerlink" title="이산형 균등분포(Discrete Uniform Distribution)"></a>이산형 균등분포(Discrete Uniform Distribution)</h3><ul>
+<li>확률 변수 $X$가 유한개이고, 모든 확률 변수에 대하여 균일한 확률을 갖는 분포</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_4.png" class="">
+<script type="math/tex; mode=display">
+  \begin{align*}
+    f_x (x) & = P(X = x) \\
+    & = \frac{1}{N} \qquad \qquad where \ \ x = 1, 2, \cdots, N
+    \\
+    \\ 
+    & X \sim U(a, b)
+  \end{align*}</script><ul>
+<li>기댓값</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) & = \sum x f(x) \\
+    & = \frac{1}{n} \sum{x} \\
+    & = \frac{1}{n} \cdot \frac{n(n+1)}{2} \\
+    & = \frac {n+1}{2}
+  \end{align*}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    Var(X) & = E(X^2) - [E(X)]^2 \\
+    & = \frac{(N+1)(2N+1)}{6} - \left( \frac{N+1}{2} \right)^2 \\
+    & = \frac{n^2 - 1}{12}
+  \end{align*}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 주사위를 한 번 굴려서 나오는 숫자를 확률변수 $X$라고 하자.</p>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_5.png" class="">
+<p><br></p>
+<h3 id="베르누이-분포-Bernuoulli-Distribution"><a href="#베르누이-분포-Bernuoulli-Distribution" class="headerlink" title="베르누이 분포 (Bernuoulli Distribution)"></a>베르누이 분포 (Bernuoulli Distribution)</h3><blockquote>
+<p><strong>베르누이 시행 (Bernuoulli Trial)</strong></p>
+<ul>
+<li>각 시행의 결과가 <strong>성공, 실패 두가지 결과만 존재</strong>하는 시행</li>
+</ul>
+</blockquote>
+<ul>
+<li>베르누이 시행에서 성공이 <code>1</code>, 실패가 <code>0</code>의 값을 가질 때 확률 변수 $X$의 분포</li>
+</ul>
+<script type="math/tex; mode=display">
+  X=
+  \begin{cases}
+    1, \qquad \text{success} \\
+    0, \qquad \text{fail}
+  \end{cases}
+    \qquad  X \sim \text{Bernuoulli}(p)</script><script type="math/tex; mode=display">
+  f_x(x) = p^x (1-p)^{1-x} \qquad x=0,1,\cdots</script><ul>
+<li>기댓값</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) & = 1 \cdot p + 0 \cdot (1-p) \\ 
+    & = p
+  \end{align*}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    Var(X) & = E(X - p)^2 \\
+    &= (0-p)^2 \cdot (1-p) + (1-p)^2 \cdot p \\
+    & = p(1-p) 
+  \end{align*}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 파란 공 7개, 빨간 공 3개가 들어있는 주머니에서 공 하나를 뽑을 때, 파란 공이면 성공, 빨간 공이면 실패인 실험을 한다고 가정하자. 이 때 베르누이 분포를 정의하면</p>
+<script type="math/tex; mode=display">
+  X=
+  \begin{cases}
+    0.7 \qquad \text{if} \ \ x = 1 \\
+    0.3 \qquad \text{if} \ \ x = 0
+  \end{cases}
+    \qquad  X \sim \text{Bernuoulli}(0.7)</script><script type="math/tex; mode=display">
+  \text{or}</script><script type="math/tex; mode=display">
+  p(x) = (0.7)^x \times (0.3)^{1-x} \qquad \qquad x = 0, 1</script><p><br></p>
+<h3 id="이항분포-Binomial-Distribution"><a href="#이항분포-Binomial-Distribution" class="headerlink" title="이항분포 (Binomial Distribution)"></a>이항분포 (Binomial Distribution)</h3><ul>
+<li>연속적인 베르누이 시행을 거쳐 나타나는 확률 분포</li>
+<li>서로 독립인 베르누이 시행을 $n$번 반복해서 실행했을 때, 성공한 횟수 $X$의 확률 분포</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    f_x (x) & = P(X = x) \\
+    & = {n \choose x} p^x (1-p)^{n-x} \\
+    & = \frac{n!}{x!(n-x)!} \qquad \qquad x = 0,1,\cdots,n
+  \end{align*}</script><ul>
+<li>기댓값</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) & = \sum_{r=0}^{n}{r \cdot \ _n C_r p^r q^{n-r}} \\
+    & = \sum_{r=0}^{n}{r \cdot \frac{n!}{(n-r)! r!} p^r q^{n-r}} \\
+    & = \sum_{r=1}^{n}{\frac{n \cdot (n-1)!}{(n-r)!(r-1)!}p \cdot p^{r-1}q^{n-r}} \\
+    & = np \sum_{r=1}^{n}{ _{n-1}C_{r-1} p^{r-1} q^{(n-1)-(r-1)}} \\
+    & = np \sum_{r=1}^{n}{_{n-1}C_{r-1} p^{r-1} q^{n-r}}\\
+    & = np \cdot \left( _{n-1}C_{0} p^{0} q^{n-1} + _{n-1}C_{1} p^{1} q^{n-2} + \cdots + _{n-1}C_{n-1} p^{n-1} q^{0} \right) \\
+    & = np(p+q)^{n-1} \\
+
+    & = np
+  \end{align*}</script><ul>
+<li>분산</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_6.png" class="">
+<script type="math/tex; mode=display">
+  \begin{align*}
+    Var(X) & = E(X^2) - [E(X)]^2 \\
+    & = n(n-1)p^2 + np - (np)^2 \\
+    & = n^2p^2 - np^2 + np - n^2p^2 \\ 
+    & = np(1-p)
+  \end{align*}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 축구선수의 패널티킥 성공률이 80%일 때, 10번의 기회에서 $x$번 성공횟수와 그 확률</p>
+<script type="math/tex; mode=display">
+  P(X) = {10 \choose x} (0.8)^x (0.2)^{10-x}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 반도체 공장에서 불량이 발생할 확률이 10%라고 하자. 10개의 제품을 생성했을 때 불량이 2개 이하일 확률을 구하시오.</p>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_7.png" class="">
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P(X \leq 2) & = P(X=0) + P(X = 1) + P (X = 2) \\
+    & = {10 \choose 0}(0.1)^0 (0.9)^{10-0} + {10 \choose 1}(0.1)^1 (0.9)^{10-1} + {10 \choose 2}(0.1)^2 (0.9)^{10-2} \\
+    & \approx 0.35 + 0.35 + 0.19 \\
+    & = 0.93
+  \end{align*}</script><p><br></p>
+<h3 id="포아송-분포-Poisson-distribution"><a href="#포아송-분포-Poisson-distribution" class="headerlink" title="포아송 분포 (Poisson distribution)"></a>포아송 분포 (Poisson distribution)</h3><ul>
+<li>어느 희귀한 <strong>사건</strong>이 어떤 <strong>일정한 시간대에 특정한 사건</strong>이 발생할 확률 분포</li>
+</ul>
+<blockquote>
+<p> <strong>조건 (Condition)</strong></p>
+<ol>
+<li>어떤 단위구간(예,1일)동안 이를 더 짧은 작은 단위의 구간(예:1시간)으로 나눌 수 있고 이러한 더 짧은 단위구간중 어떤 사건이 발생할 확률은 전체 척도 중 항상 일정</li>
+<li>두 개 이상의 사건이 동시 발생할 확률은 0에 가까움</li>
+<li>어떤 단위구간의 사건 발생은 다른 단위구간의 발생으로부터 <strong>독립적</strong></li>
+<li>특정 구간에서 사건 발생확률은 그 <strong>구간의 크기에 비례</strong></li>
+<li>포아송 분포의 확률 변수 기댓값 $E(X)$와 분산 $Var(X)$ 모두 $\lambda$<ul>
+<li>즉, 기댓값과 분산이 <strong>동일</strong>함</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_8.png" class="">
+<script type="math/tex; mode=display">
+  \begin{align*}
+    f_x(x) & = P(X=x) \\
+    & = \frac{e^-\lambda^x}{x!} \qquad \qquad x = 0, 1, 2, \cdots
+  \end{align*}</script><blockquote>
+<p><strong>이항 분포의 포아송 근사</strong></p>
+<ul>
+<li>확률변수 $X$가 $X \sim B(n, p)$이고, $n$이 충분히 크고 $p$가 아주 작을 때 $X$의 분포는 평균이 $\lambda = np$인 포아송 분포로 근사 시킬 수 있다.<br>$<strong>n = 30$일 경우 크다고 판단</strong></li>
+<li>보통 $n$이 클 때 $np&lt;5$를 만족하는 $p$가 존재하면 근사 정도가 좋다고 함</li>
+</ul>
+</blockquote>
+<p><span style="color:blue"> <strong>[Ex]</strong> </span> 이항분포와 포아송분포 비교</p>
+<p>$n = 100, \ \ p = 0.01$ 이항 분포 $X \sim B (100, 0.01)$</p>
+<p>$\lambda = 100 \times 0.01 = 1$ 포아송 근사 $X \sim \text{Poisson}(1)$</p>
+<blockquote>
+<p><strong>엑셀 함수</strong></p>
+<ul>
+<li>이항분포 : <code>BINOM.DIST</code>($X,N,P,$ 누적여부)</li>
+<li>포아송분포 : <code>POISSON.DIST</code>($X, \lambda,$ 누적여부)<br>➣ 누적여부 = <code>1</code> (Yes), 누적여부 = <code>0</code> (NO)</li>
+</ul>
+</blockquote>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_9.png" class="">
+<p><br></p>
+<h3 id="기하-분포-Geometric-Distribution"><a href="#기하-분포-Geometric-Distribution" class="headerlink" title="기하 분포 (Geometric Distribution)"></a>기하 분포 (Geometric Distribution)</h3><ul>
+<li>어떤 실험에서 처음 성공이 발생하기까지 시도한 횟수 $X$의 분포</li>
+<li>각 시도는 베르누이 시행을 따름</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    f_x (x) & = P(X=x) \\
+    & = (1-p)^{x-1} \cdot p \qquad \qquad x = 1, 2, \cdots
+  \end{align*}</script><script type="math/tex; mode=display">
+  X \sim \text{Geometic(p)}</script><ul>
+<li>기댓값</li>
+</ul>
+<script type="math/tex; mode=display">
+  E(X) = \frac{1}{p}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  Var(X) = \frac{1-p}{p^2}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 축구선수 손흥민의 필드골 성공 확률이 30%일 때, 5번째 슛팅에서 골을 넣을 확률분포</p>
+<p>$x = 5, \ \ p = 0.3$</p>
+<script type="math/tex; mode=display">
+(1 - 0.3)^{5 - 1} \times 0.3 = 0.07203</script><p><br></p>
+<h3 id="음이항-분포-Negative-Binomial-Distribution"><a href="#음이항-분포-Negative-Binomial-Distribution" class="headerlink" title="음이항 분포(Negative Binomial Distribution)"></a>음이항 분포(Negative Binomial Distribution)</h3><ul>
+<li>어떤 실험에서 성공확률이 $p$일 때, $r$번의 실패가 나올 때까지 발생한 성공 횟수 $X$의 확률분포</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    f_x(x) & = P(X=x) \\
+    & = {x + r - 1 \choose x} p^x (1 - p)^r \qquad \qquad x= 1, 2, \cdots
+  \end{align*}</script><script type="math/tex; mode=display">
+  X \sim NB(r, p)</script><ul>
+<li>기댓값</li>
+</ul>
+<script type="math/tex; mode=display">
+  E(X) = \frac{r(1-p)}{p}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  Var(X) = \frac{r(1-p)}{p^2}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 농구 선수 허훈의 자유투 성공 확률이 90%일 때, 3번째 실패가 나올 때까지 성공시킨 자유투가 10번일 확률</p>
+<p>$x = 3 , \ \ r = 10$</p>
+<script type="math/tex; mode=display">
+_{12}C_{10} \cdot (0.9)^3 (0.1)^{10} = 0.000000481</script><p><br></p>
+<h2 id="연속-확률분포-Continus-Uniform-Distribution"><a href="#연속-확률분포-Continus-Uniform-Distribution" class="headerlink" title="연속 확률분포 (Continus Uniform Distribution)"></a>연속 확률분포 (Continus Uniform Distribution)</h2><h3 id="확률밀도함수-Probability-Density-Function-pdf"><a href="#확률밀도함수-Probability-Density-Function-pdf" class="headerlink" title="확률밀도함수 (Probability Density Function, pdf)"></a>확률밀도함수 (Probability Density Function, pdf)</h3><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_10.png" class="">
+<ul>
+<li><strong>확률밀도함수 :</strong> 연속형 확률 변수 $X$에 대해서 함수 $f(x)$가 다음을 만족<ol>
+<li>모든 $X$에 대해서 $f(x) \geq 0$</li>
+<li>$P(x \in \left( -\infty, \infty) \right ) = \int_{-\infty}^{\infty} f(x) = 1$</li>
+<li>$P(a \leq X \leq b) = \int_{a}^{b} f(x) dx$</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p><strong>확률밀도함수 성질</strong></p>
+</blockquote>
+<p><strong>Property 1</strong></p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P(X=a) & = P(a \leq X \leq a) \\
+    & = \int_{a}^{a} f(x) dx \\
+    & = 0
+  \end{align*}</script><p><strong>Property 2</strong></p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P(a \leq X \leq b) & = P(a \leq X < b) \\
+    & = P(a < X \leq b) \\
+    & = P(a < X < b)
+  \end{align*}</script><blockquote>
+<p><strong>확률밀도함수 평균과 분산</strong></p>
+</blockquote>
+<ul>
+<li>평균</li>
+</ul>
+<script type="math/tex; mode=display">
+  E(X) = \int_{-\infty}^{\infty}x f(x) dx</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    Var(X) & = E(X-\mu)^2 \\
+    & = \int_{-\infty}^{\infty}{(x-\mu)^2 f(x) dx}
+  \end{align*}</script><p><br></p>
+<h3 id="누적분포함수-Cumulative-density-function-cdf"><a href="#누적분포함수-Cumulative-density-function-cdf" class="headerlink" title="누적분포함수 (Cumulative density function, cdf)"></a>누적분포함수 (Cumulative density function, cdf)</h3><ul>
+<li>확률밀도함수(pdf)를 적분한 값</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    F(x) & = P(X \leq x) \\
+    & = \int_{-\infty}^{x}{f(x)dt}
+  \end{align*}</script><script type="math/tex; mode=display">
+  \frac{d}{dx} F(x) = f(x)</script><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_11.png" class="">
+<blockquote>
+<p><strong>누적분포함수 성질</strong></p>
+</blockquote>
+<p><strong>Property 1</strong></p>
+<script type="math/tex; mode=display">
+  0 \leq F(x) \leq 1</script><p><strong>Property 2</strong></p>
+<script type="math/tex; mode=display">
+  \text {For} \ \ a \leq b, \ \ F(a) \leq F(b)</script><p><strong>Property 3</strong></p>
+<script type="math/tex; mode=display">
+  P(a \leq X \leq b) = F(b) - F(a)</script><p><br></p>
+<h3 id="균일분포-Uniform-Distribution"><a href="#균일분포-Uniform-Distribution" class="headerlink" title="균일분포 (Uniform Distribution)"></a>균일분포 (Uniform Distribution)</h3><ul>
+<li>확률변수 $X$가 $a$와 $b$ 사이에서 아래와 같은 확률밀도함수(pdf)를 가짐</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_12.png" class="">
+<script type="math/tex; mode=display">
+  f(x) = 
+    \begin{cases}
+    \frac{1}{b-a} \qquad \text{if} \ \ a \leq x \leq b \\
+    0 \quad \qquad \text{otherwise}
+  \end{cases}</script><ul>
+<li><strong>CDF</strong></li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_13.png" class="">
+<script type="math/tex; mode=display">
+  F(x) =
+  \begin{cases}
+    0 \qquad \quad x \leq a \\
+    \frac{1}{b-a} \qquad \text{otherwise} \\
+    1 \qquad \quad x \geq b
+  \end{cases}</script><blockquote>
+<p><strong>균일분포 평균과 분산</strong></p>
+</blockquote>
+<ul>
+<li>평균</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) & = \int_{a}^{b}{xf(x) dx} \\
+    & = \int_{a}^{b}{x \frac{1}{b-a} dx} \\
+    & = \left[ \frac{x^2}{2(b-a)} \right]_{a}^{b} \\
+    & = \frac{b^2-a^2}{2(b-a)} \\
+    & = \frac{a+b}{2}
+  \end{align*}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X^2) & = \int_{a}^{b}{x^2 \frac{1}{b-a}} \\
+    & = \left[ \frac{x^3}{3(b-a)}\right]_{a}^{b} \\
+    & = \frac{b^3 - a^3}{3(b-a)} \\
+    & = \frac{(b-a)(b^2 + ab + a^2)}{3(b-a)} \\
+    & = \frac{b^2 + ab + a^2}{3}
+  \end{align*}</script><script type="math/tex; mode=display">
+  \begin{align*}
+    Var(X) & = E(X^2) - [E(X)]^2 \\
+    & = \frac{b^2 + ab + a^2}{3} - \left( \frac{a+b}{2} \right)^2 \\
+    & = \frac{b^2 + ab + a^2}{3} - \frac{b^2 + 2ab + a^2}{4} \\
+    & = \frac{4b^2 + 4ab + 4a^2 - 3b^2 - 6ab - 3a^2}{12} \\
+    & = \frac{b^2 - 2ab + a^2}{12} \\
+    & = \frac{(a-b)^2}{12}
+  \end{align*}</script><p><br></p>
+<h3 id="정규분포-Normal-Distribution"><a href="#정규분포-Normal-Distribution" class="headerlink" title="정규분포 (Normal Distribution)"></a>정규분포 (Normal Distribution)</h3><ul>
+<li>19세기 독일의 가우스에 의해 제시</li>
+<li><strong>가우스 분포</strong>라고도 함</li>
+<li>확률밀도함수(pdf)는 평균이 $\mu$이고 분산이 $\sigma^2$인 정규분포를 따를 때 아래와 같이 표현</li>
+</ul>
+<script type="math/tex; mode=display">
+  f(x) = \frac{1}{\sqrt{2 \pi \sigma} }{e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}} \qquad \qquad -\infty < x < \infty, \ \ -\infty < \mu < \infty, \ \ \sigma^2 > 0</script><script type="math/tex; mode=display">
+  X \sim N(\mu, \ \sigma^2)</script><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_14.png" class="">
+<blockquote>
+<p><strong>정규분포 평균과 분산</strong></p>
+</blockquote>
+<ul>
+<li>평균</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    E(X) & = \int x f(x) dx \\
+    & = \int x \frac{1}{\sqrt{2 \pi \sigma}} e^{-\frac{1}{2 \sigma^2}(x - \mu)^2} dx \\
+    & = \mu
+  \end{align*}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  Var(X) = \sigma^2</script><ul>
+<li>표준편차</li>
+</ul>
+<script type="math/tex; mode=display">
+  Std(X) = \sigma</script><blockquote>
+<p><strong>파라미터(parameter)에 따른 정규분포 모양</strong></p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>평균에 따른 차이</th>
+<th>분산에 따른 차이</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_15.png" class=""></td>
+<td><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_16.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="표준정규분포-Standard-Normal-Distribution"><a href="#표준정규분포-Standard-Normal-Distribution" class="headerlink" title="표준정규분포 (Standard Normal Distribution)"></a>표준정규분포 (Standard Normal Distribution)</h3><ul>
+<li>정규분포(Normal Distribution)를 간단히 계산하기 위해 등장</li>
+<li>확률변수 $X \sim N(\mu , \ \sigma^2)$ 정규분포를 따르고, 확률변수 $Z$에 대하여 $Z = \frac{X-\mu}{\sigma}$라고 할 때, 확률변수 $Z \sim N(0, 1)$</li>
+</ul>
+<script type="math/tex; mode=display">
+  f(x) = \frac{1}{\sqrt{2 \pi \sigma} }{e^{-\frac{1}{2 \sigma^2}(x - \mu)^2}} \qquad \qquad -\infty < x < \infty, \ \ -\infty < \mu < \infty, \ \ \sigma^2 > 0</script><script type="math/tex; mode=display">
+  \Downarrow</script><script type="math/tex; mode=display">
+  \begin{align*}
+    \phi(Z) & = P(Z \leq z)\\ 
+    & = \frac{1}{\sqrt{2 \pi}} e^{- \frac{1}{2}z^2}
+  \end{align*}</script><p><span style="color:blue"> <strong>[Ex 1]</strong> </span></p>
+<script type="math/tex; mode=display">
+  P(Z \leq 1.96) = 0.975</script><p><span style="color:blue"> <strong>[Ex 2]</strong> </span></p>
+<script type="math/tex; mode=display">
+  P(Z \leq -1.96) = 1 - P(Z \leq 1.96) = 0.025</script><p><span style="color:blue"> <strong>[Ex 3]</strong> </span></p>
+<script type="math/tex; mode=display">
+  P(0.5 \leq Z \leq 1.96) = 0.975 - 0.6915 = 0.28354</script><p><br></p>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_17.png" class="">
+<blockquote>
+<p><strong>정규분포의 성질</strong></p>
+</blockquote>
+<ul>
+<li>$X \sim N(\mu, \sigma^2)$ 일 때 임의의 상수 $\alpha, \ \beta$에 대하여</li>
+</ul>
+<script type="math/tex; mode=display">
+  \alpha X + \beta \sim N(\alpha \mu + \beta, \alpha^2 \sigma^2)</script><script type="math/tex; mode=display">
+  Z = \frac{X - \mu}{\sigma}, \qquad \qquad Z \sim N (0, \ 1)</script><ul>
+<li>$X \sim N(\mu_1, \sigma^2_1)$, $Y \sim N(\mu_2, \sigma^2_2)$ 이고, $X, \ Y$ : 독립일 때</li>
+</ul>
+<script type="math/tex; mode=display">
+  \alpha X + \beta Y \sim N \left( \alpha \mu_1 + \beta \mu_2 , \  \alpha^2 \sigma^2_1 + \beta^2 \sigma^2_2 \right)</script><p><span style="color:blue"> <strong>[Ex]</strong> </span></p>
+<ul>
+<li><p>$X \sim N(100, 10^2)$ 일 때, $P(100 \leq X \leq 110)$을 구하시오</p>
+<p>sol)</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P ( 100 \leq X \leq 110) & = P \left( \frac{100 - 100}{10} \leq \frac{X-100}{10} \leq \frac{110-100}{10} \right) \\
+    & = P(0 \leq Z \leq 1) \\
+    & = 0.8413 - 0.5 \\
+    & = 0.3413
+  \end{align*}</script><blockquote>
+<p><strong>이항분포의 정규 근사</strong></p>
+</blockquote>
+<ul>
+<li>$X \sim B(n, \ p)$일 때 확률변수 $X$는 $n$이 충분히 크면 근사적으로 정규분포 $X \sim N(np, \ np(1-p))$를 따름</li>
+</ul>
+<script type="math/tex; mode=display">
+  Z = \frac{X-np}{\sqrt{np(1-p)}} \sim N(0, 1)</script><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_18.png" class="">
+<p><br></p>
+<h3 id="지수분포-Exponential-Distribution"><a href="#지수분포-Exponential-Distribution" class="headerlink" title="지수분포 (Exponential Distribution)"></a>지수분포 (Exponential Distribution)</h3><ul>
+<li>단위 시간당 발생할 확률 $\lambda$인 어떤 사건의 횟수가 포아송 분포를 따를 때, 어떤 사건이 처음 발생할 때까지 걸린 시간 확률변수 $X$</li>
+<li>연속되는 사건 사이의 대기시간도 지수 분포</li>
+</ul>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_19.png" class="">
+<p><span style="color:blue"> <strong>[Ex]</strong> </span> 버스 정류장에서 버스가 100번 <strong>도착하는 횟수가 포아송 분포</strong>를 따른다고 가정하면, <strong>첫 번째 버스가 도착할 때까지의 시간 분포가 지수분포</strong><br>  ➣ 두 번째 버스가 도착하고 세 번째 버스가 도착 할 때까지의 대기시간의 분포도 <strong>지수분포</strong></p>
+<ul>
+<li>지수분포의 확률밀도함수(pdf)</li>
+</ul>
+<script type="math/tex; mode=display">
+  f(x) = \lambda e^{-\lambda x}, \qquad \qquad x \geq 0</script><script type="math/tex; mode=display">
+  X \sim Exp(\lambda)</script><ul>
+<li>지수분포의 누적분포함수(cdf)</li>
+</ul>
+<script type="math/tex; mode=display">
+  F(x) = 1-e^{-\lambda x}, \qquad x \geq 0</script><blockquote>
+<p><strong>지수분포의 평균과 분산</strong></p>
+</blockquote>
+<ul>
+<li>평균</li>
+</ul>
+<script type="math/tex; mode=display">
+  E(X) = \frac{1}{\lambda}</script><ul>
+<li>분산</li>
+</ul>
+<script type="math/tex; mode=display">
+  Var(X) = \frac{1}{\lambda^2}</script><p><span style="color:blue"> <strong>[Ex]</strong> </span> 버스 정류장에 A버스가 평균 시간당 6대가 정차한다고 가정</p>
+<ul>
+<li><p>10분 이상 대기할 확률</p>
+<p>sol)</p>
+</li>
+</ul>
+<p>$\lambda = \frac{6}{60} = \frac{1}{10}$</p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P(x \geq 10) & = 1 - P(x < 10) \\
+    & = 1 - \left( 1- e^{-\frac{1}{10} 10} \right) \\
+    & = e^{-1} \\
+    & \approx 0.368
+  \end{align*}</script><ul>
+<li><p>10분에서 20분 사이 대기할 확률</p>
+<p>sol)</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    P(10 \leq x \leq 20) & = P(x \leq 20 ) -  P(x \leq 10) \\
+    & = 1- e^{-\frac{1}{10} 20} - \left( 1- e^{-\frac{1}{10} 10} \right) \\
+    & = e^{-1} - e^{-2} \\
+    & \approx 0.233
+  \end{align*}</script><blockquote>
+<p><strong>지수분포의 무기억성 (Memoryless Property)</strong></p>
+<ul>
+<li>어떤 시점부터 소요되는 시간은 과거 시간에 영향을 받지 않음</li>
+<li><span style="color:blue"> <strong>Ex 1.</strong> </span> 버스를 기다리는 대기시간은 먼저 기다린 사람의 확률과 같음</li>
+<li><span style="color:blue"> <strong>Ex 2.</strong> </span> 전구를 한 달동안 사용했을 때 남은 수명은 한달 간 사용했던 영향을 받지 않음. 즉 새 전구와 한달 간 사용한 전구의 남은 수명은 같다고 생각함</li>
+</ul>
+</blockquote>
+<script type="math/tex; mode=display">
+  P(X>a +t | X>a) = P(X > t), \quad a \geq 0, \quad t \geq 0</script><script type="math/tex; mode=display">
+  \begin{align*}
+    \frac{P(X>a+t)}{P(X>a)} & = \frac{1-P(X \leq a+t)}{1 - P(X\leq a)} \\
+    & = \frac{1-(1-e^{- \lambda(a+t)})}{1-(1-e^{- \lambda a})} \\
+    & = e^{-\lambda t} \\
+    & = P(X\geq t)
+  \end{align*}</script><ul>
+<li>생존분석에서는 <strong>Weibull</strong> 분포 또는 <strong>long-normal</strong> 분포를 사용하여 예측</li>
+</ul>
+<blockquote>
+<p><strong>지수분포와 포아송분포의 관계</strong></p>
+</blockquote>
+<img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_20.png" class="">
+<p><br></p>
+<h2 id="확률-분포의-관계도"><a href="#확률-분포의-관계도" class="headerlink" title="확률 분포의 관계도"></a>확률 분포의 관계도</h2><img src="/2024/02/21/Math-Statistics-Basic-001/Math_Statistics_Basic_001_21.png" class=""></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/21/Math-Statistics-Basic-001/">https://gyoungmin-lim.github.io/2024/02/21/Math-Statistics-Basic-001/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Statistics/">Statistics</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/21/Math-Statistics-Basic-002/" title="(Statistics) 통계학 기초 - 모집단(Population), 표본(Sample), 표본 분포(Sampling Distribution)"><img class="cover" src="/../cover_img/Mathematics_Statistics_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Statistics) 통계학 기초 - 모집단(Population), 표본(Sample), 표본 분포(Sampling Distribution)</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/20/SBS-KeywordAnalysis-MakingBoW/" title="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/21/Math-Statistics-Basic-002/" title="(Statistics) 통계학 기초 - 모집단(Population), 표본(Sample), 표본 분포(Sampling Distribution)"><img class="cover" src="/../cover_img/Mathematics_Statistics_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Statistics) 통계학 기초 - 모집단(Population), 표본(Sample), 표본 분포(Sampling Distribution)</div></div></a></div><div><a href="/2024/02/18/Math-Statistics-Intro/" title="(Statistics) 통계학 소개(Introduction)"><img class="cover" src="/../cover_img/Mathematics_Statistics_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-18</div><div class="title">(Statistics) 통계학 소개(Introduction)</div></div></a></div><div><a href="/2024/02/21/Math-Statistics-Basic-003/" title="(Statistics) 통계학 기초 - 추정"><img class="cover" src="/../cover_img/Mathematics_Statistics_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Statistics) 통계학 기초 - 추정</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%99%95%EB%A5%A0-Probability"><span class="toc-number">1.</span> <span class="toc-text">확률 (Probability)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%91%9C%EB%B3%B8-%EA%B3%B5%EA%B0%84-Sample-Space"><span class="toc-number">1.1.</span> <span class="toc-text">표본 공간 (Sample Space)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%86%B5%EA%B3%84%EC%A0%81-%ED%99%95%EB%A5%A0"><span class="toc-number">1.2.</span> <span class="toc-text">통계적 확률</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%99%95%EB%A5%A0%EC%9D%98-%EC%84%B1%EC%A7%88"><span class="toc-number">1.3.</span> <span class="toc-text">확률의 성질</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A7%91%ED%95%A9-%EC%84%B1%EC%A7%88"><span class="toc-number">1.3.1.</span> <span class="toc-text">집합 성질</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%99%95%EB%A5%A0-%EB%B2%95%EC%B9%99"><span class="toc-number">1.3.2.</span> <span class="toc-text">확률 법칙</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%88%9C%EC%97%B4-Permutation-%EC%A1%B0%ED%95%A9-Combination"><span class="toc-number">1.4.</span> <span class="toc-text">순열 (Permutation), 조합 (Combination)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A1%B0%EA%B1%B4%EB%B6%80-%ED%99%95%EB%A5%A0-Conditional-Probability"><span class="toc-number">1.5.</span> <span class="toc-text">조건부 확률 (Conditional Probability)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%B2%A0%EC%9D%B4%EC%A6%88-%EC%A0%95%EB%A6%AC-Bayes%E2%80%99-Theorem"><span class="toc-number">1.5.1.</span> <span class="toc-text">베이즈 정리(Bayes’ Theorem)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%99%95%EB%A5%A0-%EB%B3%80%EC%88%98-Random-Variable"><span class="toc-number">2.</span> <span class="toc-text">확률 변수 (Random Variable)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%84%B1%EC%A7%88-Property"><span class="toc-number">2.1.</span> <span class="toc-text">성질 (Property)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B8%B0%EB%8C%80%EA%B0%92-Expected-Value-%EC%9D%98-%EC%84%B1%EC%A7%88"><span class="toc-number">2.1.1.</span> <span class="toc-text">기대값 (Expected Value)의 성질</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%B6%84%EC%82%B0-Variance-%EC%9D%98-%EC%84%B1%EC%A7%88"><span class="toc-number">2.1.2.</span> <span class="toc-text">분산 (Variance)의 성질</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B3%B5%EB%B6%84%EC%82%B0-Covariance"><span class="toc-number">2.2.</span> <span class="toc-text">공분산 (Covariance)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%ED%99%95%EB%A5%A0-%EB%B6%84%ED%8F%AC-Probability-Distribution"><span class="toc-number">3.</span> <span class="toc-text">확률 분포 (Probability Distribution)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9D%B4%EC%82%B0-%ED%99%95%EB%A5%A0-%EB%B6%84%ED%8F%AC-Discrete-Probability-Distribution"><span class="toc-number">3.1.</span> <span class="toc-text">이산 확률 분포 (Discrete Probability Distribution)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9D%B4%EC%82%B0%ED%98%95-%EA%B7%A0%EB%93%B1%EB%B6%84%ED%8F%AC-Discrete-Uniform-Distribution"><span class="toc-number">3.1.1.</span> <span class="toc-text">이산형 균등분포(Discrete Uniform Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%B2%A0%EB%A5%B4%EB%88%84%EC%9D%B4-%EB%B6%84%ED%8F%AC-Bernuoulli-Distribution"><span class="toc-number">3.1.2.</span> <span class="toc-text">베르누이 분포 (Bernuoulli Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9D%B4%ED%95%AD%EB%B6%84%ED%8F%AC-Binomial-Distribution"><span class="toc-number">3.1.3.</span> <span class="toc-text">이항분포 (Binomial Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%8F%AC%EC%95%84%EC%86%A1-%EB%B6%84%ED%8F%AC-Poisson-distribution"><span class="toc-number">3.1.4.</span> <span class="toc-text">포아송 분포 (Poisson distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B8%B0%ED%95%98-%EB%B6%84%ED%8F%AC-Geometric-Distribution"><span class="toc-number">3.1.5.</span> <span class="toc-text">기하 분포 (Geometric Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%9D%8C%EC%9D%B4%ED%95%AD-%EB%B6%84%ED%8F%AC-Negative-Binomial-Distribution"><span class="toc-number">3.1.6.</span> <span class="toc-text">음이항 분포(Negative Binomial Distribution)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%97%B0%EC%86%8D-%ED%99%95%EB%A5%A0%EB%B6%84%ED%8F%AC-Continus-Uniform-Distribution"><span class="toc-number">3.2.</span> <span class="toc-text">연속 확률분포 (Continus Uniform Distribution)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%99%95%EB%A5%A0%EB%B0%80%EB%8F%84%ED%95%A8%EC%88%98-Probability-Density-Function-pdf"><span class="toc-number">3.2.1.</span> <span class="toc-text">확률밀도함수 (Probability Density Function, pdf)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EB%88%84%EC%A0%81%EB%B6%84%ED%8F%AC%ED%95%A8%EC%88%98-Cumulative-density-function-cdf"><span class="toc-number">3.2.2.</span> <span class="toc-text">누적분포함수 (Cumulative density function, cdf)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B7%A0%EC%9D%BC%EB%B6%84%ED%8F%AC-Uniform-Distribution"><span class="toc-number">3.2.3.</span> <span class="toc-text">균일분포 (Uniform Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A0%95%EA%B7%9C%EB%B6%84%ED%8F%AC-Normal-Distribution"><span class="toc-number">3.2.4.</span> <span class="toc-text">정규분포 (Normal Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%91%9C%EC%A4%80%EC%A0%95%EA%B7%9C%EB%B6%84%ED%8F%AC-Standard-Normal-Distribution"><span class="toc-number">3.2.5.</span> <span class="toc-text">표준정규분포 (Standard Normal Distribution)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%A7%80%EC%88%98%EB%B6%84%ED%8F%AC-Exponential-Distribution"><span class="toc-number">3.2.6.</span> <span class="toc-text">지수분포 (Exponential Distribution)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%99%95%EB%A5%A0-%EB%B6%84%ED%8F%AC%EC%9D%98-%EA%B4%80%EA%B3%84%EB%8F%84"><span class="toc-number">3.3.</span> <span class="toc-text">확률 분포의 관계도</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SBS_SST_DataConfiguration"/></a><div class="content"><a class="title" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration">SBS_SST_DataConfiguration</a><time datetime="2024-02-22T09:36:17.000Z" title="Created 2024-02-22 18:36:17">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온 예측"/></a><div class="content"><a class="title" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측">위성자료를 활용한 표층수온 예측</a><time datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"/></a><div class="content"><a class="title" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</a><time datetime="2024-02-22T09:09:46.000Z" title="Created 2024-02-22 18:09:46">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - Application"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application">(Step) 독거노인 위급 행동 구별 - Application</a><time datetime="2024-02-21T11:41:17.000Z" title="Created 2024-02-21 20:41:17">2024-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - EDA"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA">(Step) 독거노인 위급 행동 구별 - EDA</a><time datetime="2024-02-21T07:52:17.000Z" title="Created 2024-02-21 16:52:17">2024-02-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

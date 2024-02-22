@@ -1,0 +1,363 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Step) 독거노인 위급 행동 구별 - EDA | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="참고  (Project) 독거노인 위급 행동 구별 (Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular (Step) 독거노인 위급 행동 구별 - Application    Openpose - Body25Try : Head + Neck 상반신에서도 머리와 목 부분만 Observation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Step) 독거노인 위급 행동 구별 - EDA">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-EDA/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="참고  (Project) 독거노인 위급 행동 구별 (Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular (Step) 독거노인 위급 행동 구별 - Application    Openpose - Body25Try : Head + Neck 상반신에서도 머리와 목 부분만 Observation">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase01_cover.jpg">
+<meta property="article:published_time" content="2024-02-21T07:52:17.000Z">
+<meta property="article:modified_time" content="2024-02-22T09:06:20.331Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Step">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase01_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-EDA/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Step) 독거노인 위급 행동 구별 - EDA',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-02-22 18:06:20'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_DL_Zerobase01_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Step) 독거노인 위급 행동 구별 - EDA</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-21T07:52:17.000Z" title="Created 2024-02-21 16:52:17">2024-02-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-02-22T09:06:20.331Z" title="Updated 2024-02-22 18:06:20">2024-02-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Step-By-Step/">Step By Step</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Step) 독거노인 위급 행동 구별 - EDA"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>참고</strong></p>
+<ul>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/Project-DL-Zerobase01/">(Project) 독거노인 위급 행동 구별</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-DataConfiguration/">(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular</a></li>
+<li><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-Application/">(Step) 독거노인 위급 행동 구별 - Application</a></li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="Openpose-Body25"><a href="#Openpose-Body25" class="headerlink" title="Openpose - Body25"></a>Openpose - Body25</h2><h3 id="Try-Head-Neck"><a href="#Try-Head-Neck" class="headerlink" title="Try : Head + Neck"></a>Try : Head + Neck</h3><ul>
+<li>상반신에서도 머리와 목 부분만 Observation을 확인해보기 위해 그려봄<ul>
+<li>데이터 확인을 위해 <strong>1번 사람의 1그룹 카메라 1번에서 관측되는 값</strong>을 사용</li>
+<li>각 Figure를 그림에 있어 <code>title</code>에 해당하는 신체부위를 작성, <code>x</code>축은 프레임으로 통일하였으며, <code>y</code>축은 위부터 순서대로 결과 도출의 <code>x축</code>, <code>y축</code>, <code>z축</code>으로 통일</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_00.png" class="">
+<p><br></p>
+<h2 id="Mediapipe-Brazepose"><a href="#Mediapipe-Brazepose" class="headerlink" title="Mediapipe - Brazepose"></a>Mediapipe - Brazepose</h2><ul>
+<li>Module Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Figure 저장소 설정</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Figure 저장소</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    os.mkdir(<span class="string">&#x27;Figure&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Data Load</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv(<span class="string">&#x27;data/Total_merged_data.csv&#x27;</span>)</span><br><span class="line">df.drop(<span class="string">&#x27;Unnamed: 0&#x27;</span>, axis = <span class="number">1</span>, inplace = <span class="literal">True</span>)</span><br><span class="line">df[<span class="string">&#x27;Frame&#x27;</span>] = df[<span class="string">&#x27;Frame&#x27;</span>].astype(<span class="built_in">int</span>)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="Target-Point-선정"><a href="#Target-Point-선정" class="headerlink" title="Target Point 선정"></a>Target Point 선정</h3><ul>
+<li>우리가 생각하는 <u><strong>‘쓰러지기’</strong></u>의 경우, <u><strong>‘서 있는 상태’에서 ‘누워있는 상태’로 전환</strong></u>되는 것을 생각<ul>
+<li>따라서, 머리의 움직임이 가장 클 것으로 생각하여 머리에 해당하는 점을 <code>Target point</code>로 지정</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_13.png" class="">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Head Point Extracted</span></span><br><span class="line">target_pt = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">0</span>, <span class="number">11</span>))</span><br><span class="line">target_df = sample_df[sample_df[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>시각화를 위한 축 데이터 생성</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame = <span class="built_in">int</span>(<span class="built_in">len</span>(target_df) / <span class="built_in">len</span>(target_pt))</span><br><span class="line">x_values = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">0</span>, frame))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>시각화</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams.update(&#123;<span class="string">&#x27;font.size&#x27;</span>: <span class="number">8</span>&#125;)</span><br><span class="line">f, ax = plt.subplots(<span class="built_in">len</span>(target_pt), <span class="number">1</span>, figsize = (<span class="number">10</span>, <span class="number">10</span>), sharex = <span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(target_pt)):</span><br><span class="line">    sns.lineplot(data = target_df[target_df[<span class="string">&#x27;Landmark_ID&#x27;</span>] == i], x = x_values, y = <span class="string">&#x27;lm.y&#x27;</span>, ax = ax[i], color=<span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_14.png" class="">
+<blockquote>
+<p><strong>중간점검</strong></p>
+<ul>
+<li>시각화 결과, 전반적으로 비슷한 트렌드의 그래프를 가짐</li>
+<li>따라서, 머리(Head)의 모든 점을 보는 것은 비효율적이라 판단</li>
+<li>새로운 Target Point 지정</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h3 id="New-Target-Point"><a href="#New-Target-Point" class="headerlink" title="New Target Point"></a>New Target Point</h3><ul>
+<li>Target Point 재선정<ul>
+<li>몸 전체 움직임을 확인하기 위해 5 point로 축소 및 재선정</li>
+<li>가장 큰 움직임을 보여줄 것으로 예상</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Previous Target</th>
+<th style="text-align:center">New Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_13.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_15.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># targt point</span></span><br><span class="line"><span class="comment"># | 0 | nose</span></span><br><span class="line"><span class="comment"># | 15 | left wrist</span></span><br><span class="line"><span class="comment"># | 16 | right wrist</span></span><br><span class="line"><span class="comment"># | 31 | left foot index</span></span><br><span class="line"><span class="comment"># | 32 | right foot index</span></span><br><span class="line"></span><br><span class="line">target_pt = [<span class="number">0</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">31</span>, <span class="number">32</span>]</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h2 id="Figure-Out"><a href="#Figure-Out" class="headerlink" title="Figure Out"></a>Figure Out</h2><h3 id="같은-카메라-시점으로-보기"><a href="#같은-카메라-시점으로-보기" class="headerlink" title="같은 카메라 시점으로 보기"></a>같은 카메라 시점으로 보기</h3><ul>
+<li>카메라 시점에 따른 데이터 변화를 보기 위해, 임의적으로 인덱스별 한 개의 데이터 셋을 선정<ul>
+<li>Index 17번 (머리 드라이기로 말리기) 중 <code>Index 17번 Group 1 Camera 1</code> 데이터 탐색</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Index 17 Group 1 Camera 1 데이터 탐색</span></span><br><span class="line"></span><br><span class="line">df_A017_G001_C001 = df[(df[<span class="string">&#x27;index&#x27;</span>] == <span class="string">&#x27;A017&#x27;</span>) &amp; (df[<span class="string">&#x27;group&#x27;</span>] == <span class="string">&#x27;G001&#x27;</span>) &amp; (df[<span class="string">&#x27;camera&#x27;</span>] == <span class="string">&#x27;C001&#x27;</span>)]</span><br><span class="line">df_A017_G001_C001 = df_A017_G001_C001[[<span class="string">&#x27;Frame&#x27;</span>, <span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;people&#x27;</span>, <span class="string">&#x27;group&#x27;</span>, <span class="string">&#x27;camera&#x27;</span>, <span class="string">&#x27;Landmark_ID&#x27;</span>, <span class="string">&#x27;lm.x&#x27;</span>, <span class="string">&#x27;lm.y&#x27;</span>, <span class="string">&#x27;lm.z&#x27;</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target Point 데이터 선택</span></span><br><span class="line">target_A017_df = df_A017_G001_C001[df_A017_G001_C001[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1명(P001)의 데이터 살펴보기</span></span><br><span class="line">target_A017_df[target_A017_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P001&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_16.png" class="">
+<ul>
+<li>시간(Frame)에 따른 각 point 상/하 움직임을 그래프로 표현<ul>
+<li>데이터의 경우 <u><strong>양 팔의 움직임</strong></u>이 발생</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">4</span>))</span><br><span class="line">sns.lineplot(data = target_A017_df[target_A017_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P001&#x27;</span>], x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.y&#x27;</span>, hue = <span class="string">&#x27;Landmark_ID&#x27;</span>, palette = <span class="string">&#x27;Set1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 축 y축 범위 지정 및 범례 위치 설정</span></span><br><span class="line">plt.ylim([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">plt.xlim([<span class="number">19</span>, <span class="number">60</span>])</span><br><span class="line">plt.legend(labels=[<span class="string">&#x27;nose&#x27;</span>, <span class="string">&#x27;left wrist&#x27;</span>, <span class="string">&#x27;right wrist&#x27;</span>, <span class="string">&#x27;left foot&#x27;</span>, <span class="string">&#x27;right foot&#x27;</span>], loc = <span class="string">&#x27;upper right&#x27;</span>, ncol = <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 뒤집기</span></span><br><span class="line">plt.gca().invert_yaxis()</span><br><span class="line"></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_17.png" class="">
+<ul>
+<li>시간(Frame)에 따른 각 point 원/근 움직임을 그래프로 표현<ul>
+<li><strong>난잡한 그래프</strong>가 발생</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">4</span>))</span><br><span class="line">sns.lineplot(data = target_A017_df[target_A017_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P001&#x27;</span>], x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.z&#x27;</span>, hue = <span class="string">&#x27;Landmark_ID&#x27;</span>, palette = <span class="string">&#x27;Set1&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 축 y축 범위 지정 및 범례 위치 설정</span></span><br><span class="line">plt.xlim([<span class="number">19</span>, <span class="number">60</span>])</span><br><span class="line">plt.legend(labels=[<span class="string">&#x27;nose&#x27;</span>, <span class="string">&#x27;left wrist&#x27;</span>, <span class="string">&#x27;right wrist&#x27;</span>, <span class="string">&#x27;left foot&#x27;</span>, <span class="string">&#x27;right foot&#x27;</span>], loc = <span class="string">&#x27;upper right&#x27;</span>, ncol = <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 뒤집기</span></span><br><span class="line">plt.gca().invert_yaxis()</span><br><span class="line"></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_18.png" class="">
+<ul>
+<li>같은 방법으로, Index 53(쓰러지기)의 움직임 탐색</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Index 53 Group 1 Camera 1 데이터 탐색</span></span><br><span class="line"></span><br><span class="line">df_A053_G001_C001 = df[(df[<span class="string">&#x27;index&#x27;</span>] == <span class="string">&#x27;A053&#x27;</span>) &amp; (df[<span class="string">&#x27;group&#x27;</span>] == <span class="string">&#x27;G001&#x27;</span>) &amp; (df[<span class="string">&#x27;camera&#x27;</span>] == <span class="string">&#x27;C001&#x27;</span>)]</span><br><span class="line">df_A053_G001_C001 = df_A053_G001_C001[[<span class="string">&#x27;Frame&#x27;</span>, <span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;people&#x27;</span>, <span class="string">&#x27;group&#x27;</span>, <span class="string">&#x27;camera&#x27;</span>, <span class="string">&#x27;Landmark_ID&#x27;</span>, <span class="string">&#x27;lm.x&#x27;</span>, <span class="string">&#x27;lm.y&#x27;</span>, <span class="string">&#x27;lm.z&#x27;</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target Point 데이터 선택</span></span><br><span class="line">target_A053_df = df_A053_G001_C001[df_A053_G001_C001[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1명(P001)의 데이터 살펴보기</span></span><br><span class="line">target_A053_df[target_A053_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P018&#x27;</span>].head()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_19.png" class="">
+<ul>
+<li>Frame당 각 Point 상/하 움직임을 그래프로 표현<ul>
+<li>(좌) 그래프의 경우, <u><strong>일정한 움직임(거의 변화없음)</strong></u>을 보임</li>
+<li>(우) 그래프의 경우, <strong>난잡한 움직임</strong>을 보임</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Figure 1</span></span><br><span class="line"><span class="comment">## y축(위, 아래) 움직임 확인</span></span><br><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">4</span>))</span><br><span class="line">sns.lineplot(data = target_A053_df[target_A053_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P018&#x27;</span>], x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.y&#x27;</span>, hue = <span class="string">&#x27;Landmark_ID&#x27;</span>, palette = <span class="string">&#x27;Set1&#x27;</span>)</span><br><span class="line">plt.ylim([<span class="number">0</span>, <span class="number">1</span>]) <span class="comment"># 축 y축 범위 지정</span></span><br><span class="line">plt.xlim([<span class="number">19</span>, <span class="number">60</span>]) <span class="comment"># Frame 길이 지정</span></span><br><span class="line">plt.legend(labels=[<span class="string">&#x27;nose&#x27;</span>, <span class="string">&#x27;left wrist&#x27;</span>, <span class="string">&#x27;right wrist&#x27;</span>, <span class="string">&#x27;left foot&#x27;</span>, <span class="string">&#x27;right foot&#x27;</span>], loc = <span class="string">&#x27;upper right&#x27;</span>, ncol = <span class="number">5</span>) <span class="comment"># 범례 위치 설정</span></span><br><span class="line">plt.gca().invert_yaxis() <span class="comment"># y축 뒤집기</span></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br><span class="line"></span><br><span class="line"><span class="comment">## Figure 2</span></span><br><span class="line"><span class="comment">## z축(앞, 뒤) 움직임 확인</span></span><br><span class="line">plt.figure(figsize = (<span class="number">10</span>, <span class="number">4</span>))</span><br><span class="line">sns.lineplot(data = target_A053_df[target_A053_df[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P018&#x27;</span>], x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.z&#x27;</span>, hue = <span class="string">&#x27;Landmark_ID&#x27;</span>, palette = <span class="string">&#x27;Set1&#x27;</span>)</span><br><span class="line">plt.xlim([<span class="number">19</span>, <span class="number">60</span>])</span><br><span class="line">plt.legend(labels=[<span class="string">&#x27;nose&#x27;</span>, <span class="string">&#x27;left wrist&#x27;</span>, <span class="string">&#x27;right wrist&#x27;</span>, <span class="string">&#x27;left foot&#x27;</span>, <span class="string">&#x27;right foot&#x27;</span>], loc = <span class="string">&#x27;upper right&#x27;</span>, ncol = <span class="number">5</span>)</span><br><span class="line">plt.gca().invert_yaxis() <span class="comment"># y축 뒤집기</span></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">상/하 움직임</th>
+<th style="text-align:center">원/근 움직임</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_20.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_21.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>중간점검</strong></p>
+<ul>
+<li><strong>Index 53 쓰러지기 데이터</strong>의 경우, 쓰러지는 Motion이 아닌, 쓰러진 후 누워있는 상태의 영상만 존재</li>
+<li>‘<span style="color:green"> <strong>활동 중</strong> </span>‘인 상태와 ‘<span style="color:red"> <strong>주의/경고</strong> </span>를 나타내는 상태로 구분하고자 목표를 변경</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h3 id="특정-기준-데이터-탐색"><a href="#특정-기준-데이터-탐색" class="headerlink" title="특정 기준 데이터 탐색"></a>특정 기준 데이터 탐색</h3><ul>
+<li><p>촬영장소 및 카메라 <code>위치</code>별 추출된 좌표의 비교를 위해 특정 기준을 정하여 데이터 비교</p>
+<ul>
+<li><strong>기준</strong> : 특정 인덱스 인원 1명</li>
+<li><code>그룹</code>별 추출 데이터 트렌드 비교<ul>
+<li>여기서 <code>그룹(Group)</code>은 촬영된 위치를 나타낸다. (위 참조)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Index 17번 <code>P20</code> 인원의 촬영 영상을 <code>그룹</code>별로 나눠 비교</p>
+<ul>
+<li>비교 결과, <u><strong>Group별로 다른 트렌드의 그래프</strong></u>가 나타남</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 17 번 인덱스 P20 행동탐색</span></span><br><span class="line">Landmark_label = &#123;<span class="number">0</span> : <span class="string">&#x27;nose&#x27;</span>, <span class="number">15</span> : <span class="string">&#x27;left wrist&#x27;</span>, <span class="number">16</span> : <span class="string">&#x27;right wrist&#x27;</span>, <span class="number">31</span> : <span class="string">&#x27;left foot&#x27;</span>, <span class="number">32</span> : <span class="string">&#x27;right foot&#x27;</span>&#125;</span><br><span class="line">f, ax = plt.subplots(<span class="number">5</span>, <span class="number">3</span>, figsize = (<span class="number">15</span>, <span class="number">6</span>), sharex = <span class="literal">True</span>, sharey = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> group_name <span class="keyword">in</span> only_A017_G001[<span class="string">&#x27;group&#x27;</span>].unique():</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> Landmark_name <span class="keyword">in</span> only_A017_G001[<span class="string">&#x27;Landmark_ID&#x27;</span>].unique():</span><br><span class="line">        tmp_df = only_A017_G001[only_A017_G001[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P020&#x27;</span>]</span><br><span class="line">        tmp_df = tmp_df[(tmp_df[<span class="string">&#x27;group&#x27;</span>] == group_name) &amp; (tmp_df[<span class="string">&#x27;Landmark_ID&#x27;</span>] == Landmark_name)]</span><br><span class="line">        sns.lineplot(data = tmp_df, x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.y&#x27;</span>, ax = ax[j, i])</span><br><span class="line">        ax[j, i].set_ylabel(<span class="string">f&#x27;<span class="subst">&#123;Landmark_label[Landmark_name]&#125;</span>&#x27;</span>)</span><br><span class="line">        ax[<span class="number">0</span>, i].set_title(<span class="string">f&#x27;A017_<span class="subst">&#123;group_name&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 뒤집기</span></span><br><span class="line">plt.gca().invert_yaxis()</span><br><span class="line"></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_22.png" class="">
+<ul>
+<li>같은 방법으로, Index 53 (쓰러지기)에 대한 데이터 탐색</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Index 53 Group 1 데이터 탐색</span></span><br><span class="line"></span><br><span class="line">df_A053_G001 = df[(df[<span class="string">&#x27;index&#x27;</span>] == <span class="string">&#x27;A053&#x27;</span>)]</span><br><span class="line">df_A053_G001 = df_A053_G001[[<span class="string">&#x27;Frame&#x27;</span>, <span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;people&#x27;</span>, <span class="string">&#x27;group&#x27;</span>, <span class="string">&#x27;camera&#x27;</span>, <span class="string">&#x27;Landmark_ID&#x27;</span>, <span class="string">&#x27;lm.x&#x27;</span>, <span class="string">&#x27;lm.y&#x27;</span>, <span class="string">&#x27;lm.z&#x27;</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Target Point 데이터 선택</span></span><br><span class="line">only_A053_G001 = df_A053_G001[df_A053_G001[<span class="string">&#x27;Landmark_ID&#x27;</span>].isin(target_pt)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1명(P001)의 데이터 살펴보기</span></span><br><span class="line">only_A053_G001[only_A053_G001[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P019&#x27;</span>]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>P19</code> 인원의 촬영 영상을 나눠 비교<ul>
+<li>Group, 즉 <u><strong>장소에 상관없이 일정한 경향의 그래프</strong></u>를 나타냄</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 53 번 인덱스 P19 행동탐색</span></span><br><span class="line">Landmark_label = &#123;<span class="number">0</span> : <span class="string">&#x27;nose&#x27;</span>, <span class="number">15</span> : <span class="string">&#x27;left wrist&#x27;</span>, <span class="number">16</span> : <span class="string">&#x27;right wrist&#x27;</span>, <span class="number">31</span> : <span class="string">&#x27;left foot&#x27;</span>, <span class="number">32</span> : <span class="string">&#x27;right foot&#x27;</span>&#125;</span><br><span class="line">f, ax = plt.subplots(<span class="number">5</span>, <span class="number">4</span>, figsize = (<span class="number">15</span>, <span class="number">6</span>), sharex = <span class="literal">True</span>, sharey = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> group_name <span class="keyword">in</span> only_A053_G001[<span class="string">&#x27;group&#x27;</span>].unique():</span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> Landmark_name <span class="keyword">in</span> only_A053_G001[<span class="string">&#x27;Landmark_ID&#x27;</span>].unique():</span><br><span class="line">        tmp_df = only_A053_G001[only_A053_G001[<span class="string">&#x27;people&#x27;</span>] == <span class="string">&#x27;P019&#x27;</span>]</span><br><span class="line">        tmp_df = tmp_df[(tmp_df[<span class="string">&#x27;group&#x27;</span>] == group_name) &amp; (tmp_df[<span class="string">&#x27;Landmark_ID&#x27;</span>] == Landmark_name)]</span><br><span class="line">        sns.lineplot(data = tmp_df, x = <span class="string">&#x27;Frame&#x27;</span>, y = <span class="string">&#x27;lm.y&#x27;</span>, ax = ax[j, i])</span><br><span class="line">        ax[j, i].set_ylabel(<span class="string">f&#x27;<span class="subst">&#123;Landmark_label[Landmark_name]&#125;</span>&#x27;</span>)</span><br><span class="line">        ax[<span class="number">0</span>, i].set_title(<span class="string">f&#x27;A053_<span class="subst">&#123;group_name&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># y축 뒤집기</span></span><br><span class="line">plt.gca().invert_yaxis()</span><br><span class="line"></span><br><span class="line">sns.despine()</span><br><span class="line">plt.tight_layout()</span><br></pre></td></tr></table></figure>
+<img src="/2024/02/21/SBS-DL-Zerobase01-EDA/Project_DL_Zerobase01_23.png" class=""></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-EDA/">https://gyoungmin-lim.github.io/2024/02/21/SBS-DL-Zerobase01-EDA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Step/">Step</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Step) 독거노인 위급 행동 구별 - Application</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/21/SBS-DL-Zerobase01-DataConfiguration/" title="(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/21/SBS-DL-Zerobase01-DataConfiguration/" title="(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 독거노인 위급 행동 구별 - Data Configuration &amp; Extracting to Tabular</div></div></a></div><div><a href="/2024/02/21/SBS-BaseballSalaryPrediction/" title="(Step) 야구선수 연봉 예측"><img class="cover" src="/../cover_img/EDA_Baseball_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 야구선수 연봉 예측</div></div></a></div><div><a href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">(Step) 독거노인 위급 행동 구별 - Application</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-Application/" title="(Step) 키워드, 시간대별 응답률 분석 - Application"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - Application</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-EDA/" title="(Step) 키워드, 시간대별 응답률 분석 - EDA"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - EDA</div></div></a></div><div><a href="/2024/02/20/SBS-KeywordAnalysis-MakingBoW/" title="(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">(Step) 키워드, 시간대별 응답률 분석 - 자연어 처리 (KoNLPy)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Openpose-Body25"><span class="toc-number">1.</span> <span class="toc-text">Openpose - Body25</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Try-Head-Neck"><span class="toc-number">1.1.</span> <span class="toc-text">Try : Head + Neck</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mediapipe-Brazepose"><span class="toc-number">2.</span> <span class="toc-text">Mediapipe - Brazepose</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Target-Point-%EC%84%A0%EC%A0%95"><span class="toc-number">2.1.</span> <span class="toc-text">Target Point 선정</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#New-Target-Point"><span class="toc-number">2.2.</span> <span class="toc-text">New Target Point</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Figure-Out"><span class="toc-number">3.</span> <span class="toc-text">Figure Out</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B0%99%EC%9D%80-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EC%8B%9C%EC%A0%90%EC%9C%BC%EB%A1%9C-%EB%B3%B4%EA%B8%B0"><span class="toc-number">3.1.</span> <span class="toc-text">같은 카메라 시점으로 보기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%ED%8A%B9%EC%A0%95-%EA%B8%B0%EC%A4%80-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%90%EC%83%89"><span class="toc-number">3.2.</span> <span class="toc-text">특정 기준 데이터 탐색</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SBS_SST_DataConfiguration"/></a><div class="content"><a class="title" href="/2024/02/22/SBS-SST-DataConfiguration/" title="SBS_SST_DataConfiguration">SBS_SST_DataConfiguration</a><time datetime="2024-02-22T09:36:17.000Z" title="Created 2024-02-22 18:36:17">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온 예측"/></a><div class="content"><a class="title" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측">위성자료를 활용한 표층수온 예측</a><time datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"/></a><div class="content"><a class="title" href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</a><time datetime="2024-02-22T09:09:46.000Z" title="Created 2024-02-22 18:09:46">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - Application"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-Application/" title="(Step) 독거노인 위급 행동 구별 - Application">(Step) 독거노인 위급 행동 구별 - Application</a><time datetime="2024-02-21T11:41:17.000Z" title="Created 2024-02-21 20:41:17">2024-02-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA"><img src="/../cover_img/Project_DL_Zerobase01_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 독거노인 위급 행동 구별 - EDA"/></a><div class="content"><a class="title" href="/2024/02/21/SBS-DL-Zerobase01-EDA/" title="(Step) 독거노인 위급 행동 구별 - EDA">(Step) 독거노인 위급 행동 구별 - EDA</a><time datetime="2024-02-21T07:52:17.000Z" title="Created 2024-02-21 16:52:17">2024-02-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
