@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>REF_SST_01 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : 남해지역의 해수면온도 예측 및 2017년부터 2019년까지의 고수온 발생건에 대해서 예측 결과의 공간 분포와 공간 분포와 예측 가능성에 대해 분석  Method  DL Model : LSTM, ConvLSTM Model Accuracy : MD, RMSE Interpolation : Cubic Interpolation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="REF_SST_01">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/03/01/REF-SST-01/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : 남해지역의 해수면온도 예측 및 2017년부터 2019년까지의 고수온 발생건에 대해서 예측 결과의 공간 분포와 공간 분포와 예측 가능성에 대해 분석  Method  DL Model : LSTM, ConvLSTM Model Accuracy : MD, RMSE Interpolation : Cubic Interpolation">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_SST_cover.jpg">
+<meta property="article:published_time" content="2024-03-01T06:03:54.000Z">
+<meta property="article:modified_time" content="2024-03-01T08:32:42.154Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="DL">
+<meta property="article:tag" content="SST">
+<meta property="article:tag" content="Reference">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_SST_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/03/01/REF-SST-01/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'REF_SST_01',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-01 17:32:42'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_SST_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">REF_SST_01</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-01T06:03:54.000Z" title="Created 2024-03-01 15:03:54">2024-03-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-01T08:32:42.154Z" title="Updated 2024-03-01 17:32:42">2024-03-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Reference/">Reference</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="REF_SST_01"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>남해지역의 해수면온도 예측 및 2017년부터 2019년까지의 고수온 발생건에 대해서 예측 결과의 공간 분포와 공간 분포와 예측 가능성에 대해 분석</strong></li>
+<li><span style="color:blue"> <strong>Method</strong> </span><ul>
+<li>DL Model : <strong>LSTM, ConvLSTM</strong></li>
+<li>Model Accuracy : <strong>MD, RMSE</strong></li>
+<li>Interpolation : <strong>Cubic Interpolation</strong></li>
+</ul>
+</li>
+<li><span style="color:violet"> <strong>요약</strong> </span><ul>
+<li>LSTM의 정확도 는 선행연구와 비슷한 수준을 보였고 특히 ConvLSTM 모델은 기존 해수면 온도 예측 연구 결과보다 상대적으 로 우수한 성능을 보임</li>
+<li>여름철 이상 고수온 이 발생한 경우, 본 연구의 중단기 예측모델에서 LSTM 은 약 2일전, ConvLSTM은 5일전 탐지가 가능</li>
+<li>시계열 자료 기반의 모델 특성 상, 예측 기간이 길어질수록 과소 및 과대추정을 하는 경향이 커지게 되는데, 이는 향후 편차 보정을 위한 앙상블 기법(Adaboost, Bias corrected random forest 등)을 활용하여 해수면 온도 예측 성능을 개선한 다면 장기간(7일 이상) 예측 시 오차의 증가 폭을 줄여 고수온 탐지 영역의 축소 현상도 다소 줄일 수 있을것 으로 보임</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><br></p>
+<h2 id="Title"><a href="#Title" class="headerlink" title="Title"></a>Title</h2><ul>
+<li><strong>Title</strong> : 시계열 기계학습을 이용한 한반도 남해 해수면 온도 예측 및 고수온 탐지(Prediction of Sea Surface Temperature and Detection of Ocean Heat Wave in the South Sea of Korea Using Time-series Deep-learning Approaches)</li>
+<li><strong>Link</strong> : <a target="_blank" rel="noopener" href="https://koreascience.kr/article/JAKO202032254872840.page">Korean Journal of Remote Sensing (대한원격탐사학회지)</a></li>
+</ul>
+<p><br></p>
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><ul>
+<li>해수면 온도는 전 세계 해양, 기상 현상에 영향을 주고 해양 환경 변화와 생물에게 영향을 주는 중요한 요소</li>
+<li>우리나라 남해안을 비롯한 <u><strong>연안 지역의 경우 어업 및 양식업 등의 수산업이 많이 발달</strong></u></li>
+<li>매 년 <u><strong>고수온 현상으로 인한 사회·경제적 피해가 발생</strong></u></li>
+<li>위성 자료와 같은 광범위한 지역을 감시할 수 있는 자료를 활용한 해수면 온도 및 공간적 분포의 예측기술 개발을 통하여 피해를 예방할 수 있는 시스템을 구축할 필요</li>
+<li>해수면 온도 예측은 기존의 수치 모델을 통해서 예측을 진행하였지만, 다수의 역학적 요인들을 사용하여 예측 결과 산출 시 복잡함이 존재</li>
+<li>최근 기계학습 및 딥러닝 기법이 발달함에 따라 해양 분야의 예측에 적용하는 연구가 진행</li>
+<li>시·공간적인 일관성 및 정확도가 높은 <u><strong>장단기 기억(Long Short Term Memory, LSTM)</strong></u>과 <u><strong>합성곱 장단기 기억(Convolutional Long Short Term Memory, ConvLSTM)</strong></u> <u><strong>딥러닝 기법</strong></u>을 사용하여 <u><strong>남해지역의 해수면온도 예측 및 2017년부터 2019년까지의 고수온 발생건에 대해서 예측 결과의 공간 분포와 공간 분포와 예측 가능성에 대해 분석</strong></u></li>
+</ul>
+<p><br></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li><u><strong>해수면 온도(sea surface temperature, SST)</strong></u> : 전세계 해양의 열 분배, 해양-대기 순환 현상을 결정하는 가장 중요한 변수</li>
+<li>해양의 상층부에서 장, 단기적인 해양순환을 일으키며 물리적인 영향 및 생지화학 변화에 대한 영향을 끼침</li>
+<li><p>고수온 현상은 다양한 사회환경적인 문제를 야기하기 때문에 해수면 온도를 예측하는 연구가 최근 활발히 수행</p>
+</li>
+<li><p>해수면 온도 예측 방법</p>
+<ul>
+<li>수치 모델 이용</li>
+<li>자료 중심적(Data-driven)인 모델 사용</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="Research"><a href="#Research" class="headerlink" title="Research"></a>Research</h2><h3 id="연구지역"><a href="#연구지역" class="headerlink" title="연구지역"></a>연구지역</h3><ul>
+<li>위도 34.475°E ~ 33.025°N, 경도 126.972°E ~ 128.925°E으로 설정</li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_0.png" class="">
+<ul>
+<li>얕은 수심과 복잡한 연안구조를 가지고 있으며 쿠로시오 난류로부터 분화되는 고온·고염의 대마난류가 대한 해협을 통과하여 동해로 흐르는 해수의 열염 순환 및 해양환경 변화 등 물리적·생물학적인 영향을 크게 미치는 지역</li>
+<li>이상 고수온 현상이 발생하며 넓은 범위에 걸쳐 양식장 생물 폐사 및 해양생태계에 피해를 발생</li>
+</ul>
+<p><br></p>
+<h3 id="연구자료"><a href="#연구자료" class="headerlink" title="연구자료"></a>연구자료</h3><ul>
+<li><u><strong>연안 부이와 시계열적인 일관성</strong></u>이 상대적으로 높았던 <u><strong>유럽 기상청의 OSTIA자료</strong></u>를 이번 연구의 입력 자료로 사용</li>
+<li>OSTIA 해수면 합성 온도자료의 공간해상도는 0.05°, 시간해상도는 1일이며 실시간 해수면 온도 자료와 현장자료를 최적 보간(Optimal interpolation)으로 동기화 하여 빈공간이 없는 자료를 산출하며 정확도는 0.57K의 Root Mean Square Error (RMSE)를 가짐</li>
+<li>OSTIA자료는 <a target="_blank" rel="noopener" href="http://marine.copernicus.eu">Copernicus Marine Environment Monitoring Service, CMEMS</a>에서 제공</li>
+</ul>
+<p><br></p>
+<h3 id="연구방법"><a href="#연구방법" class="headerlink" title="연구방법"></a>연구방법</h3><blockquote>
+<p><strong>LSTM과 ConvLSTM을 이용</strong></p>
+</blockquote>
+<ul>
+<li>LSTM과 ConvLSTM을 이용하여 일일 해수면 온도를 <u><strong>1-7일 예측하는 모델</strong></u>과 <u><strong>2017년 8월 17일의 고수온 사례를 7일 전부터 1일 전까지 예측 모델</strong></u>을 구축</li>
+<li><span style="color:blue"><strong>학습 기간</strong></span> : 2006년부터 2016년까지 <u><strong>10년 자료 학습</strong></u> 후 2017년부터 2019년까지 3년간의 자료로 <strong>모델 검증</strong>&lt;/u&gt; 진행</li>
+<li>OSTIA 해수면 온도자료에서 <u><strong>거문도 지역의 3개 픽셀</strong></u>이 육지 마스킹에 의해 값이 존재하지 않음</li>
+<li><strong>시·공간적 특성을 연속적으로 학습하기 위하여</strong> <u><strong>Cubic interpolation</strong></u>을 사용하여 해당 픽셀을 보간</li>
+<li><strong>해수면온도 데이터</strong>가 가진 특성(feature)들이 <u><strong>시공간적인 차이로 인한 학습 시 성능 저하 현상을 방지</strong></u>하기 위해 최대 최소값으로 0 부터 1까지의 범위를 가지게 되는 <u><strong>정규화(normalization)</strong></u> 진행</li>
+</ul>
+<blockquote>
+<p><strong>고수온 속보</strong></p>
+<ul>
+<li>주의보와 경보는 각각 평년대비 2℃와 3℃ 이상의 급격한 수온 이상치가 발생한 해역 그리고 수온이 28℃ 이상이 되는 경우와 3일 이상 지속되는 경우</li>
+</ul>
+</blockquote>
+<ul>
+<li>OSTIA 일일 해수면 합성장 자료를 통하여 픽셀별로 특정 날짜의 최근 10년간의 일일 수온 값의 평균을 이용하여 평년 대비 해수면 온도 이상치를 산출</li>
+</ul>
+<p><br></p>
+<h2 id="정확도-평가"><a href="#정확도-평가" class="headerlink" title="정확도 평가"></a>정확도 평가</h2><blockquote>
+<p><strong>평균 오차 (Mean Difference, MD), RMSE(Root Mean Square Error 활용)</strong></p>
+</blockquote>
+<ul>
+<li><p><strong>평균 오차(Mean Difference)</strong></p>
+<ul>
+<li>관측 값에서 예측 값을 뺀 오차에 대한 평균값</li>
+<li><u><strong>과추정(overestimation)</strong></u>, 혹은 <u><strong>저추정(underestimation)</strong></u>과 같은 공간적인 오차의 패턴을 분석할 때 용이</li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align}
+    MD = \frac{1}{n} \sum_{i=1}^{n}{(y_i - x_i)}
+  \end{align}</script><p>where $n$ is # of data, $y_i$ is reference of OSTIA, $x_i$ is prediction value</p>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li><p><strong>RMSE(Root Mean Square Error)</strong></p>
+<ul>
+<li>관측 값과 예측 값 사이 오차의 절댓값을 활용한 지표</li>
+<li>Mean Difference (MD)와 비교하여 과추정 및 저추정의 패턴을 파악하기에는 어렵지만, <u><strong>공간적인 오차의 절대 적인 분포를 비교하는데 용이</strong></u></li>
+</ul>
+<script type="math/tex; mode=display">
+  \begin{align}
+    RMSE = \sqrt{\frac{\sum_{i=1}^{n}{(y_i - x_i)^2}}{n}}
+  \end{align}</script><p>where $n$ is # of data, $y_i$ is reference of OSTIA, $x_i$ is prediction value</p>
+</li>
+</ul>
+<p><br></p>
+<h2 id="연구-결과-및-토의"><a href="#연구-결과-및-토의" class="headerlink" title="연구 결과 및 토의"></a>연구 결과 및 토의</h2><blockquote>
+<p><strong>예측 오차 변화 분석</strong></p>
+</blockquote>
+<ul>
+<li><p>전체 테스트 기간(2017-2019)과 상대적으로 예측 오차가 크게 나타나는 <u><strong>여름 계절(6, 7, 8월)에 대한 예측오차</strong></u>를 <strong>RMSE를 활용하여 비교·분석</strong></p>
+<ul>
+<li><strong>전체 기간에 대한 평균 예측 RMSE</strong>의 경우(1 ~ 7dayslead time), ConvLSTM이 LSTM에 비하여 상대적으로 높은 예측력을 보임</li>
+<li>전체적인 오차는 선행연구(Xiao et al., 2019b)와 비교하여 본 연구의 모델의 결과가 상대적으로 우수하며 특히 ConvLSTM의 결과에서 7일 예측의 결과에서 약 0.71℃로 선행연구에서 나타난 약 0.85℃의 RMSE 오차와 비교하여 상대적으로 높은 예측 성능을 보임</li>
+<li>두 연구의 활용된 위성 자료의 특성, <u><strong>연산에 활용된 픽셀 량</strong></u> 그리고 <u><strong>모델의 깊이 차이</strong></u>에 따른 <u><strong>정확도 차이</strong></u>가 발생했을 것으로 보임</li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_1.png" class="">
+<ul>
+<li>모델의 깊이는 시계열 자료를 학습한 딥러닝 모델의 학습 깊이와 연관이 있는 것으로 보이며, 시공간적 패턴을 나타내는 자료의 특징(feature)을 충분히 학습한 결과로 판단됨</li>
+<li><strong>여름철에 대한 평균 예측</strong> RMSE 또한 LSTM이 약 0.90℃, ConvLSTM이 약 0.71℃로 <strong>ConvLSTM의 예측 정확도가 더 높음</strong>을 보여줌</li>
+<li>예측 오차의 경우, 선형성을 보이는 양상은 이는 연구지역에 대한 특성과 본 연구에서 설정한 두 모델의 하이퍼 파라미터에 의해 나타난 영향이 학습 결과에 반영되므로 오차의 증가와 다른 패턴을 보임</li>
+<li><strong>예측 기간이 길어짐</strong>에 따라 <strong>LSTM모델의 RMSE가 ConvLSTM 모델보다 더욱 빠르게 증가</strong>하는 것으로 나타났으며, 일 변화가 상대적으로 큰 여름철의 예측 오차가 더욱 빠르게 증가하는 것으로 나타남</li>
+<li><strong>LSTM과 ConvLSTM의 오차 증가폭을 비교</strong>했을 때 LSTM이 더 큰 것으로 나타남<ul>
+<li>합성곱, 즉 주변 픽셀의 영향을 반영하는 경우 모델의 성능이 대체적으로 더 뛰어나기 때문인 것으로 판단</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>일일 해수면 온도 예측 결과 정확도 분석</strong></p>
+</blockquote>
+<ul>
+<li><p>LSTM과 ConvLSTM을 활용한 연구지역 내 해수면온도의 <strong>일일 예측 값(daily prediction)에 대한 오차</strong> 및 <strong>4계절(봄, 여름, 가을, 겨울)에 대한 각 계절별 예측 정확도</strong>를 비교</p>
+<ul>
+<li>전 계절 뿐만 아니라, <u><strong>각 계절에 대한 예측 RMSE 기준</strong></u>으로 <u><strong>ConvLSTM이 LSTM기반의 예측 모델보다 전반적으로 높은 예측 정확도를 보임</strong></u></li>
+<li><strong>고수온 등의 이상 해수면 온도현상이 발생하는 여름</strong>의 경우, ConvLSTM 모델의 1일 예측 정확도는 다른 계절보다 상대적으로 낮은 RMSE를 보였지만 <strong>LSTM 모델은 다른 계절과 비교하여 가장 높은 RMSE</strong>를 보임</li>
+<li>공간적 분포의 경우, 전반적으로 <strong>수심이 얕아지는 연안에 가까운 지역일수록 예측 정확도가 상대적으로 낮은 것으로 나타남</strong></li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_2.png" class="">
+<ul>
+<li>우리나라의 남해안을 따라 흐르는 대마 난류의 흐름과 세기에 따른 예측 지역적인 변동으로 인한 공간적 분포 오차가 발생하는 것으로 보이며(NA et al., 1990; CHoo and Kim, 1998), 이로 인한 일일 예측 오차가 함께 발생한 것으로 보임</li>
+<li>본 연구에서 활용한 OSTIA 자료의 특성으로 인한 오류 또한 발생할 수 있는데, 위성자료와 현장 관측 자료를 동화하여 일일 산출물을 생산하는 OSTIA 해수면 온도 합성 자료의 특성상 본 연구지역은 연안지역과 가까워 대부분 마이크로파 기반의 위성 자료가 활용되지 않고 열적외 위성 자료와 현장관측 자료가 동화에 활용</li>
+<li>온도 합성 자료에 동화되는 자료는 구름, 날씨 등의 이유로 일일 OSTIA자료에 반영이 되지 않을 수 있으며, 특히 특정해의 계절적인 해수면 온도 자료 동화량과 같은 위성자료 자체의 요인과 외부에서 유입되는 난류 등의 환경적인 요인을 고려하는데 한계점이 있는 것으로 판단</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>각 계절 별 해수면 온도의 공간 분포 예측 결과를 분석</strong></p>
+</blockquote>
+<ul>
+<li><u><strong>2019년 기준 봄(2019. 01. 01), 여름(2019. 04. 01), 가을(2019. 07. 01), 겨울(2019. 10. 01)에 대한 일일 수온예측 결과에 대한 공간 분포를 비교·분석</strong></u></li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_3.png" class="">
+<ul>
+<li>봄, 여름, 겨울의 경우, 평균적으로 연안에서 외해로 넘어갈수록 온도가 증가 하는 패턴</li>
+<li><strong>각 픽셀별로 훈련한 LSTM 예측모델</strong>의 경우, <u><strong>공간분포에 대한 상대적으로 높은 노이즈(salt-and-pepper) 현상</strong></u>을 보이는 것으로 나타남</li>
+<li>픽셀별로 모델링 하는 LSTM의 공간적 노이즈 등을 해결하기 위해서 주변 픽셀에 대한 <strong>공간적인 특성을 반영할 수 있는 공간적 기법(CNN)을 적용한 기법(FC-LSTM, ConvLSTM)</strong>을 통해 해결할 수 있을 것으로 보임</li>
+<li>2019년 7월 1일과 12월 1일에 <strong>대마난류의 흐름에 의한 과대 또는 과소추정의 결과가 관측</strong>된다(T.W.C)</li>
+</ul>
+<p><br></p>
+<blockquote>
+<p><strong>예측 기간별 공간적 오차 분석</strong></p>
+</blockquote>
+<ul>
+<li>LSTM, ConvLSTM 모델을 이용한 중단기 예측의 검증 자료의 공간적인 오차를 분석</li>
+<li>두 모델 모두 <strong>예측 일수가 증가함에 따라 예측 오차가 비례하여 증가하는 것으로 나타남</strong></li>
+<li><p>MD의 경우, LSTM이 예측 기간이 증가함에 따라 공간적으로 <strong>불연속적인 오차 패턴</strong>이 나타나는 것과 비교하여, ConvLSTM 모델은 <strong>연속적인 양의 오차</strong>(positive error)만 나타남</p>
+</li>
+<li><p>LSTM과 ConvLSTM 모델의 ME에 대한 공간적 분포를 비교</p>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_4.png" class="">
+<ul>
+<li>각 <strong>픽셀별로 훈련된 LSTM 모델이 상대적으로 높은 공간적 노이즈</strong>를 보이는 것으로 나타났으며, <strong>과소추정과 과대 추정하는 패턴</strong>이 골고루 나타남</li>
+<li>RMSE를 활용한 두 모델의 <strong>해수면 온도 예측 단계별 오차의 공간분포</strong> 또한 <strong>LSTM 기반 예측 모델이 ConvLSTM 모델에 비하여 상대적으로 낮은 예측 정확도</strong>를 보임</li>
+<li>두 모델 모두, <strong>예측기간 4일을 기준으로 급격히 증가</strong>하는 것으로 나타났으며, <strong>연안지역이 원해지역에 비하여 상대적으로 더 높은 RMSE를 보이는 것으로 나타남</strong><ul>
+<li>이는 대마난류에 의하여 예측 오차가 커진 것으로 분석됨</li>
+<li>합성곱 연산(convolutional operator)이 필터에 숫자에 따른 연산이 증가됨에 따라 예측 자료의 값(value)이 예측을 거듭할수록 Smoothing되는 경향이 ConvLSTM모델에서 보이며 두 예측 모델 모두 거문도 남동쪽-제주도 북동쪽 해역(그림의 중간 부분)부터 RMSE와 MD가 서서히 증가되며 주변 영역으로 확대되는 현상을 보였다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="활용결과"><a href="#활용결과" class="headerlink" title="활용결과"></a>활용결과</h2><blockquote>
+<p><strong>국립수산과학원에서 제공하는 고수온 속보와 두 모델에서 예측한 해수면의 비교 및 분석을 수행</strong></p>
+</blockquote>
+<ul>
+<li><p>인공위성 산출 해수면 온도는 표층 뜰개 부이와의 측정 수심이 다르기 때문에 오차가 존재하며 연안과의 거리에 따른 정확도에 차이가 있다(Park et al., 2008)</p>
+<ul>
+<li>OSTIA는 파운데이션 해수면온도(foundation SST)를 산출하며 주간 효과(Diurnal warming) 을 제거하였기 때문에 표층 해수면 온도와 차이가 생길수 있으며 직접 비교하기에 한계가 있다(Donlon et al., 2012; Woo et al., 2020)</li>
+<li>고수온이 발생한 2017년 8월 17일을 대상으로 두 모델의 예측 결과를 비교해 본 결과 ConvLSTM이 LSTM에 비해 1-7일 예측 모두 레퍼런스 해수면 온도와 유사한 공간적 분포를 보여줌</li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_5.png" class="">
+</li>
+<li><p>LSTM, ConvLSTM의 이상치(anomaly)와 고수온 카테고리에 대한 시공간적인 분포를 나타냄</p>
+<ul>
+<li><strong>LSTM의 결과에서 이상치는 2일 이상 예측 시 급격한 탐지 성능 저하</strong>가 생기며 대부분 <strong>해역에 대한 주의보(caution)를 예측하지 못하는 것으로 나타남</strong><ul>
+<li><strong>예측 기간이 증가함에 따라 예측 이상치 면적이 급격히 감소</strong></li>
+<li>예측 해수면 온도 값의 <strong>과소 추정</strong>으로 인해 전체적으로 <strong>고수온 탐지를 과소 모의하는 경향</strong>을 보임</li>
+</ul>
+</li>
+<li>ConvLSTM의 결과에서는 <strong>시공간적인 분포에서 고수온 탐지 지역의 범위가 LSTM보다 상대적으로 서서히 감소</strong><ul>
+<li><strong>예측 기간이 5일 이상이 되는 시점부터 경보 예측의 오차가 커지는 경향을 보임</strong></li>
+<li>예측 기간별 공간적 오차와 RMSE의 결과와 동일하게 LSTM의 경우 각 픽셀마다 모델링을 하기 때문에 LSTM 고수온 카테고리 결과에서 제주도 남동쪽 해역(그림의 좌하단)의 픽셀은 <strong>5일까지 이상치를 적절히 모의</strong>하는 반면 이외의 부분에서는 <strong>과소 추정</strong>함</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_6.png" class="">
+<ul>
+<li>반면 ConvLSTM 모델 결과에 따르면 2, 3일전 제주도 동쪽 해역(그림의 중간 부분)에서 <strong>과대 추정으로 인해 이상 치가 증가됨에 따라 경보 범위가 확대</strong>되었으며 주의보 픽셀들은 <strong>과소 추정하는 경향</strong>이 나타나며 범위가 축소</li>
+<li>과대 추정을 하는 경향을 가진 픽셀에 대해서는 주의보, 경보에 대한 탐지를 할 수 있지만 <strong>과소 추정하는 경우 탐지할 수 없는 한계</strong></li>
+<li><strong>두 예측 모델 모두에서 예측 기간이 길어짐에 따라 주의보와 경보의 면적 추정 시 과소 모의하는 경향이 뚜렷</strong>하므로 <strong>예측 기간의 연장에 따라 고수온 탐지 영역의 축소 현상</strong>이 일어남</li>
+</ul>
+<img src="/2024/03/01/REF-SST-01/REF_SST_01_7.png" class="">
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/03/01/REF-SST-01/">https://gyoungmin-lim.github.io/2024/03/01/REF-SST-01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DL/">DL</a><a class="post-meta__tags" href="/tags/SST/">SST</a><a class="post-meta__tags" href="/tags/Reference/">Reference</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/01/SBS-SST-BuoyData/" title="(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/22/SBS-SST-DataConfiguration/" title="(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 활성화 함수(Activation Function)</div></div></a></div><div><a href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 퍼셉트론(Perceptron)</div></div></a></div><div><a href="/2024/02/22/ETC-KODC/" title="한국 해양자료센터(Korea Oceanographic Data Center, KODC)"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-22</div><div class="title">한국 해양자료센터(Korea Oceanographic Data Center, KODC)</div></div></a></div><div><a href="/2024/02/22/ETC-OSTIA-DataDownload/" title="해양수치모델 OSTIA 데이터 다운로드 방법"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-22</div><div class="title">해양수치모델 OSTIA 데이터 다운로드 방법</div></div></a></div><div><a href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-22</div><div class="title">위성자료를 활용한 표층수온 예측</div></div></a></div><div><a href="/2024/03/01/SBS-SST-BuoyData/" title="(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-01</div><div class="title">(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">99</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Title"><span class="toc-number">1.</span> <span class="toc-text">Title</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Background"><span class="toc-number">2.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-number">3.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Research"><span class="toc-number">4.</span> <span class="toc-text">Research</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%97%B0%EA%B5%AC%EC%A7%80%EC%97%AD"><span class="toc-number">4.1.</span> <span class="toc-text">연구지역</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%97%B0%EA%B5%AC%EC%9E%90%EB%A3%8C"><span class="toc-number">4.2.</span> <span class="toc-text">연구자료</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%97%B0%EA%B5%AC%EB%B0%A9%EB%B2%95"><span class="toc-number">4.3.</span> <span class="toc-text">연구방법</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%A0%95%ED%99%95%EB%8F%84-%ED%8F%89%EA%B0%80"><span class="toc-number">5.</span> <span class="toc-text">정확도 평가</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%97%B0%EA%B5%AC-%EA%B2%B0%EA%B3%BC-%EB%B0%8F-%ED%86%A0%EC%9D%98"><span class="toc-number">6.</span> <span class="toc-text">연구 결과 및 토의</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%ED%99%9C%EC%9A%A9%EA%B2%B0%EA%B3%BC"><span class="toc-number">7.</span> <span class="toc-text">활용결과</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/01/SBS-SST-BuoyData/" title="(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data"/></a><div class="content"><a class="title" href="/2024/03/01/SBS-SST-BuoyData/" title="(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data">(Step) 위성자료를 활용한 표층수온 예측 - Buoy Data</a><time datetime="2024-03-01T07:59:02.000Z" title="Created 2024-03-01 16:59:02">2024-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/01/REF-SST-01/" title="REF_SST_01"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="REF_SST_01"/></a><div class="content"><a class="title" href="/2024/03/01/REF-SST-01/" title="REF_SST_01">REF_SST_01</a><time datetime="2024-03-01T06:03:54.000Z" title="Created 2024-03-01 15:03:54">2024-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/SBS-SST-DataConfiguration/" title="(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration"/></a><div class="content"><a class="title" href="/2024/02/22/SBS-SST-DataConfiguration/" title="(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration">(Step) 위성자료를 활용한 표층수온 예측 - Data Configuration</a><time datetime="2024-02-22T09:36:17.000Z" title="Created 2024-02-22 18:36:17">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온 예측"/></a><div class="content"><a class="title" href="/2024/02/22/Project-SST/" title="위성자료를 활용한 표층수온 예측">위성자료를 활용한 표층수온 예측</a><time datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/22/ETC-OSTIA-DataDownload/" title="해양수치모델 OSTIA 데이터 다운로드 방법"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="해양수치모델 OSTIA 데이터 다운로드 방법"/></a><div class="content"><a class="title" href="/2024/02/22/ETC-OSTIA-DataDownload/" title="해양수치모델 OSTIA 데이터 다운로드 방법">해양수치모델 OSTIA 데이터 다운로드 방법</a><time datetime="2024-02-22T09:23:39.000Z" title="Created 2024-02-22 18:23:39">2024-02-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
