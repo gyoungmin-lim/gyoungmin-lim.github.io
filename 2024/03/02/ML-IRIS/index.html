@@ -1,0 +1,439 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(ML) IRIS Classification | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="머신러닝이란? 명시적으로 프로그래밍하지 않고 컴퓨터에 학습할 수 있는 능력을 부여하는 학문 경험에 쌓여 감에 따라 주어진 태스크의 성능이 점점 좋아질 때 컴퓨터 프로그램은 경험으로부터 학습한다고 할 수 있음   Process 지도학습   학습 대상이 되는 데이터에 정답(label)을 붙여서 학습 모델을 얻어서 완전히 새로운 데이터에 모델을 사용해서 ‘답’을">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(ML) IRIS Classification">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/03/02/ML-IRIS/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="머신러닝이란? 명시적으로 프로그래밍하지 않고 컴퓨터에 학습할 수 있는 능력을 부여하는 학문 경험에 쌓여 감에 따라 주어진 태스크의 성능이 점점 좋아질 때 컴퓨터 프로그램은 경험으로부터 학습한다고 할 수 있음   Process 지도학습   학습 대상이 되는 데이터에 정답(label)을 붙여서 학습 모델을 얻어서 완전히 새로운 데이터에 모델을 사용해서 ‘답’을">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/ML_cover.jpg">
+<meta property="article:published_time" content="2024-03-02T07:24:15.000Z">
+<meta property="article:modified_time" content="2024-03-02T08:02:22.270Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="ML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/ML_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/03/02/ML-IRIS/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(ML) IRIS Classification',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-02 17:02:22'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/ML_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(ML) IRIS Classification</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-02T07:24:15.000Z" title="Created 2024-03-02 16:24:15">2024-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-02T08:02:22.270Z" title="Updated 2024-03-02 17:02:22">2024-03-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/ML-DL/">ML/DL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(ML) IRIS Classification"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="머신러닝이란"><a href="#머신러닝이란" class="headerlink" title="머신러닝이란?"></a>머신러닝이란?</h1><ul>
+<li>명시적으로 프로그래밍하지 않고 <strong>컴퓨터에 학습할 수 있는 능력을 부여</strong>하는 학문</li>
+<li><strong>경험에 쌓여 감에 따라 주어진 태스크의 성능이 점점 좋아질 때</strong> 컴퓨터 프로그램은 <strong>경험으로부터 학습한다</strong>고 할 수 있음</li>
+</ul>
+<p><br></p>
+<h2 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h2><blockquote>
+<p><strong>지도학습</strong></p>
+</blockquote>
+<ul>
+<li>학습 대상이 되는 데이터에 정답(label)을 붙여서 학습</li>
+<li>모델을 얻어서 완전히 새로운 데이터에 모델을 사용해서 ‘답’을 얻고자 하는 것</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="Iris-Classification"><a href="#Iris-Classification" class="headerlink" title="Iris Classification"></a>Iris Classification</h1><blockquote>
+<p><strong>IRIS</strong></p>
+</blockquote>
+<ul>
+<li>프랑스의 국화</li>
+<li>아이리스(Iris)라는 이름은 그리스 신화의 무지개의 여신인 Iris에서 따온 것<ul>
+<li>헤라 여신이 Iris에게 내린 축복의 숨결이 땅으로 떨어져 핀 꽃</li>
+<li>꽃말 : 좋은소식, 잘 전해주세요, 사랑의메시지</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h2><ul>
+<li><strong>아이리스의 품종 분류</strong><blockquote>
+<p><strong>꽃잎(petal), 꽃받침(sepal)의 길이/너비 정보를 이용</strong>해서 이 3종의 품종을 구분할 수 있을까?</p>
+</blockquote>
+</li>
+</ul>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_1.png" class="">
+<p><br></p>
+<h2 id="Checking-Dataset"><a href="#Checking-Dataset" class="headerlink" title="Checking Dataset"></a>Checking Dataset</h2><ul>
+<li>Load Iris Dataset</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Load Iris Dataset</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line">iris</span><br></pre></td></tr></table></figure>
+<ul>
+<li>sklearn의 Dataset은 Python의 dict()형과 유사</li>
+</ul>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_2.png" class="">
+<ul>
+<li>iris key 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iris.keys()</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_3.png" class="">
+<ul>
+<li>Iris Description 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(iris.DESCR)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_4.png" class="">
+<ul>
+<li>target name 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iris.target_names</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_5.png" class="">
+<ul>
+<li>target 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iris.target</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_6.png" class="">
+<ul>
+<li>data 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iris.data</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_7.png" class="">
+<p><br></p>
+<h2 id="데이터-관찰"><a href="#데이터-관찰" class="headerlink" title="데이터 관찰"></a>데이터 관찰</h2><h3 id="상황-파악"><a href="#상황-파악" class="headerlink" title="상황 파악"></a>상황 파악</h3><img src="/2024/03/02/ML-IRIS/ML_IRIS_8.png" class="">
+<ul>
+<li>그럼 어떻게 해야할까?</li>
+<li>사람이 직접 구분하려면??</li>
+<li>일단, 먼저 versicolor, virginica, setosa를 구분하기 위해 3개 품종의 특성을 먼저 공부해야~</li>
+</ul>
+<p><br></p>
+<h3 id="Making-DataFrame"><a href="#Making-DataFrame" class="headerlink" title="Making DataFrame"></a>Making DataFrame</h3><ul>
+<li>DataFrame 만들기</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">iris_pd = pd.DataFrame(iris.data, columns = iris.feature_names)</span><br><span class="line">iris_pd.head()</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_9.png" class="">
+<ul>
+<li>Iris 품종 구분을 위해 column 추가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iris 품종 추가</span></span><br><span class="line">iris_pd[<span class="string">&#x27;species&#x27;</span>] = iris.target</span><br><span class="line">iris_pd.head()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>Boxplot을 통해 관계 확인</strong></p>
+</blockquote>
+<ul>
+<li>sepal length의 관계 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;sepal length (cm)&#x27;</span>, y = <span class="string">&#x27;species&#x27;</span>, data = iris_pd, orient = <span class="string">&#x27;h&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_10.png" class="">
+<ul>
+<li>sepal width의 관계 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;petal length (cm)	&#x27;</span>, y = <span class="string">&#x27;species&#x27;</span>, data = iris_pd, orient = <span class="string">&#x27;h&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_11.png" class="">
+<ul>
+<li>petal length의 관계 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;petal length (cm)&#x27;</span>, y = <span class="string">&#x27;species&#x27;</span>, data = iris_pd, orient = <span class="string">&#x27;h&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_12.png" class="">
+<ul>
+<li>petal width의 관계 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">sns.boxplot(x = <span class="string">&#x27;petal width (cm)&#x27;</span>, y = <span class="string">&#x27;species&#x27;</span>, data = iris_pd, orient = <span class="string">&#x27;h&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_13.png" class="">
+<blockquote>
+<p><strong>Pairplot</strong></p>
+</blockquote>
+<ul>
+<li>꽃잎의 가로, 세로 길이를 가지고 더 높은 확률로 품종을 구분할 수 있을 것 같다.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(iris_pd, hue = <span class="string">&#x27;species&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_14.png" class="">
+<ul>
+<li>유의미할 것 같은 부분을 디테일하게 살펴보자.<ul>
+<li>세 가지 품종에 대한 구분이 가능할 것 같음</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sns.pairplot(data = iris_pd,</span><br><span class="line">             <span class="built_in">vars</span> = [<span class="string">&#x27;petal length (cm)&#x27;</span>, <span class="string">&#x27;petal width (cm)&#x27;</span>],</span><br><span class="line">             hue = <span class="string">&#x27;species&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_15.png" class="">
+<blockquote>
+<p><strong>Q. 품종 세 개를 구분할 수 있을까?</strong></p>
+<ol>
+<li>Petal Length가 2.5보다 작다면 모두 <strong>Setosa</strong>로 분류해도 됨</li>
+<li>몇 개의 데이터는 놓쳐지지만, petal width가 2.5보다 크면서 petal width가 1.6보다 작을 경우 <strong>Versicolor</strong></li>
+<li>petal length가 2.5보다 크면서 petal width가 1.6보다 클 경우 <strong>Virginica</strong></li>
+</ol>
+</blockquote>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_16.png" class="">
+<ul>
+<li>현 상황에서 가장 논리적인 근거</li>
+<li>진행했을 때 각각의 차이점에 대한 정량적 수치 제시</li>
+<li>가로선이 어디에 있는 것이 최선인지 확인</li>
+</ul>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_17.png" class="">
+<p><br></p>
+<h2 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h2><blockquote>
+<p><strong>Decision Tree란?</strong></p>
+</blockquote>
+<ul>
+<li>Sklearn을 이용한 decision tree 구현</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># decisionTree 구현</span></span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line">iris_tree = DecisionTreeClassifier()</span><br><span class="line">iris_tree.fit(iris.data[:, <span class="number">2</span>:], iris.target) <span class="comment"># Train Model</span></span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_18.png" class="">
+<ul>
+<li>accuracy 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># accuracy 확인</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">y_pred_tr = iris_tree.predict(iris.data[:, <span class="number">2</span>:]) <span class="comment"># Test Model</span></span><br><span class="line">accuracy_score(iris.target, y_pred_tr)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_19.png" class="">
+<p><br></p>
+<h3 id="Back-to-Previous-Story"><a href="#Back-to-Previous-Story" class="headerlink" title="Back to Previous Story"></a>Back to Previous Story</h3><ul>
+<li>Iris 품종을 분류하는 결정나무 모델이 어떻게 데이터를 분류했는지 알아보자.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mlxtend</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iris 품종을 분류하는 결정나무 모델이 어떻게 데이터를 분류했는지 알아보자.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mlxtend.plotting <span class="keyword">import</span> plot_decision_regions</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">14</span>, <span class="number">8</span>))</span><br><span class="line">plot_decision_regions(X = iris.data[:, <span class="number">2</span>:], Y = iris.target, clf = iris_tree, legend = <span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_20.png" class="">
+<ul>
+<li>Treemap 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Treemap 확인</span></span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> plot_tree</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">plot_tree(iris_tree);</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_21.png" class="">
+<p><br></p>
+<h2 id="과적합-Overfitting"><a href="#과적합-Overfitting" class="headerlink" title="과적합 (Overfitting)"></a>과적합 (Overfitting)</h2><ul>
+<li>Accuracy가 높게 나왔다고 해도 들여다 볼 필요가 있다.</li>
+</ul>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_22.png" class="">
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_23.png" class="">
+<ul>
+<li>저 경계면은 올바른 걸까<ul>
+<li>저 결과는 내가 가진 데이터를 벗어나서 일반화할 수 있는 걸까?</li>
+</ul>
+</li>
+<li>어차피 얻은(혹은 구한) 데이터는 유한하고 내가 얻은 데이터를 이용해서 일반화를 추구하게 된다.</li>
+<li>이때 복잡한 경계면은 모델의 성능을 결국 나쁘게 만든다.</li>
+</ul>
+<p><br><br><br></p>
+<h2 id="데이터-분리"><a href="#데이터-분리" class="headerlink" title="데이터 분리"></a>데이터 분리</h2><ul>
+<li>전체 데이터 (Origin Data) 중 모델 학습에 사용하지 않고 제외해 둔 데이터를 가지고 모델을 테스트한다.</li>
+</ul>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_24.png" class="">
+<p><br><br><br></p>
+<h1 id="New-IRIS-Classification"><a href="#New-IRIS-Classification" class="headerlink" title="(New) IRIS Classification"></a>(New) IRIS Classification</h1><ul>
+<li>Train/Test 데이터를 8:2 비율로 분리</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">features = iris.data[:, <span class="number">2</span>:]</span><br><span class="line">labels = iris.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8:2 비율로 Train/Test 분리</span></span><br><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(features,</span><br><span class="line">                                                    labels,</span><br><span class="line">                                                    test_size = <span class="number">0.2</span>,</span><br><span class="line">                                                    random_state = <span class="number">13</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Train/Test 데이터가 잘 분리되었는지 확인<ul>
+<li>문제가 각 클래스(setosa, versicolor, verginica) 별로 동일 비율이 아니다</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Train/Test 데이터가 잘 분리되었는지 확인</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">np.unique(Y_test, return_counts = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_25.png" class="">
+<ul>
+<li>동일하게 분리하기 위해 <code>stratify</code> option 추가</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">features = iris.data[:, <span class="number">2</span>:]</span><br><span class="line">labels = iris.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8:2 비율로 Train/Test 분리</span></span><br><span class="line"><span class="comment"># 동일하게 분리하기 위해 &#x27;stratify&#x27; option 추가</span></span><br><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(features, labels,</span><br><span class="line">                                                    stratify = labels,</span><br><span class="line">                                                    test_size = <span class="number">0.2</span>,</span><br><span class="line">                                                    random_state = <span class="number">13</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Train data를 대상으로 decision tree 만들기<ul>
+<li>학습할 때 마다 일관성을 위해 random_state만 고정</li>
+<li>모델을 단순화시키기 위해 max_depth를 조정</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line"><span class="comment"># 학습할 때 마다 일관성을 위해 random_state만 고정해서~</span></span><br><span class="line"><span class="comment"># 모델을 단순화시키기 위해 max_depth를 조정</span></span><br><span class="line">iris_tree = DecisionTreeClassifier(max_depth = <span class="number">2</span>, random_state = <span class="number">13</span>)</span><br><span class="line">iris_tree.fit(X_train, Y_train)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_26.png" class="">
+<ul>
+<li>Treemap 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> plot_tree</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">plot_tree(iris_tree);</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_27.png" class="">
+<ul>
+<li>Train data에 대한 accuracy 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">y_pred_tr = iris_tree.predict(X_train)</span><br><span class="line">accuracy_score(Y_train, y_pred_tr)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_28.png" class="">
+<ul>
+<li>Train data에 대한 결정 경계 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iris 품종을 분류하는 결정나무 모델이 어떻게 데이터를 분류했는지 알아보자.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> mlxtend.plotting <span class="keyword">import</span> plot_decision_regions</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">14</span>, <span class="number">8</span>))</span><br><span class="line">plot_decision_regions(X = iris.data[:, <span class="number">2</span>:], y = iris.target, clf = iris_tree, legend = <span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_29.png" class="">
+<ul>
+<li>Test data에 대한 Accuracy</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Test data에 대한 Accuracy</span></span><br><span class="line"></span><br><span class="line">y_pred_test = iris_tree.predict(X_test)</span><br><span class="line">accuracy_score(Y_test, y_pred_test)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_30.png" class="">
+<p><br></p>
+<h2 id="잔기술-전체-데이터에서-관찰해보기"><a href="#잔기술-전체-데이터에서-관찰해보기" class="headerlink" title="잔기술 - 전체 데이터에서 관찰해보기"></a>잔기술 - 전체 데이터에서 관찰해보기</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 잔기술</span></span><br><span class="line"><span class="comment"># 전체 데이터에서 관찰해보기</span></span><br><span class="line"></span><br><span class="line">scatter_hightlight_kwargs = &#123;<span class="string">&#x27;s&#x27;</span> : <span class="number">150</span>, <span class="string">&#x27;label&#x27;</span> : <span class="string">&#x27;Test data&#x27;</span>, <span class="string">&#x27;alpha&#x27;</span> : <span class="number">0.9</span>&#125;</span><br><span class="line">scatter_kwargs = &#123;<span class="string">&#x27;s&#x27;</span> : <span class="number">120</span>, <span class="string">&#x27;edgecolor&#x27;</span> : <span class="literal">None</span>, <span class="string">&#x27;alpha&#x27;</span> : <span class="number">0.9</span>&#125;</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line">plot_decision_regions(X = features,</span><br><span class="line">                      y = labels,</span><br><span class="line">                      X_highlight = X_test,</span><br><span class="line">                      clf = iris_tree,</span><br><span class="line">                      legend = <span class="number">2</span>,</span><br><span class="line">                      scatter_highlight_kwargs = scatter_hightlight_kwargs,</span><br><span class="line">                      scatter_kwargs = scatter_kwargs,</span><br><span class="line">                      contourf_kwargs = &#123;<span class="string">&#x27;alpha&#x27;</span> : <span class="number">0.2</span>&#125;</span><br><span class="line">                      )</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_31.png" class="">
+<p><br></p>
+<h2 id="Using-Feature-4"><a href="#Using-Feature-4" class="headerlink" title="Using Feature 4"></a>Using Feature 4</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"></span><br><span class="line">features = iris.data</span><br><span class="line">labels = iris.target</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8:2 비율로 Train/Test 분리</span></span><br><span class="line">X_train, X_test, Y_train, Y_test = train_test_split(features,</span><br><span class="line">                                                    labels,</span><br><span class="line">                                                    stratify = labels,</span><br><span class="line">                                                    test_size = <span class="number">0.2</span>,</span><br><span class="line">                                                    random_state = <span class="number">13</span>)</span><br><span class="line">iris_tree = DecisionTreeClassifier(max_depth = <span class="number">2</span>, random_state = <span class="number">13</span>)</span><br><span class="line">	iris_tree.fit(X_train, Y_train)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Treemap 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> plot_tree</span><br><span class="line"></span><br><span class="line">plt.figure(figsize = (<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line">plot_tree(iris_tree);</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_32.png" class="">
+<ul>
+<li>Train data에 대한 accuracy 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Train data에 대한 accuracy 확인</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> accuracy_score</span><br><span class="line"></span><br><span class="line">y_pred_tr = iris_tree.predict(X_train)</span><br><span class="line">accuracy_score(Y_train, y_pred_tr)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_33.png" class="">
+<ul>
+<li>Test data에 대한 accuracy 확인</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Test data에 대한 Accuracy</span></span><br><span class="line"></span><br><span class="line">y_pred_test = iris_tree.predict(X_test)</span><br><span class="line">accuracy_score(Y_test, y_pred_test)</span><br></pre></td></tr></table></figure>
+<img src="/2024/03/02/ML-IRIS/ML_IRIS_34.png" class=""></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/03/02/ML-IRIS/">https://gyoungmin-lim.github.io/2024/03/02/ML-IRIS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/ML/">ML</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/02/ML-Titanic/" title="(ML) Titanic 생존율 예측"><img class="cover" src="/../cover_img/ML_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(ML) Titanic 생존율 예측</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/02/Mysql-ForeignKey/" title="(MySQL) 외래 키(Foreign Key)"><img class="cover" src="/../cover_img/Mysql_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(MySQL) 외래 키(Foreign Key)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/03/ML-Scalar-Encoder/" title="(ML) label_encoder, min_max, standard, robust scalar"><img class="cover" src="/../cover_img/ML_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-03</div><div class="title">(ML) label_encoder, min_max, standard, robust scalar</div></div></a></div><div><a href="/2024/03/02/ML-Titanic/" title="(ML) Titanic 생존율 예측"><img class="cover" src="/../cover_img/ML_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-02</div><div class="title">(ML) Titanic 생존율 예측</div></div></a></div><div><a href="/2024/03/03/ML-WineDataAnalysis/" title="(ML) 와인(Wine) 데이터 분석"><img class="cover" src="/../cover_img/ML_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-03</div><div class="title">(ML) 와인(Wine) 데이터 분석</div></div></a></div><div><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/DL_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 활성화 함수(Activation Function)</div></div></a></div><div><a href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img class="cover" src="/../cover_img/DL_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 퍼셉트론(Perceptron)</div></div></a></div><div><a href="/2024/02/16/Python-Algorithm/" title="(Python 중급) 알고리즘(Algorithm)"><img class="cover" src="/../cover_img/Python_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-16</div><div class="title">(Python 중급) 알고리즘(Algorithm)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%EC%9D%B4%EB%9E%80"><span class="toc-number">1.</span> <span class="toc-text">머신러닝이란?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Process"><span class="toc-number">1.1.</span> <span class="toc-text">Process</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Iris-Classification"><span class="toc-number">2.</span> <span class="toc-text">Iris Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Goal"><span class="toc-number">2.1.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Checking-Dataset"><span class="toc-number">2.2.</span> <span class="toc-text">Checking Dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B4%80%EC%B0%B0"><span class="toc-number">2.3.</span> <span class="toc-text">데이터 관찰</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EC%83%81%ED%99%A9-%ED%8C%8C%EC%95%85"><span class="toc-number">2.3.1.</span> <span class="toc-text">상황 파악</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Making-DataFrame"><span class="toc-number">2.3.2.</span> <span class="toc-text">Making DataFrame</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Decision-Tree"><span class="toc-number">2.4.</span> <span class="toc-text">Decision Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Back-to-Previous-Story"><span class="toc-number">2.4.1.</span> <span class="toc-text">Back to Previous Story</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B3%BC%EC%A0%81%ED%95%A9-Overfitting"><span class="toc-number">2.5.</span> <span class="toc-text">과적합 (Overfitting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%84%EB%A6%AC"><span class="toc-number">2.6.</span> <span class="toc-text">데이터 분리</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#New-IRIS-Classification"><span class="toc-number">3.</span> <span class="toc-text">(New) IRIS Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%9E%94%EA%B8%B0%EC%88%A0-%EC%A0%84%EC%B2%B4-%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%97%90%EC%84%9C-%EA%B4%80%EC%B0%B0%ED%95%B4%EB%B3%B4%EA%B8%B0"><span class="toc-number">3.1.</span> <span class="toc-text">잔기술 - 전체 데이터에서 관찰해보기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-Feature-4"><span class="toc-number">3.2.</span> <span class="toc-text">Using Feature 4</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/05/SBS-SST-EDA/" title="File Download"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="File Download"/></a><div class="content"><a class="title" href="/2024/03/05/SBS-SST-EDA/" title="File Download">File Download</a><time datetime="2024-03-05T05:15:52.000Z" title="Created 2024-03-05 14:15:52">2024-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/Math-Modeling-002/" title="(Mathematical Modeling) - Deterministic ODE Models">(Mathematical Modeling) - Deterministic ODE Models</a><time datetime="2024-03-04T08:05:22.000Z" title="Created 2024-03-04 17:05:22">2024-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/Math-Modeling-001/" title="(Mathematical Modeling) - Introduction">(Mathematical Modeling) - Introduction</a><time datetime="2024-03-04T08:05:19.000Z" title="Created 2024-03-04 17:05:19">2024-03-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/03/ML-Scalar-Encoder/" title="(ML) label_encoder, min_max, standard, robust scalar"><img src="/../cover_img/ML_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(ML) label_encoder, min_max, standard, robust scalar"/></a><div class="content"><a class="title" href="/2024/03/03/ML-Scalar-Encoder/" title="(ML) label_encoder, min_max, standard, robust scalar">(ML) label_encoder, min_max, standard, robust scalar</a><time datetime="2024-03-03T07:25:59.000Z" title="Created 2024-03-03 16:25:59">2024-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/03/ML-WineDataAnalysis/" title="(ML) 와인(Wine) 데이터 분석"><img src="/../cover_img/ML_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(ML) 와인(Wine) 데이터 분석"/></a><div class="content"><a class="title" href="/2024/03/03/ML-WineDataAnalysis/" title="(ML) 와인(Wine) 데이터 분석">(ML) 와인(Wine) 데이터 분석</a><time datetime="2024-03-03T07:13:54.000Z" title="Created 2024-03-03 16:13:54">2024-03-03</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
