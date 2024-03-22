@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LSTM 기법을 활용한 수온 예측 | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Summary   Goal  : LSTM 기법을 활용한 수온 예측  수행기간  : 2024.01.31 ~ 2024.03.21  수행내용  위성데이터의 경우 Epoch Time으로 이루어져 있어 Local Time으로 변환 시간에 따른 해수면온도(Sea Surface Temperature, SST) 변화를 살펴본 결과, 여름철 남쪽에서부터 북쪽으로 SST가">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LSTM 기법을 활용한 수온 예측">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/02/22/Project-DL-Zerobase02/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="Summary   Goal  : LSTM 기법을 활용한 수온 예측  수행기간  : 2024.01.31 ~ 2024.03.21  수행내용  위성데이터의 경우 Epoch Time으로 이루어져 있어 Local Time으로 변환 시간에 따른 해수면온도(Sea Surface Temperature, SST) 변화를 살펴본 결과, 여름철 남쪽에서부터 북쪽으로 SST가">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase02_cover.jpg">
+<meta property="article:published_time" content="2024-02-22T09:35:40.000Z">
+<meta property="article:modified_time" content="2024-03-22T07:27:29.380Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="DL">
+<meta property="article:tag" content="Project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Project_DL_Zerobase02_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/02/22/Project-DL-Zerobase02/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LSTM 기법을 활용한 수온 예측',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-22 16:27:29'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">131</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Project_DL_Zerobase02_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">LSTM 기법을 활용한 수온 예측</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-02-22T09:35:40.000Z" title="Created 2024-02-22 18:35:40">2024-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-22T07:27:29.380Z" title="Updated 2024-03-22 16:27:29">2024-03-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Project/">Project</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="LSTM 기법을 활용한 수온 예측"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>Summary</strong></p>
+<ul>
+<li><span style="color:green"> <strong>Goal</strong> </span> : <strong>LSTM 기법을 활용한 수온 예측</strong></li>
+<li><span style="color:blue"> <strong>수행기간</strong> </span> : <strong>2024.01.31 ~ 2024.03.21</strong></li>
+<li><span style="color:violet"> <strong>수행내용</strong> </span><ul>
+<li>위성데이터의 경우 <strong>Epoch Time</strong>으로 이루어져 있어 <strong>Local Time</strong>으로 변환</li>
+<li>시간에 따른 해수면온도(Sea Surface Temperature, SST) 변화를 살펴본 결과, <strong><u>여름철 남쪽에서부터 북쪽으로 SST</u></strong>가 상승하며, 반대로 <strong><u>겨울철에 북쪽에서 남쪽으로 SST 하락</u></strong>을 보임. 이는 <u><strong>해류와 연관성</strong></u>이 있어보임.</li>
+<li>사용모델 : <strong>LSTM(Long Short Term Memory)</strong></li>
+<li>평가지표 : <strong>RMSE(Root Mean Square Error)</strong></li>
+<li>예측 결과, <u><strong>연안에서 RMSE가 대체적으로 높게 나타나는 것을 확인</strong></u>하였으며, <strong>원해의 경우 남해 부근에서 RMSE가 높게</strong> 나타남</li>
+<li><u><strong>장기 데이터를 사용할수록 RMSE가 증가</strong></u>하는 것을 확인. 따라서 <u><strong>단기 예측에는 효율적이나, 장기 예측의 경우 부정확할 것이라고 판단</strong></u>됨. 그러나 중간에 예측값(Day4, Day6)이 튀는 현상은 해결하지 못함</li>
+<li>추후 <strong>Drop-Out Method</strong> 등을 활용하여 해당 문제를 해결할 수 있을 것이라고 생각됨</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<p><br></p>
+<h1 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h1><ul>
+<li>Sea Surface Temperature(SST) : 지구 해양-대기 시스템에서 중요한 매개변수 중 하나</li>
+<li>지구 바다 전역 기후에 깊은 영향을 미침</li>
+<li>강수량 분포에 영향을 미쳐 가뭄과 홍수 같은 심각한 피해를 끼치는 기상사건 발생 가능성이 커짐</li>
+</ul>
+<p><br></p>
+<h2 id="OSTIA-Operational-Sea-Surface-Temperature-and-Sea-Ice-Analysis"><a href="#OSTIA-Operational-Sea-Surface-Temperature-and-Sea-Ice-Analysis" class="headerlink" title="OSTIA(Operational Sea Surface Temperature and Sea Ice Analysis)"></a>OSTIA(Operational Sea Surface Temperature and Sea Ice Analysis)</h2><ul>
+<li>해양수치모델 OSTIA는 해양의 표면 온도와 해빙 분포를 모니터링하고 예측하기 위한 모델</li>
+<li><p><u><strong>영국 해양과학 연구소 (UK Met Office)</strong></u>에서 개발하고 운영</p>
+</li>
+<li><p>위성 자료를 기반으로 해양 환경을 추정</p>
+</li>
+<li>표면 온도와 해빙을 모니터링하고 예측하는 데에 사용<ul>
+<li>해양 수면 온도와 해빙은 해양 생태계, 기후 변화, 해양 탐사 및 해양 자원 관리 등 다양한 분야에서 중요한 역할</li>
+</ul>
+</li>
+<li>국제 해양 연구 및 모니터링 프로그램에서 널리 사용</li>
+<li>해양 환경에 대한 이해를 향상시키고 다양한 관련 분야에서의 응용 가능성을 확대하는 데 기여</li>
+</ul>
+<blockquote>
+<p><strong>특징</strong></p>
+</blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">특징</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">위성 자료 활용</td>
+<td>위성 자료를 기반으로 해양 환경을 모니터링하고 예측하는 데 사용 <br > 넓은 지역의 해양 상태를 실시간 또는 예측</td>
+</tr>
+<tr>
+<td style="text-align:center">공간 및 시간 분해능</td>
+<td>OSTIA는 고해상도의 공간 분해능과 시간 분해능을 제공하여 해양 환경을 상세하게 파악</td>
+</tr>
+<tr>
+<td style="text-align:center">실시간 및 예측</td>
+<td>실시간 및 예측 모드에서 작동하여 해양 환경의 현재 상태를 모니터링하고 미래 상황을 예측 <br> 해양 관련 활동을 계획하고 관리하는 데 도움</td>
+</tr>
+<tr>
+<td style="text-align:center">다양한 응용 분야</td>
+<td>해양 예측 및 모니터링, 해양 생물학적 연구, 해양 자원 개발 등 다양한 분야에 활용</td>
+</tr>
+<tr>
+<td style="text-align:center">국제적 활용</td>
+<td>국제 해양 연구 및 모니터링 프로그램에서 널리 사용 <br> 다양한 국가 및 기관에서 활발하게 활용</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>공간 분해능</strong><ul>
+<li>데이터나 모델이 특정 지역을 얼마나 세세하게 분석할 수 있는지를 나타냄</li>
+<li>공간 분해능이 높을수록 더 작은 지리적 영역을 상세하게 파악 가능</li>
+<li>ex) 고해상도 위성 이미지는 더 작은 지형 특징이나 객체를 분석하는 데 유용합니다.</li>
+</ul>
+</li>
+<li><strong>시간 분해능</strong><ul>
+<li>데이터나 모델이 시간을 얼마나 세밀하게 측정하거나 예측할 수 있는지를 나타냄</li>
+<li>시간 분해능이 높을수록 더 짧은 시간 간격으로 변화를 관찰하거나 예측할 수 있다</li>
+<li>ex) 기상 예측 모델이 날씨 변화를 미래 몇 시간 내에 얼마나 정확하게 예측할 수 있는지에 영향</li>
+</ul>
+</li>
+</ul>
+<p>▶︎ 고해상도의 공간 분해능과 시간 분해능을 가진 모델은 해양 환경을 상세하게 파악할 수 있고, 실시간 모니터링과 예측에 유용</p>
+<p><br></p>
+<h2 id="Data-Classification"><a href="#Data-Classification" class="headerlink" title="Data Classification"></a>Data Classification</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Full name</strong></td>
+<td>Global Ocean OSTIA Sea Surface Temperature and Sea Ice Analysis</td>
+</tr>
+<tr>
+<td><strong>Product ID</strong></td>
+<td>SST_GLO_SST_L4_NRT_OBSERVATIONS_010_001</td>
+</tr>
+<tr>
+<td><strong>Source</strong></td>
+<td>Satellite observations</td>
+</tr>
+<tr>
+<td><strong>Spatial extent</strong></td>
+<td>Global OceanLat -89.97° to 89.97°Lon -179.98° to 179.98°</td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Spatial resolution</strong>  </span></td>
+<td><span style="color:blue"> <strong>0.05° × 0.05°</strong> </span></td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Temporal extent</strong> </span></td>
+<td><span style="color:blue"> <strong>1 Jan 2007 to 21 Feb 2024</strong> </span></td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Temporal resolution</strong> </span></td>
+<td><span style="color:blue"> <strong>Daily, Monthly</strong> </span></td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Processing level</strong> </span></td>
+<td><span style="color:blue"> <strong>Level 4</strong> </span></td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Variables</strong> </span></td>
+<td>Sea ice area fraction, <span style="color:blue"> <strong>Sea surface temperature (SST)</strong> </span></td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Feature type</strong> </span></td>
+<td>Grid</td>
+</tr>
+<tr>
+<td><strong>Blue markets</strong></td>
+<td>Polar environment monitoringClimate &amp; adaptationPolicy <br> governanceScience &amp; innovationExtremes <br> hazards &amp; safetyCoastal services</td>
+</tr>
+<tr>
+<td><strong>Projection</strong></td>
+<td>WGS 84 (EPSG:4326)</td>
+</tr>
+<tr>
+<td><strong>Update</strong> frequency</td>
+<td>Daily – 08:00; 12:00 UTC</td>
+</tr>
+<tr>
+<td><span style="color:blue"> <strong>Format</strong> </span></td>
+<td>NetCDF-3, <span style="color:blue"> <strong>NetCDF-4</strong> </span></td>
+</tr>
+<tr>
+<td><strong>Originating centre</strong></td>
+<td>Met Office (UK)</td>
+</tr>
+<tr>
+<td><strong>Last metadata update</strong></td>
+<td>30 March 2023</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br><br></p>
+<h1 id="Data-Configuration"><a href="#Data-Configuration" class="headerlink" title="Data Configuration"></a>Data Configuration</h1><blockquote>
+<p><strong>지역 설정</strong></p>
+</blockquote>
+<ul>
+<li>아래 시간 및 지역에 해당하는 Sea Surface Temperature(SST) Data Download<ul>
+<li><strong>시간</strong> : 2023. 01. 01. ~ 2024. 01. 01</li>
+<li><strong>경도</strong> : 124° ~ 132°, <strong>위도</strong> : 33° ~ 43°</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="시간-Time"><a href="#시간-Time" class="headerlink" title="시간(Time)"></a>시간(Time)</h2><ul>
+<li>시간 구성을 확인하기 위해 <code>head</code> 확인<ul>
+<li><u><strong>지수표기법</strong></u>으로 구성되어있다. 따라서 <u><strong>지수표기법을 일반화</strong></u>하여 확인</li>
+<li>OSTIA Time의 경우 <u><strong>에포크 시간(epoch time)</strong></u>으로 표현되는 것을 확인</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>에포크 시간(epoch time)</strong></p>
+<ul>
+<li>에포크 시간은 보통 1970년 1월 1일 0시 0분 0초 (UTC)부터 현재까지의 시간을 초 단위로 표현한 것</li>
+<li>따라서 이 숫자들은 해당 기간동안의 초 단위를 나타냄</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>에포크 시간(epoch time)을 현재 시간(local time)</strong>으로 변환<ul>
+<li><code>time</code> 변수의 경우 masking numpy array로 되어있어 data만 추출하여야 변환 가능</li>
+<li>변환된 시간을 date 형태로 변환</li>
+<li>변환된 시간을 <code>&#39;yyyy-mm-dd&#39;</code>와 <code>&#39;hh:mm&#39;</code>으로 변환</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<h2 id="공간-Space"><a href="#공간-Space" class="headerlink" title="공간(Space)"></a>공간(Space)</h2><ul>
+<li>공간을 나타내는 변수인 <code>위도(latitude)</code>와 <code>경도(longitude)</code>를 확인</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">위도(latitude)</th>
+<th style="text-align:center">경도(longitude)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/Project-SST-DataConfiguration_7.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/Project-SST-DataConfiguration_8.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="Sea-Surface-Temperature-SST"><a href="#Sea-Surface-Temperature-SST" class="headerlink" title="Sea Surface Temperature(SST)"></a>Sea Surface Temperature(SST)</h2><ul>
+<li>우리가 보고자 하는 변수 ‘<code>analysed_sst</code>‘에 대한 데이터 정보 확인<ul>
+<li>3-dimension으로 구성되어있으며, <u><strong>(time, latitude, longitute)</strong></u>를 나타냄</li>
+<li><strong>time</strong>의 경우, 일(day) 단위를 나타냄</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br></p>
+<h1 id="EDA"><a href="#EDA" class="headerlink" title="EDA"></a>EDA</h1><h2 id="단위-변환"><a href="#단위-변환" class="headerlink" title="단위 변환"></a>단위 변환</h2><ul>
+<li>위/경도에 따른 표층수온(SST)을 시각화</li>
+</ul>
+<blockquote>
+<p><strong>수온의 상태가 이상하다</strong></p>
+<ul>
+<li>OSTIA NetCDF 수온의 경우, <u><strong>켈빈(Kelvin, K)</strong></u>으로 단위가 지정되어 있음</li>
+<li>따라서, <u><strong>켈빈을 섭씨(Celcius, $ ^oC$)로 변경</strong></u>해줄 필요가 있음<script type="math/tex; mode=display">
+K = C + 273.15</script></li>
+</ul>
+</blockquote>
+<ul>
+<li>섭씨(Cellcius)로 변환된 값을 이용해 Figure Out</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/2024/02/22/Project-DL-Zerobase02/Project-SST-DataConfiguration_10.png" class=""></td>
+<td><img src="/2024/02/22/Project-DL-Zerobase02/Project-SST-DataConfiguration_11.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h2 id="계절성-변화도"><a href="#계절성-변화도" class="headerlink" title="계절성 변화도"></a>계절성 변화도</h2><ul>
+<li><p><strong>수온의 변화를 눈에 잘 보이게 하기 위해</strong>, 표층수온 전체 데이터의 Max, Min(즉, 최대, 최소 표층수온) 구한 후, colorbar 고정</p>
+<ul>
+<li><u><strong>가지고 있는 데이터의 최대, 최소값</strong></u>으로 설정</li>
+<li><code>Max</code> : 31.25, <code>Min</code> : -2.0</li>
+</ul>
+</li>
+<li><p>계절 기준 표층수온(SST) 변화도를 확인하기 위해 봄(3, 4, 5월), 여름(6, 7, 8월), 가을(9, 10, 11월), 겨울(12, 1, 2월)의 첫 날짜를 기준으로 시각화를 진행</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">2023-03-01</th>
+<th style="text-align:center">2023-06-01</th>
+<th style="text-align:center">2023-09-01</th>
+<th style="text-align:center">2023-12-01</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_EDA_2.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_EDA_3.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_EDA_4.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_EDA_5.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>또한, 현재 주어진 데이터는 일(Day) 데이터 기반이기 때문에, 시간의 흐름에 따른 수온의 변화를 애니메이션(<code>gif</code>)을 통해 확인</li>
+</ul>
+<img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_EDA_6.gif" class="">
+<p><br><br><br></p>
+<h1 id="Application-with-LSTM"><a href="#Application-with-LSTM" class="headerlink" title="Application with LSTM"></a>Application with LSTM</h1><ul>
+<li>LSTM 모델을 활용하여 과거 데이터를 얼만큼 사용했을 때의 결과를 비교하기 위해 코드를 진행하기 앞서, 한 가지를 먼저 진행</li>
+<li><u><strong>Sequence Length = 3</strong></u>, 즉 3일간의 데이터를 사용했을 때의 결과를 먼저 비교하고자 함</li>
+<li>이후 Sequence Length의 변화에 따른 결과를 비교</li>
+</ul>
+<h2 id="Lead-3-time"><a href="#Lead-3-time" class="headerlink" title="Lead 3 time"></a>Lead 3 time</h2><ul>
+<li>LSTM을 구현하기 위해, 현재 데이터프레임에 생성되어있는 <code>NaN</code> column 제거<ul>
+<li>모델을 돌리기 위한 데이터프레임에 <code>NaN</code>값이 포함되어있을 경우 동작하지 않는 것으로 알고 있다.</li>
+<li>현재 데이터프레임은 <u><strong>masking되어 있는 값으로 구분</strong></u>되기 때문에, masking patern을 가지고 있는 경우 제거하기 위해 <strong>column list를 작성하여 추가</strong>해준다.</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_LSTM_01_3.png" class="">
+<p><br></p>
+<h3 id="LSTM-Model-구축"><a href="#LSTM-Model-구축" class="headerlink" title="LSTM Model 구축"></a>LSTM Model 구축</h3><ul>
+<li>Sequence Length 설정 및 Train/Test Set 분리</li>
+<li>확인결과, <u><strong>2023.10.20.을 기준</strong></u>으로 각각 Set 분리되는 것을 확인<ul>
+<li><code>Sequence Length</code> : 3</li>
+<li>Train : Test = 8 : 2<ul>
+<li>2023.10.20 이전 : Train Set</li>
+<li>2023.10.20 이후 : Test Set</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br></p>
+<ul>
+<li>구축된 모델을 기반으로 예측 값과 실제 값 시각화하여 비교<ul>
+<li>여기서 <strong>실제 값(y)은 OSTIA 관측 데이터</strong>를 의미</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">실제값(y)</th>
+<th style="text-align:center">예측값(prediction)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_LSTM_01_13.png" class=""></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_LSTM_01_15.png" class=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<h3 id="공간별-예측결과"><a href="#공간별-예측결과" class="headerlink" title="공간별 예측결과"></a>공간별 예측결과</h3><ul>
+<li>예측된 결과를 비교하기 위해, 예측값과 실제값의 차이를 시각화<ul>
+<li>2023년 10월 20일 기준 결과 비교</li>
+</ul>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+  \text{result} = \text{prediction} - \text{y}</script><img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_LSTM_01_16.png" class="">
+<h3 id="RMSE-Root-Mean-Square-Error"><a href="#RMSE-Root-Mean-Square-Error" class="headerlink" title="RMSE(Root Mean Square Error)"></a>RMSE(Root Mean Square Error)</h3><ul>
+<li><p>모델 성능을 평가하기 위해, 공간별 RMSE 시각화</p>
+<ul>
+<li>각 좌표(lon, lat)별 RMSE를 시각화</li>
+</ul>
+</li>
+<li><p>구축한 모델을 기반으로 예측을 진행하며, 모델의 성능을 평가하기 위해 RMSE(Root Mean Square Error)를 평가지표로 활용</p>
+</li>
+</ul>
+<blockquote>
+<p><strong>평균 제곱근 오차(Root Mean Square Error; RMSE)</strong></p>
+<ul>
+<li>추정 값 또는 모델이 예측한 값과 실제 환경에서 관찰되는 값의 차이를 다룰 때 사용하는 측도</li>
+<li>관측 값과 예측 값 사이 오차의 절댓값을 활용한 지표<script type="math/tex; mode=display">
+\begin{align}
+  RMSE = \sqrt{\frac{\sum_{i=1}^{n}{(y_i - x_i)^2}}{n}}
+\end{align}</script>where $n$ is # of data, $y_i$ is reference of OSTIA, $x_i$ is prediction value</li>
+</ul>
+</blockquote>
+<ul>
+<li>시각화 결과<ul>
+<li>기간 : 2023.10.20 ~ 2024.01.01</li>
+<li><u><strong>대체적으로 연안에서 RMSE가 큰 것</strong></u>을 확인</li>
+<li>원해의 경우, <u><strong>한반도 남해에서 RMSE가 큰 것</strong></u>을 확인</li>
+</ul>
+</li>
+</ul>
+<img src="/2024/02/22/Project-DL-Zerobase02/SBS_SST_LSTM_01_18.png" class="">
+<p><br></p>
+<h2 id="Change-the-Lead-Time"><a href="#Change-the-Lead-Time" class="headerlink" title="Change the Lead Time"></a>Change the Lead Time</h2><ul>
+<li>과거 데이터 길이(sequence length) 변경에 따라 모델 예측결과가 어떻게 나타나는지 확인하기 위해 진행<ul>
+<li>위에서 진행했던 방법 그대로 진행하며, <code>random seed</code>만 변경하여 결과를 시각화</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Lead time</th>
+<th style="text-align:center">RMSE</th>
+<th style="text-align:center">Result</th>
+<th style="text-align:center">Lead time</th>
+<th style="text-align:center">RMSE</th>
+<th style="text-align:center">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>day1</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day1.png" class=""></td>
+<td style="text-align:center"><strong>day5</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day5.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>day2</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day2.png" class=""></td>
+<td style="text-align:center"><strong>day6</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day6.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>day3</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day3.png" class=""></td>
+<td style="text-align:center"><strong>day7</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day7.png" class=""></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>day4</strong></td>
+<td style="text-align:center"><span style="color:blue"> <strong>입력</strong> </span></td>
+<td style="text-align:center"><img src="/2024/02/22/Project-DL-Zerobase02/RMSE_of_SST_day4.png" class=""></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br><br></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><blockquote>
+<p><strong>데이터 구성</strong></p>
+</blockquote>
+<ul>
+<li>위성데이터의 경우 <strong>Epoch Time</strong>으로 이루어져 있어 <strong>Local Time</strong>으로 변환</li>
+<li>또한 딥러닝 모델을 적용시키기 위해 NetCDF 파일을 Tabular 형태로 변경</li>
+</ul>
+<blockquote>
+<p><strong>EDA</strong></p>
+</blockquote>
+<ul>
+<li>시간에 따른 해수면온도(Sea Surface Temperature, SST) 변화를 살펴본 결과, <strong><u>여름철 남쪽에서부터 북쪽으로 SST</u></strong>가 상승하며, 반대로 <strong><u>겨울철에 북쪽에서 남쪽으로 SST 하락</u></strong>을 보임. 이는 <u><strong>해류와 연관성</strong></u>이 있어보임.</li>
+</ul>
+<blockquote>
+<p><strong>Application with LSTM</strong></p>
+</blockquote>
+<ul>
+<li>예측 결과, <u><strong>연안에서 RMSE가 대체적으로 높게 나타나는 것을 확인</strong></u>하였으며, <strong>원해의 경우 남해 부근에서 RMSE가 높게</strong> 나타남</li>
+<li><u><strong>장기 데이터를 사용할수록 RMSE가 증가</strong></u>하는 것을 확인. 따라서 <u><strong>단기 예측에는 효율적이나, 장기 예측의 경우 부정확할 것이라고 판단</strong></u>됨. 그러나 중간에 예측값(Day4, Day6)이 튀는 현상은 해결하지 못함<ul>
+<li>추후 <strong>Drop-Out Method</strong> 등을 활용하여 해당 문제를 해결할 수 있을 것이라고 생각됨</li>
+</ul>
+</li>
+<li>시간적 데이터량(현재 데이터셋은 1년)이 적어 계절별 특징을 확인하지 못함<ul>
+<li>현재는 2023년 10월 20일 이후 데이터셋으로만 비교 가능</li>
+<li>추후 데이터셋을 확장한다면 계절별 예측 결과를 확인할 수 있을 것으로 보임</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/02/22/Project-DL-Zerobase02/">https://gyoungmin-lim.github.io/2024/02/22/Project-DL-Zerobase02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DL/">DL</a><a class="post-meta__tags" href="/tags/Project/">Project</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/02/22/SBS-DL-Zerobase02-DataConfiguration/" title="(Step) LSTM 기법을 활용한 수온 예측 - Data Configuration"><img class="cover" src="/../cover_img/Project_DL_Zerobase02_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Step) LSTM 기법을 활용한 수온 예측 - Data Configuration</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/22/ETC-OSTIA-DataDownload/" title="해양수치모델 OSTIA 데이터 다운로드 방법"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">해양수치모델 OSTIA 데이터 다운로드 방법</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/02/17/DL-ActivationFunction/" title="(DL) 활성화 함수(Activation Function)"><img class="cover" src="/../cover_img/DL_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 활성화 함수(Activation Function)</div></div></a></div><div><a href="/2024/02/17/DL-Perceptron/" title="(DL) 퍼셉트론(Perceptron)"><img class="cover" src="/../cover_img/DL_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-17</div><div class="title">(DL) 퍼셉트론(Perceptron)</div></div></a></div><div><a href="/2024/03/01/REF-SST-01/" title="REF_SST_01"><img class="cover" src="/../cover_img/Project_SST_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-01</div><div class="title">REF_SST_01</div></div></a></div><div><a href="/2024/02/20/Project-KeywordAnalysis/" title="키워드, 시간대별 응답률 분석"><img class="cover" src="/../cover_img/Project_Keyword_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-20</div><div class="title">키워드, 시간대별 응답률 분석</div></div></a></div><div><a href="/2024/02/21/Project-DL-Zerobase01/" title="독거노인 위급 행동 구별"><img class="cover" src="/../cover_img/Project_DL_Zerobase01_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-21</div><div class="title">독거노인 위급 행동 구별</div></div></a></div><div><a href="/2024/02/14/Project-HYCOM/" title="HYCOM 수온, 염도 데이터 분석 및 비교"><img class="cover" src="/../cover_img/Project_HYCOM_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-02-14</div><div class="title">HYCOM 수온, 염도 데이터 분석 및 비교</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">131</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%EA%B0%9C%EC%9A%94"><span class="toc-number">1.</span> <span class="toc-text">개요</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#OSTIA-Operational-Sea-Surface-Temperature-and-Sea-Ice-Analysis"><span class="toc-number">1.1.</span> <span class="toc-text">OSTIA(Operational Sea Surface Temperature and Sea Ice Analysis)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Classification"><span class="toc-number">1.2.</span> <span class="toc-text">Data Classification</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Configuration"><span class="toc-number">2.</span> <span class="toc-text">Data Configuration</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EC%8B%9C%EA%B0%84-Time"><span class="toc-number">2.1.</span> <span class="toc-text">시간(Time)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B3%B5%EA%B0%84-Space"><span class="toc-number">2.2.</span> <span class="toc-text">공간(Space)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sea-Surface-Temperature-SST"><span class="toc-number">2.3.</span> <span class="toc-text">Sea Surface Temperature(SST)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EDA"><span class="toc-number">3.</span> <span class="toc-text">EDA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%EB%8B%A8%EC%9C%84-%EB%B3%80%ED%99%98"><span class="toc-number">3.1.</span> <span class="toc-text">단위 변환</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%EA%B3%84%EC%A0%88%EC%84%B1-%EB%B3%80%ED%99%94%EB%8F%84"><span class="toc-number">3.2.</span> <span class="toc-text">계절성 변화도</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Application-with-LSTM"><span class="toc-number">4.</span> <span class="toc-text">Application with LSTM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lead-3-time"><span class="toc-number">4.1.</span> <span class="toc-text">Lead 3 time</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LSTM-Model-%EA%B5%AC%EC%B6%95"><span class="toc-number">4.1.1.</span> <span class="toc-text">LSTM Model 구축</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EA%B3%B5%EA%B0%84%EB%B3%84-%EC%98%88%EC%B8%A1%EA%B2%B0%EA%B3%BC"><span class="toc-number">4.1.2.</span> <span class="toc-text">공간별 예측결과</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RMSE-Root-Mean-Square-Error"><span class="toc-number">4.1.3.</span> <span class="toc-text">RMSE(Root Mean Square Error)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Change-the-Lead-Time"><span class="toc-number">4.2.</span> <span class="toc-text">Change the Lead Time</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/03/22/VSCode-Substitution/" title="(VSCode) 한 번에 단어 바꾸는 방법"><img src="/../cover_img/VS_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(VSCode) 한 번에 단어 바꾸는 방법"/></a><div class="content"><a class="title" href="/2024/03/22/VSCode-Substitution/" title="(VSCode) 한 번에 단어 바꾸는 방법">(VSCode) 한 번에 단어 바꾸는 방법</a><time datetime="2024-03-22T08:45:16.000Z" title="Created 2024-03-22 17:45:16">2024-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/21/Markdown-Table/" title="(Markdown) 표(Table) 입력방법"><img src="/../cover_img/Markdown_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Markdown) 표(Table) 입력방법"/></a><div class="content"><a class="title" href="/2024/03/21/Markdown-Table/" title="(Markdown) 표(Table) 입력방법">(Markdown) 표(Table) 입력방법</a><time datetime="2024-03-21T09:09:40.000Z" title="Created 2024-03-21 18:09:40">2024-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/21/Memo-SST-Plan/" title="위성자료를 활용한 표층수온(Sea Surface Temperature, SST) 예측 OutLine - Memo"><img src="/../cover_img/Project_SST_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="위성자료를 활용한 표층수온(Sea Surface Temperature, SST) 예측 OutLine - Memo"/></a><div class="content"><a class="title" href="/2024/03/21/Memo-SST-Plan/" title="위성자료를 활용한 표층수온(Sea Surface Temperature, SST) 예측 OutLine - Memo">위성자료를 활용한 표층수온(Sea Surface Temperature, SST) 예측 OutLine - Memo</a><time datetime="2024-03-21T08:46:59.000Z" title="Created 2024-03-21 17:46:59">2024-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/21/Math-MatrixComputation-004/" title="(Matrix Computation) - Row, Column of Linear system"><img src="/../cover_img/Math_MatrixComputation_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Matrix Computation) - Row, Column of Linear system"/></a><div class="content"><a class="title" href="/2024/03/21/Math-MatrixComputation-004/" title="(Matrix Computation) - Row, Column of Linear system">(Matrix Computation) - Row, Column of Linear system</a><time datetime="2024-03-21T08:00:37.000Z" title="Created 2024-03-21 17:00:37">2024-03-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/21/Math-MatrixComputation-003/" title="(Matrix Computation) - Linear Systtem, Null space"><img src="/../cover_img/Math_MatrixComputation_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Matrix Computation) - Linear Systtem, Null space"/></a><div class="content"><a class="title" href="/2024/03/21/Math-MatrixComputation-003/" title="(Matrix Computation) - Linear Systtem, Null space">(Matrix Computation) - Linear Systtem, Null space</a><time datetime="2024-03-21T07:50:37.000Z" title="Created 2024-03-21 16:50:37">2024-03-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
