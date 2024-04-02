@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>(Matrix Computation) - LU Factorization | Gmio's Page</title><meta name="author" content="Gmio"><meta name="copyright" content="Gmio"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2024.03.30 updated   Let $Ax &#x3D; b, \quad A \in \mathbb{R}^{m \times n}$    \begin{bmatrix}     A_1 \\ A_2 \\ \vdots \\ A_m   \end{bmatrix}   \begin{bmatrix}     x_1 \\ x_2 \\ \vdots \\ x_n   \end{bmat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Matrix Computation) - LU Factorization">
+<meta property="og:url" content="https://gyoungmin-lim.github.io/2024/03/30/Math-MatrixComputation-005/index.html">
+<meta property="og:site_name" content="Gmio&#39;s Page">
+<meta property="og:description" content="2024.03.30 updated   Let $Ax &#x3D; b, \quad A \in \mathbb{R}^{m \times n}$    \begin{bmatrix}     A_1 \\ A_2 \\ \vdots \\ A_m   \end{bmatrix}   \begin{bmatrix}     x_1 \\ x_2 \\ \vdots \\ x_n   \end{bmat">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gyoungmin-lim.github.io/cover_img/Math_MatrixComputation_cover.jpg">
+<meta property="article:published_time" content="2024-03-30T09:01:18.000Z">
+<meta property="article:modified_time" content="2024-03-30T09:09:44.618Z">
+<meta property="article:author" content="Gmio">
+<meta property="article:tag" content="Matrix">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gyoungmin-lim.github.io/cover_img/Math_MatrixComputation_cover.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://gyoungmin-lim.github.io/2024/03/30/Math-MatrixComputation-005/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Gmio","link":"Link: ","source":"Source: Gmio's Page","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '(Matrix Computation) - LU Factorization',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-30 18:09:44'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../cover_img/Math_MatrixComputation_cover.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Gmio's Page"><span class="site-name">Gmio's Page</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">(Matrix Computation) - LU Factorization</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-30T09:01:18.000Z" title="Created 2024-03-30 18:01:18">2024-03-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-30T09:09:44.618Z" title="Updated 2024-03-30 18:09:44">2024-03-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/">Study</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Study/Mathematics/">Mathematics</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="(Matrix Computation) - LU Factorization"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p><strong>2024.03.30 updated</strong></p>
+</blockquote>
+<p><br></p>
+<p>Let $Ax = b, \quad A \in \mathbb{R}^{m \times n}$</p>
+<script type="math/tex; mode=display">
+  \begin{bmatrix}
+    A_1 \\ A_2 \\ \vdots \\ A_m
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    x_1 \\ x_2 \\ \vdots \\ b_m
+  \end{bmatrix}</script><p>where <script type="math/tex">A_m = [a_{m1}, a_{m2}, \cdots, a_{mn}]</script></p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    N(A) &= \{ x \in \mathbb{R^n} | Ax = 0 \} \in \mathbb{R}^n \\
+    N(A^T) &= \{ y \in \mathbb{R^m} | A^T y = 0 \} \in \mathbb{R}^m \\
+    R(A^T) &= span\{ A_1, A_2, \cdots, A_m \} \in \mathbb{R}^n \\
+    R(A) &= span\{ a_1, a_2, \cdots, a_n \} \in \mathbb{R}^m
+  \end{align*}</script><p><br></p>
+<ol>
+<li>Let <script type="math/tex">S = \{ x | Ax = b\}, \quad S \neq N(A)</script></li>
+<li>MIT</li>
+</ol>
+<script type="math/tex; mode=display">
+  b^Ty = 0 \qquad \text{whenever} \qquad A^T y = 0</script><script type="math/tex; mode=display">
+  b \in R(A) = \alpha_1 a_1 + \cdots + \alpha_n a_n = \begin{bmatrix} \alpha_1 a_{11} + \alpha_2 a_{12} + \cdots + \alpha_n a_{1n} \\ \vdots  \\ \alpha_1 a_{11} + \alpha_1 a_{m1} + \cdots + \alpha_n a_{mn} \end{bmatrix}</script><p><br></p>
+<p><span style="color:blue"> <strong>Note</strong> </span></p>
+<script type="math/tex; mode=display">
+  Ax = \begin{bmatrix} A_1 \\ A_2 \\ \vdots \\ A_m \end{bmatrix} x = \begin{bmatrix} A_1 x \\ A_2x \\ \vdots \\ A_m x \end{bmatrix} = \begin{bmatrix} x_1 a_{11} + \cdots + x_n a_{1n} \\ \vdots \\ x_1 a_{m1} + \cdots + x_n a_{mn} \end{bmatrix}</script><script type="math/tex; mode=display">
+  \begin{align*}
+    \vert R(A) \vert^{\perp} = N(A^T) & = \{ x | A^T x = 0 \} \\
+    & = \{ y | y^T A = 0 \}
+  \end{align*}</script><p><br></p>
+<p><span style="color:blue"> <strong>Ex</strong> </span></p>
+<script type="math/tex; mode=display">
+  \begin{cases}
+    x_1 + 2x_2 + x_3 = 7 \\
+    x_1 - x_2 - x_3 = -4
+  \end{cases}</script><p>First,</p>
+<script type="math/tex; mode=display">
+  s = \begin{bmatrix} 1 \\ 1 \\ 4 \end{bmatrix}</script><script type="math/tex; mode=display">
+  \therefore N(A) = \left\{ t \begin{bmatrix} 1 \\ -2 \\ 3 \end{bmatrix} \right\}</script><script type="math/tex; mode=display">
+  \begin{align*}
+    \dim(N(A)) & = n \text{-rank}(A) \\
+    & = 3 - 2
+  \end{align*}</script><p>Hence,</p>
+<script type="math/tex; mode=display">
+  \left\{ \begin{bmatrix} 1 \\ 1 \\ 4 \end{bmatrix} + t \begin{bmatrix} 1 \\ -2 \\ 3 \end{bmatrix} , \ t \in \mathbb{R} \right\}</script><p><br></p>
+<p><span style="color:blue"> <strong>Question</strong> </span></p>
+<script type="math/tex; mode=display">
+  \begin{bmatrix} 7 \\ -4 \end{bmatrix} \in span \left\{  \begin{bmatrix} 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 2 \\ -1 \end{bmatrix}, \begin{bmatrix} 1 \\ -1 \end{bmatrix} \right\} \quad ?</script><script type="math/tex; mode=display">
+  N(A^T) = \left\{ \begin{bmatrix} 1 & 1 \\ 2 & -1 \\ 1 & -1 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix} \right\}</script><script type="math/tex; mode=display">
+  \therefore \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}</script><p><br></p>
+<p><span style="color:blue"> <strong>Ex</strong> </span></p>
+<script type="math/tex; mode=display">
+  \begin{cases}
+    x_1 - x_2 = b_1 \\
+    x_2 - x_3 = b_2 \\
+    x_3 - x_1 = b_3
+  \end{cases}</script><p>then we can get obtain matrix $A$</p>
+<script type="math/tex; mode=display">
+  A = \begin{bmatrix}
+    1 & -1 & 0 \\
+    0 & 1 & -1 \\
+    -1 & 0 & 1
+  \end{bmatrix}</script><p><br></p>
+<p><strong>Step 1. 소거법</strong></p>
+<script type="math/tex; mode=display">
+  \begin{cases}
+    x_1 - x_3 = b_1 + b_2 \\
+    -x_1 + x_3 = b_3
+  \end{cases} \Longrightarrow b_1 + b_2 = - b_3</script><p>Hence,</p>
+<script type="math/tex; mode=display">
+  N(A^T) = \left\{ t \begin{bmatrix}  1 \\ 1 \\ 1 \end{bmatrix}, t \in \mathbb{R} \right\}</script><script type="math/tex; mode=display">
+  V \perp \left\{ t \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \right\}, \qquad V = \{ x_1 + x_2 + x_3 = 0 \}</script><p><br></p>
+<h2 id="Gauss-Elimination"><a href="#Gauss-Elimination" class="headerlink" title="Gauss Elimination"></a>Gauss Elimination</h2><script type="math/tex; mode=display">
+  Ax=b</script><script type="math/tex; mode=display">
+  \begin{cases}
+    a_{11} x_1 + \cdots + a_{1n} x_n = b_1 \\
+    \quad \vdots \\
+    a_{m1} x_1 + \cdots + a_{mn} x_n = b_n
+  \end{cases}</script><p><br></p>
+<h2 id="LU-Factorization"><a href="#LU-Factorization" class="headerlink" title="LU Factorization"></a>LU Factorization</h2><script type="math/tex; mode=display">
+  A \in \mathbb{R}^{m \times n} \qquad \Rightarrow \qquad LU</script><p>where $L \in \mathbb{R}^{m \times n}$ : low trace diagonal form and $U \in \mathbb{R}^{m \times n}$ : E chelon form of $A$</p>
+<script type="math/tex; mode=display">
+  Ax = b \qquad \Longrightarrow \qquad LUx = b</script><p>define $y = Ux$. Then $Ly = b$</p>
+<p><br></p>
+<p><span style="color:blue"> <strong>Ex</strong> </span></p>
+<script type="math/tex; mode=display">
+  \begin{align*}
+    \begin{bmatrix} 0 & 1 \\ 1 & 1 \end{bmatrix} & = \begin{bmatrix} 1 & 0 \\ ✳︎ & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix} : \text{존재하지 않음} \\ \\
+
+    \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix} & = \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix} : \text{무수히 많이 존재}
+  \end{align*}</script><p><br></p>
+<h3 id="Problem-1"><a href="#Problem-1" class="headerlink" title="Problem 1"></a>Problem 1</h3><blockquote>
+<p>위키피디아 등 찾아서 내가 이해가 안되는 내용 표시 (5개 정도 찾을 것)</p>
+<ul>
+<li>LU Factorization Existence (~ up to 04.27)</li>
+<li>홀레스키? 는 찾지 말것… 너무 쉽다는데 모르겠다..</li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io">Gmio</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="https://gyoungmin-lim.github.io/2024/03/30/Math-MatrixComputation-005/">https://gyoungmin-lim.github.io/2024/03/30/Math-MatrixComputation-005/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Matrix/">Matrix</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/30/Math-MatrixComputation-006/" title="(Matrix Computation) - QR Factorization"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">(Matrix Computation) - QR Factorization</div></div></a></div><div class="next-post pull-right"><a href="/2024/03/30/Math-Modeling-017/" title="(Mathematical Modeling) SIR Model - Problem 6"><img class="cover" src="/../cover_img/Math_MathematicalModeling_cover.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info">(Mathematical Modeling) SIR Model - Problem 6</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2024/03/21/Math-MatrixComputation-001/" title="Matrix Computation - Introduction"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">Matrix Computation - Introduction</div></div></a></div><div><a href="/2024/03/21/Math-MatrixComputation-002/" title="(Matrix Computation) - Matrix"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">(Matrix Computation) - Matrix</div></div></a></div><div><a href="/2024/03/21/Math-MatrixComputation-003/" title="(Matrix Computation) - Linear Systtem, Null space"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">(Matrix Computation) - Linear Systtem, Null space</div></div></a></div><div><a href="/2024/03/21/Math-MatrixComputation-004/" title="(Matrix Computation) - Row, Column of Linear system"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-21</div><div class="title">(Matrix Computation) - Row, Column of Linear system</div></div></a></div><div><a href="/2024/03/30/Math-MatrixComputation-006/" title="(Matrix Computation) - QR Factorization"><img class="cover" src="/../cover_img/Math_MatrixComputation_cover.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-30</div><div class="title">(Matrix Computation) - QR Factorization</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Gmio</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">140</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/gyoungmin-lim/gyoungmin-lim.github.io.git"><i class="fab fa-github"></i><span></span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">안녕하세요. 기술 블로그입니다.</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Gauss-Elimination"><span class="toc-number">1.</span> <span class="toc-text">Gauss Elimination</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LU-Factorization"><span class="toc-number">2.</span> <span class="toc-text">LU Factorization</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-1"><span class="toc-number">2.1.</span> <span class="toc-text">Problem 1</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/Math-Modeling-021/" title="(Mathematical Modeling) Chemical Kinetics - Problem 8"><img src="/../cover_img/Math_MathematicalModeling_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Mathematical Modeling) Chemical Kinetics - Problem 8"/></a><div class="content"><a class="title" href="/2024/04/02/Math-Modeling-021/" title="(Mathematical Modeling) Chemical Kinetics - Problem 8">(Mathematical Modeling) Chemical Kinetics - Problem 8</a><time datetime="2024-04-02T05:48:14.000Z" title="Created 2024-04-02 14:48:14">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/Math-Modeling-020/" title="(Mathematical Modeling) Variation - Problem 7"><img src="/../cover_img/Math_MathematicalModeling_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Mathematical Modeling) Variation - Problem 7"/></a><div class="content"><a class="title" href="/2024/04/02/Math-Modeling-020/" title="(Mathematical Modeling) Variation - Problem 7">(Mathematical Modeling) Variation - Problem 7</a><time datetime="2024-04-02T05:40:50.000Z" title="Created 2024-04-02 14:40:50">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/Math-Modeling-019/" title="(Mathematical Modeling) Chemical Kinetics"><img src="/../cover_img/Math_MathematicalModeling_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Mathematical Modeling) Chemical Kinetics"/></a><div class="content"><a class="title" href="/2024/04/02/Math-Modeling-019/" title="(Mathematical Modeling) Chemical Kinetics">(Mathematical Modeling) Chemical Kinetics</a><time datetime="2024-04-02T05:35:48.000Z" title="Created 2024-04-02 14:35:48">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/04/02/Math-Modeling-018/" title="(Mathematical Modeling) Variation - SIR and SEIR Model"><img src="/../cover_img/Math_MathematicalModeling_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Mathematical Modeling) Variation - SIR and SEIR Model"/></a><div class="content"><a class="title" href="/2024/04/02/Math-Modeling-018/" title="(Mathematical Modeling) Variation - SIR and SEIR Model">(Mathematical Modeling) Variation - SIR and SEIR Model</a><time datetime="2024-04-02T05:10:48.000Z" title="Created 2024-04-02 14:10:48">2024-04-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/03/30/Math-MatrixComputation-006/" title="(Matrix Computation) - QR Factorization"><img src="/../cover_img/Math_MatrixComputation_cover.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(Matrix Computation) - QR Factorization"/></a><div class="content"><a class="title" href="/2024/03/30/Math-MatrixComputation-006/" title="(Matrix Computation) - QR Factorization">(Matrix Computation) - QR Factorization</a><time datetime="2024-03-30T09:18:32.000Z" title="Created 2024-03-30 18:18:32">2024-03-30</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By Gmio</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
